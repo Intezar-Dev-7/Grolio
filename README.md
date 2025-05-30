@@ -42,6 +42,9 @@
 - Customize settings for privacy and notifications
 
 ---
+## 📌 Project Status
+
+🚧 **Grolio is currently under development.**  
 
 ## 📄 License
 
