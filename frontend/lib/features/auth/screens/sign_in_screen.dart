@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/features/auth/screens/forgot_password_screen.dart';
 import 'package:frontend/features/auth/screens/sign_up_screen.dart';
 import 'package:frontend/common/gradient_button.dart';
+import 'package:frontend/features/home/screens/home_screen.dart';
 import 'package:frontend/utils/app_colors.dart';
 import 'package:frontend/features/auth/widgets/custom_text_field.dart';
 import 'package:frontend/features/auth/widgets/social_login_button.dart';
@@ -26,9 +27,12 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   void _handleSignIn() {
-    // Handle sign in logic
     print('Email: ${_emailController.text}');
     print('Password: ${_passwordController.text}');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (_) => const HomeScreen()),
+    );
   }
 
   void _navigateToSignUp() {
