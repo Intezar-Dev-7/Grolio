@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/features/auth/screens/sign_in_screen.dart';
+import 'package:frontend/common/gradient_button.dart';
 import 'package:frontend/utils/app_colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../widgets/onboarding_page1.dart';
@@ -36,8 +38,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         curve: Curves.easeInOut,
       );
     } else {
-      // Navigate to home screen or login
-      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const SignInScreen()),
+      );
     }
   }
 
@@ -155,24 +159,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           if (_currentPage < 2) const SizedBox(width: 12),
           Expanded(
-            child: ElevatedButton(
+            child: GradientButton(
+              text: _currentPage == 2 ? 'Get Started' : 'Next',
               onPressed: _nextPage,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 0,
-              ),
-              child: Text(
-                _currentPage == 2 ? 'Get Started' : 'Next',
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.white,
-                ),
-              ),
+              height: 50,
             ),
           ),
         ],
