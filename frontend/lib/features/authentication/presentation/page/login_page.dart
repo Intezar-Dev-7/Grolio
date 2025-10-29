@@ -104,9 +104,10 @@ class LoginPage extends StatelessWidget {
                         onPressed: state.status == AuthStatus.loading
                             ? null
                             : () {
-                          context.read<AuthBloc>().add(
+                          Navigator.pushNamed(context, AppRouter.techStack);
+                          /*context.read<AuthBloc>().add(
                             const SignInWithGoogleRequested(),
-                          );
+                          );*/
                         },
                       ),
 

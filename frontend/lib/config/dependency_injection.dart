@@ -1,6 +1,8 @@
 // config/dependency_injection.dart (CORRECTED VERSION)
 
 import 'package:frontend/features/authentication/domain/usecases/forgot_password_usecase.dart';
+import 'package:frontend/features/onboarding/presentation/bloc/goals_bloc.dart';
+import 'package:frontend/features/onboarding/presentation/bloc/tech_stack_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -163,6 +165,8 @@ Future<void> init() async {
       forgotPasswordUseCase: sl<ForgotPasswordUseCase>(),
     ),
   );
+  sl.registerFactory<TechStackBloc>(() => TechStackBloc());
+  sl.registerFactory<GoalsBloc>(() => GoalsBloc());
 
   print('✅ Dependency injection completed successfully!');
 }

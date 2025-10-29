@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/core/utils/constant.dart';
 import 'package:frontend/features/authentication/presentation/widgets/terms_and_privacy_text.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -27,10 +28,8 @@ class SignUpPage extends StatelessWidget {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.status == AuthStatus.authenticated) {
-            // Navigate to home screen
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, AppRouter.techStack);
           } else if (state.status == AuthStatus.error) {
-            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.errorMessage ?? 'Sign up failed'),
