@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/router/app_router.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/goals_bloc.dart';
@@ -32,7 +33,7 @@ class GoalsView extends StatelessWidget {
       body: BlocConsumer<GoalsBloc, GoalsState>(
         listener: (context, state) {
           if (state.status == GoalsStatus.success) {
-            print("got to home screen ==============");
+            Navigator.pushReplacementNamed(context, AppRouter.home);
           } else if (state.status == GoalsStatus.error) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(

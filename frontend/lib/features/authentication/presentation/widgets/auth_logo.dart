@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/utils/constant.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 
 class AuthLogo extends StatelessWidget {
@@ -22,7 +22,7 @@ class AuthLogo extends StatelessWidget {
             ),
           ],
         ),
-        child: Image.asset(appLogo),
+        child: Image.asset(AppAssets.grolioLogo),
       ),
     );
   }

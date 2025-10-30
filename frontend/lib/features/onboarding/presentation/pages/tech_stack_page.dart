@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
-import 'package:frontend/core/utils/constant.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/tech_stack_bloc.dart';
@@ -84,7 +84,7 @@ class TechStackView extends StatelessWidget {
                                   gradient: AppColors.logoGradient,
                                 ),
                                 child: Center(
-                                  child: Image.asset(appLogo)
+                                  child: Image.asset(AppAssets.grolioLogo)
                                 ),
                               ),
                               const SizedBox(width: 12),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/LoadingScreen.dart';
+import 'package:frontend/features/home/presentation/pages/main_screen.dart';
 import 'package:frontend/features/onboarding/presentation/pages/goals_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/tech_stack_page.dart';
 import '../../../features/authentication/presentation/page/login_page.dart';
@@ -110,7 +111,7 @@ class AppRouter {
 
       case home:
         return _buildRoute(
-          const Scaffold(body: Center(child: Text('Home Page'))),
+          const MainScreen(),
           settings: settings,
         );
 
