@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/router/app_router.dart';
-import 'package:frontend/features/authentication/presentation/page/login_page.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({super.key});
@@ -128,20 +127,18 @@ class _LoadingScreenState extends State<LoadingScreen>
                 FadeTransition(
                   opacity: _fadeAnimation,
                   child: ShaderMask(
-                    shaderCallback: (bounds) => const LinearGradient(
-                      colors: [
-                        Color(0xFF4CAF93),
-                        Colors.white,
-                        Color(0xFF2196F3),
-                      ],
-                    ).createShader(bounds),
+                    shaderCallback:
+                        (bounds) => const LinearGradient(
+                          colors: [
+                            Color(0xFF4CAF93),
+                            Colors.white,
+                            Color(0xFF2196F3),
+                          ],
+                        ).createShader(bounds),
                     child: const Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          '🌿 ',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                        Text('🌿 ', style: TextStyle(fontSize: 18)),
                         Text(
                           'Code. Grow. Connect.',
                           style: TextStyle(
@@ -151,10 +148,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                             letterSpacing: 0.5,
                           ),
                         ),
-                        Text(
-                          ' 💎',
-                          style: TextStyle(fontSize: 18),
-                        ),
+                        Text(' 💎', style: TextStyle(fontSize: 18)),
                       ],
                     ),
                   ),
@@ -216,9 +210,10 @@ class _LoadingDotsState extends State<LoadingDots>
           children: List.generate(3, (index) {
             final delay = index * 0.2;
             final animationValue = (_controller.value - delay) % 1.0;
-            final opacity = (animationValue < 0.5)
-                ? animationValue * 2
-                : (1.0 - animationValue) * 2;
+            final opacity =
+                (animationValue < 0.5)
+                    ? animationValue * 2
+                    : (1.0 - animationValue) * 2;
 
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -227,14 +222,12 @@ class _LoadingDotsState extends State<LoadingDots>
                 height: 8,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xFF4CAF93).withOpacity(
-                    0.3 + (opacity * 0.7),
-                  ),
+                  color: const Color(
+                    0xFF4CAF93,
+                  ).withOpacity(0.3 + (opacity * 0.7)),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF4CAF93).withOpacity(
-                        opacity * 0.5,
-                      ),
+                      color: const Color(0xFF4CAF93).withOpacity(opacity * 0.5),
                       blurRadius: 8,
                       spreadRadius: 1,
                     ),

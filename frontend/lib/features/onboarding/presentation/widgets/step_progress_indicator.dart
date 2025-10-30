@@ -23,19 +23,15 @@ class StepProgressIndicator extends StatelessWidget {
         return Expanded(
           child: Container(
             height: 4,
-            margin: EdgeInsets.only(
-              right: index < totalSteps - 1 ? 8 : 0,
-            ),
+            margin: EdgeInsets.only(right: index < totalSteps - 1 ? 8 : 0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
-              gradient: isCompleted || isActive
-                  ? AppColors.primaryButtonGradient
-                  : LinearGradient(
-                colors: [
-                  AppColors.borderColor,
-                  AppColors.borderColor,
-                ],
-              ),
+              gradient:
+                  isCompleted || isActive
+                      ? AppColors.primaryButtonGradient
+                      : const LinearGradient(
+                        colors: [AppColors.borderColor, AppColors.borderColor],
+                      ),
             ),
           ),
         );

@@ -144,18 +144,14 @@ class GoalsView extends StatelessWidget {
                         // Subtitle
                         Text(
                           'Choose what you want to achieve. We\'ll help you track your progress and stay motivated.',
-                          style: AppTypography.subtitle.copyWith(
-                            height: 1.5,
-                          ),
+                          style: AppTypography.subtitle.copyWith(height: 1.5),
                         ),
 
                         const SizedBox(height: 24),
 
                         // Selected count badge
                         Center(
-                          child: SelectedCountBadge(
-                            count: state.selectedCount,
-                          ),
+                          child: SelectedCountBadge(count: state.selectedCount),
                         ),
 
                         const SizedBox(height: 24),
@@ -175,15 +171,13 @@ class GoalsView extends StatelessWidget {
                               },
                             ),
                           );
-                        }).toList(),
+                        }),
 
                         const SizedBox(height: 16),
 
                         // Celebration message (shows when goals selected)
                         if (state.selectedCount > 0)
-                          CelebrationMessage(
-                            count: state.selectedCount,
-                          ),
+                          CelebrationMessage(count: state.selectedCount),
 
                         const SizedBox(height: 16),
 
@@ -232,81 +226,90 @@ class GoalsView extends StatelessWidget {
                     width: double.infinity,
                     height: 52,
                     decoration: BoxDecoration(
-                      gradient: state.canComplete
-                          ? const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          AppColors.primaryGreen,
-                          AppColors.primaryBlue
-                        ],
-                      )
-                          : LinearGradient(
-                        colors: [
-                          AppColors.buttonDisabled,
-                          AppColors.buttonDisabled.withOpacity(0.8),
-                        ],
-                      ),
+                      gradient:
+                          state.canComplete
+                              ? const LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  AppColors.primaryGreen,
+                                  AppColors.primaryBlue,
+                                ],
+                              )
+                              : LinearGradient(
+                                colors: [
+                                  AppColors.buttonDisabled,
+                                  AppColors.buttonDisabled.withOpacity(0.8),
+                                ],
+                              ),
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: state.canComplete
-                          ? [
-                        BoxShadow(
-                          color: const Color(0xFF4CAF93).withOpacity(0.3),
-                          blurRadius: 12,
-                          offset: const Offset(0, 4),
-                        ),
-                      ]
-                          : null,
+                      boxShadow:
+                          state.canComplete
+                              ? [
+                                BoxShadow(
+                                  color: const Color(
+                                    0xFF4CAF93,
+                                  ).withOpacity(0.3),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ]
+                              : null,
                     ),
                     child: Material(
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: state.canComplete &&
-                            state.status != GoalsStatus.submitting
-                            ? () {
-                          context.read<GoalsBloc>().add(
-                            const GoalsSubmitted(),
-                          );
-                        }
-                            : null,
+                        onTap:
+                            state.canComplete &&
+                                    state.status != GoalsStatus.submitting
+                                ? () {
+                                  context.read<GoalsBloc>().add(
+                                    const GoalsSubmitted(),
+                                  );
+                                }
+                                : null,
                         borderRadius: BorderRadius.circular(12),
                         child: Center(
-                          child: state.status == GoalsStatus.submitting
-                              ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2.5,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
-                              ),
-                            ),
-                          )
-                              : Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'Complete Setup',
-                                style: TextStyle(
-                                  fontFamily: 'Inter',
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                  color: state.canComplete
-                                      ? Colors.white
-                                      : AppColors.buttonDisabledText,
-                                  letterSpacing: 0.3,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Icon(
-                                Icons.navigate_next_rounded,
-                                color: state.canComplete
-                                    ? Colors.white
-                                    : AppColors.buttonDisabledText,
-                                size: 20,
-                              ),
-                            ],
-                          ),
+                          child:
+                              state.status == GoalsStatus.submitting
+                                  ? const SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                  : Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                        'Complete Setup',
+                                        style: TextStyle(
+                                          fontFamily: 'Inter',
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w600,
+                                          color:
+                                              state.canComplete
+                                                  ? Colors.white
+                                                  : AppColors
+                                                      .buttonDisabledText,
+                                          letterSpacing: 0.3,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Icon(
+                                        Icons.navigate_next_rounded,
+                                        color:
+                                            state.canComplete
+                                                ? Colors.white
+                                                : AppColors.buttonDisabledText,
+                                        size: 20,
+                                      ),
+                                    ],
+                                  ),
                         ),
                       ),
                     ),

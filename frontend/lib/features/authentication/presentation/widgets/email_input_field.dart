@@ -16,10 +16,7 @@ class EmailInputField extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Email',
-              style: AppTypography.inputLabel,
-            ),
+            const Text('Email', style: AppTypography.inputLabel),
             const SizedBox(height: 8),
             TextField(
               onChanged: (value) {
@@ -33,17 +30,20 @@ class EmailInputField extends StatelessWidget {
                   Icons.email_outlined,
                   color: AppColors.iconColor,
                 ),
-                suffixIcon: state.email.isNotEmpty
-                    ? Icon(
-                  state.isEmailValid ? Icons.check_circle : Icons.error,
-                  color: state.isEmailValid
-                      ? AppColors.success
-                      : AppColors.error,
-                )
-                    : null,
-                errorText: state.email.isNotEmpty && !state.isEmailValid
-                    ? 'Please enter a valid email'
-                    : null,
+                suffixIcon:
+                    state.email.isNotEmpty
+                        ? Icon(
+                          state.isEmailValid ? Icons.check_circle : Icons.error,
+                          color:
+                              state.isEmailValid
+                                  ? AppColors.success
+                                  : AppColors.error,
+                        )
+                        : null,
+                errorText:
+                    state.email.isNotEmpty && !state.isEmailValid
+                        ? 'Please enter a valid email'
+                        : null,
               ),
             ),
           ],

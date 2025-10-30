@@ -14,10 +14,7 @@ import '../widgets/primary_button.dart';
 class ResetPasswordPage extends StatelessWidget {
   final String token;
 
-  const ResetPasswordPage({
-    super.key,
-    required this.token,
-  });
+  const ResetPasswordPage({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class ResetPasswordPage extends StatelessWidget {
             Navigator.pushNamedAndRemoveUntil(
               context,
               '/reset-password-success',
-                  (route) => false,
+              (route) => false,
             );
           } else if (state.status == AuthStatus.error) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -62,7 +59,7 @@ class ResetPasswordPage extends StatelessWidget {
                       const SizedBox(height: 32),
 
                       // Title
-                      Text(
+                      const Text(
                         'Create New Password',
                         style: AppTypography.welcomeTitle,
                         textAlign: TextAlign.center,
@@ -73,18 +70,14 @@ class ResetPasswordPage extends StatelessWidget {
                       // Description
                       Text(
                         'Your new password must be different from previously used passwords',
-                        style: AppTypography.subtitle.copyWith(
-                          height: 1.5,
-                        ),
+                        style: AppTypography.subtitle.copyWith(height: 1.5),
                         textAlign: TextAlign.center,
                       ),
 
                       const SizedBox(height: 40),
 
                       // New Password
-                      const PasswordInputField(
-                        showStrengthIndicator: true,
-                      ),
+                      const PasswordInputField(showStrengthIndicator: true),
 
                       const SizedBox(height: 20),
 
@@ -107,7 +100,7 @@ class ResetPasswordPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'Password must contain:',
                               style: AppTypography.titleSmall,
                             ),
@@ -140,13 +133,14 @@ class ResetPasswordPage extends StatelessWidget {
                       // Reset password button
                       PrimaryButton(
                         label: 'Reset Password',
-                        onPressed: state.isPasswordValid &&
-                            state.isConfirmPasswordValid &&
-                            state.password == state.confirmPassword
-                            ? () {
-                          // TODO: Implement reset password with token
-                        }
-                            : null,
+                        onPressed:
+                            state.isPasswordValid &&
+                                    state.isConfirmPasswordValid &&
+                                    state.password == state.confirmPassword
+                                ? () {
+                                  // TODO: Implement reset password with token
+                                }
+                                : null,
                       ),
 
                       const SizedBox(height: 40),
@@ -155,8 +149,7 @@ class ResetPasswordPage extends StatelessWidget {
                 ),
               ),
 
-              if (state.status == AuthStatus.loading)
-                const LoadingOverlay(),
+              if (state.status == AuthStatus.loading) const LoadingOverlay(),
             ],
           );
         },
@@ -170,10 +163,7 @@ class _PasswordRequirement extends StatelessWidget {
   final String text;
   final bool isMet;
 
-  const _PasswordRequirement({
-    required this.text,
-    required this.isMet,
-  });
+  const _PasswordRequirement({required this.text, required this.isMet});
 
   @override
   Widget build(BuildContext context) {

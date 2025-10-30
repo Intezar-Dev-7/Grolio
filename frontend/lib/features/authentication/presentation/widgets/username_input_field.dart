@@ -16,10 +16,7 @@ class UsernameInputField extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Username',
-              style: AppTypography.inputLabel,
-            ),
+            const Text('Username', style: AppTypography.inputLabel),
             const SizedBox(height: 8),
             TextField(
               onChanged: (value) {
@@ -32,19 +29,22 @@ class UsernameInputField extends StatelessWidget {
                   Icons.person_outline,
                   color: AppColors.iconColor,
                 ),
-                suffixIcon: state.username.isNotEmpty
-                    ? Icon(
-                  state.isUsernameValid
-                      ? Icons.check_circle
-                      : Icons.error,
-                  color: state.isUsernameValid
-                      ? AppColors.success
-                      : AppColors.error,
-                )
-                    : null,
-                errorText: state.username.isNotEmpty && !state.isUsernameValid
-                    ? '3-20 characters, letters, numbers, underscore only'
-                    : null,
+                suffixIcon:
+                    state.username.isNotEmpty
+                        ? Icon(
+                          state.isUsernameValid
+                              ? Icons.check_circle
+                              : Icons.error,
+                          color:
+                              state.isUsernameValid
+                                  ? AppColors.success
+                                  : AppColors.error,
+                        )
+                        : null,
+                errorText:
+                    state.username.isNotEmpty && !state.isUsernameValid
+                        ? '3-20 characters, letters, numbers, underscore only'
+                        : null,
               ),
             ),
           ],

@@ -30,9 +30,10 @@ class SecondaryButton extends StatelessWidget {
         color: AppColors.buttonSecondary,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isDisabled
-              ? AppColors.borderColor
-              : AppColors.primaryGreen.withOpacity(0.3),
+          color:
+              isDisabled
+                  ? AppColors.borderColor
+                  : AppColors.primaryGreen.withOpacity(0.3),
           width: 1,
         ),
       ),
@@ -44,34 +45,33 @@ class SecondaryButton extends StatelessWidget {
           splashColor: AppColors.primaryGreen.withOpacity(0.1),
           highlightColor: AppColors.primaryGreen.withOpacity(0.05),
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 12,
-            ),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: Center(
-              child: isLoading
-                  ? SizedBox(
-                height: 18,
-                width: 18,
-                child: CircularProgressIndicator(
-                  strokeWidth: 2.5,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    AppColors.primaryGreen,
-                  ),
-                ),
-              )
-                  : Text(
-                label,
-                style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: isDisabled
-                      ? AppColors.buttonDisabledText
-                      : AppColors.primaryGreen,
-                  letterSpacing: 0.3,
-                ),
-              ),
+              child:
+                  isLoading
+                      ? const SizedBox(
+                        height: 18,
+                        width: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2.5,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primaryGreen,
+                          ),
+                        ),
+                      )
+                      : Text(
+                        label,
+                        style: TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color:
+                              isDisabled
+                                  ? AppColors.buttonDisabledText
+                                  : AppColors.primaryGreen,
+                          letterSpacing: 0.3,
+                        ),
+                      ),
             ),
           ),
         ),

@@ -17,12 +17,10 @@ class AppTheme {
         primary: AppColors.primaryGreen,
         secondary: AppColors.primaryBlue,
         surface: AppColors.surfaceDark,
-        background: AppColors.backgroundDark,
         error: AppColors.error,
         onPrimary: AppColors.textPrimary,
         onSecondary: AppColors.textPrimary,
         onSurface: AppColors.textPrimary,
-        onBackground: AppColors.textPrimary,
         onError: AppColors.textPrimary,
       ),
 
@@ -39,10 +37,7 @@ class AppTheme {
           statusBarIconBrightness: Brightness.light,
           statusBarBrightness: Brightness.dark,
         ),
-        iconTheme: IconThemeData(
-          color: AppColors.iconColor,
-          size: 24,
-        ),
+        iconTheme: IconThemeData(color: AppColors.iconColor, size: 24),
         titleTextStyle: AppTypography.headlineMedium,
       ),
 
@@ -75,38 +70,23 @@ class AppTheme {
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.borderColor,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: AppColors.borderColor, width: 1),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.borderColor,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: AppColors.borderColor, width: 1),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.primaryGreen,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: AppColors.primaryGreen, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.error,
-            width: 1,
-          ),
+          borderSide: const BorderSide(color: AppColors.error, width: 1),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(
-            color: AppColors.error,
-            width: 2,
-          ),
+          borderSide: const BorderSide(color: AppColors.error, width: 2),
         ),
         labelStyle: AppTypography.inputLabel,
         hintStyle: AppTypography.inputText.copyWith(
@@ -123,10 +103,7 @@ class AppTheme {
           disabledBackgroundColor: AppColors.buttonDisabled,
           disabledForegroundColor: AppColors.buttonDisabledText,
           elevation: 0,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -139,18 +116,12 @@ class AppTheme {
         style: TextButton.styleFrom(
           foregroundColor: AppColors.primaryGreen,
           textStyle: AppTypography.link,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-            vertical: 8,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
       ),
 
       // Icon theme
-      iconTheme: const IconThemeData(
-        color: AppColors.iconColor,
-        size: 24,
-      ),
+      iconTheme: const IconThemeData(color: AppColors.iconColor, size: 24),
 
       // Divider theme
       dividerTheme: const DividerThemeData(
@@ -163,9 +134,7 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: AppColors.surfaceDark,
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       ),
     );
   }

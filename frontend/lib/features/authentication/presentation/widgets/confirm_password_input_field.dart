@@ -21,17 +21,15 @@ class _ConfirmPasswordInputFieldState extends State<ConfirmPasswordInputField> {
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        final passwordsMatch = state.confirmPassword.isNotEmpty &&
+        final passwordsMatch =
+            state.confirmPassword.isNotEmpty &&
             state.confirmPassword == state.password;
         final showError = state.confirmPassword.isNotEmpty && !passwordsMatch;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Confirm Password',
-              style: AppTypography.inputLabel,
-            ),
+            const Text('Confirm Password', style: AppTypography.inputLabel),
             const SizedBox(height: 8),
             TextField(
               onChanged: (value) {
@@ -53,9 +51,10 @@ class _ConfirmPasswordInputFieldState extends State<ConfirmPasswordInputField> {
                         padding: const EdgeInsets.only(right: 8),
                         child: Icon(
                           passwordsMatch ? Icons.check_circle : Icons.error,
-                          color: passwordsMatch
-                              ? AppColors.success
-                              : AppColors.error,
+                          color:
+                              passwordsMatch
+                                  ? AppColors.success
+                                  : AppColors.error,
                           size: 20,
                         ),
                       ),
