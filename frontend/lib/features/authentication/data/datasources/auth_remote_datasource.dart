@@ -1,6 +1,7 @@
 // features/authentication/data/datasources/auth_remote_datasource.dart
 
 import 'package:dio/dio.dart';
+import 'package:frontend/config/api_endpoints.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/dio_client.dart';
 import '../models/auth_result_model.dart';
@@ -71,7 +72,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       final response = await dioClient.post(
-        '/auth/login',
+        ApiEndpoints.login,
         data: requestModel.toJson(),
       );
 
@@ -95,7 +96,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     try {
       final response = await dioClient.post(
-        '/auth/github',
+        ApiEndpoints.githubAuth,
         data: {'code': authCode},
       );
 
@@ -119,7 +120,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     try {
       final response = await dioClient.post(
-        '/auth/google',
+        ApiEndpoints.googleAuth,
         data: {'id_token': idToken},
       );
 
@@ -151,7 +152,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
 
       final response = await dioClient.post(
-        '/auth/register',
+        ApiEndpoints.auth,
         data: requestModel.toJson(),
       );
 
@@ -172,7 +173,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> signOut() async {
     try {
-      final response = await dioClient.post('/auth/logout');
+      final response = await dioClient.post(ApiEndpoints.logout);
 
       if (response.statusCode != 200 && response.statusCode != 204) {
         throw ServerException(
@@ -189,7 +190,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<UserModel> getCurrentUser() async {
     try {
-      final response = await dioClient.get('/auth/me');
+      final response = await dioClient.get(ApiEndpoints.me);
 
       if (response.statusCode == 200) {
         return UserModel.fromJson(response.data['data']);
@@ -211,7 +212,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     try {
       final response = await dioClient.post(
-        '/auth/refresh',
+        ApiEndpoints.refreshToken,
         data: {'refresh_token': refreshToken},
       );
 
@@ -235,7 +236,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     try {
       final response = await dioClient.post(
-        '/auth/reset-password',
+        ApiEndpoints.resetPassword,
         data: {'email': email},
       );
 
@@ -257,7 +258,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     try {
       final response = await dioClient.post(
-        '/auth/verify-email',
+        ApiEndpoints.verifyEmail,
         data: {'token': token},
       );
 

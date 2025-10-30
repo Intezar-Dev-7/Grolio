@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
-import 'package:frontend/core/utils/constant.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/features/authentication/presentation/widgets/terms_and_privacy_text.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -78,7 +78,7 @@ class SignUpPage extends StatelessWidget {
 
                       // GitHub button
                       SocialAuthButton(
-                        icon: github_icon,
+                        icon: AppAssets.gitHubIcon,
                         label: 'Sign up with GitHub',
                         onPressed: state.status == AuthStatus.loading
                             ? null
@@ -93,7 +93,7 @@ class SignUpPage extends StatelessWidget {
 
                       // Google button
                       SocialAuthButton(
-                        icon: mail_icon,
+                        icon: AppAssets.mailIcon,
                         label: 'Sign up with Google',
                         onPressed: state.status == AuthStatus.loading
                             ? null

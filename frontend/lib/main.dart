@@ -1,27 +1,24 @@
 // main.dart
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
-import 'core/network/network_service.dart';
 import 'core/theme/app_theme.dart';
 import 'features/authentication/presentation/bloc/auth_bloc.dart';
+import 'features/feed/presentation/bloc/feed_bloc.dart';
+import 'features/devsnaps/presentation/bloc/devsnap_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize all dependencies
-  await di.init();
+  // Initialize timeago
+  timeago.setLocaleMessages('en', timeago.EnMessages());
 
-  // Initialize network interceptors after DI
-  NetworkService.initializeInterceptors(
-    di.sl<Dio>(),
-    di.sl<FlutterSecureStorage>(),
-  );
+  // Initialize dependency injection
+  await di.init();
 
   // Set system UI
   SystemChrome.setSystemUIOverlayStyle(
@@ -41,13 +38,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthBloc>(
-      create: (context) => di.sl<AuthBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        // Authentication BLoC
+        BlocProvider<AuthBloc>(create: (context) => di.sl<AuthBloc>()),
+
+        // Feed BLoC
+        BlocProvider<FeedBloc>(create: (context) => di.sl<FeedBloc>()),
+
+        // DevSnaps BLoC
+        BlocProvider<DevSnapBloc>(create: (context) => di.sl<DevSnapBloc>()),
+      ],
       child: MaterialApp(
         title: 'Grolio',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.darkTheme,
-        initialRoute: AppRouter.initial,
+        initialRoute: '/',
         onGenerateRoute: AppRouter.onGenerateRoute,
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
-import 'package:frontend/core/utils/constant.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/widgets/loading_overlay.dart';
 import 'package:frontend/features/authentication/presentation/bloc/auth_bloc.dart';
 import 'package:frontend/features/authentication/presentation/widgets/auth_logo.dart';
@@ -84,7 +84,7 @@ class LoginPage extends StatelessWidget {
 
                       // GitHub button
                       SocialAuthButton(
-                        icon: github_icon,
+                        icon: AppAssets.gitHubIcon,
                         label: 'Continue with GitHub',
                         onPressed: state.status == AuthStatus.loading
                             ? null
@@ -99,7 +99,7 @@ class LoginPage extends StatelessWidget {
 
                       // Google button
                       SocialAuthButton(
-                        icon: mail_icon,
+                        icon: AppAssets.mailIcon,
                         label: 'Continue with Google',
                         onPressed: state.status == AuthStatus.loading
                             ? null
