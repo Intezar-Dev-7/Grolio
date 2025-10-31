@@ -1,5 +1,7 @@
 // config/dependency_injection.dart
 
+import 'package:frontend/features/chat/data/datasources/chat_remote_datasource.dart';
+import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:frontend/features/discover/data/datasources/discover_remote_datasource.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -288,6 +290,22 @@ Future<void> init() async {
   sl.registerFactory<DiscoverBloc>(
         () => DiscoverBloc(
       remoteDataSource: sl<DiscoverRemoteDataSource>(),
+    ),
+  );
+
+  print('📦 Registering Chat dependencies...');
+
+  // Data Sources
+  sl.registerLazySingleton<ChatRemoteDataSource>(
+        () => ChatRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC
+  sl.registerFactory<ChatBloc>(
+        () => ChatBloc(
+      remoteDataSource: sl<ChatRemoteDataSource>(),
     ),
   );
 

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
@@ -59,6 +60,11 @@ class MyApp extends StatelessWidget {
         // Discover BLoC
         BlocProvider<DiscoverBloc>(
           create: (context) => di.sl<DiscoverBloc>(),
+        ),
+
+        // Chat BLoc
+        BlocProvider<ChatBloc>(
+          create: (context) => di.sl<ChatBloc>(),
         ),
       ],
       child: MaterialApp(

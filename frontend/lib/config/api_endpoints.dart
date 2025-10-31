@@ -143,7 +143,7 @@ class ApiEndpoints {
   static String notificationById(String notificationId) =>
       '$notifications/$notificationId';
   static const String markAllRead = '$notifications/mark-all-read';
-  static String markAsRead(String notificationId) =>
+  static String markAsReadNotification(String notificationId) =>
       '$notifications/$notificationId/read';
 
   // ============================================================================
@@ -240,4 +240,30 @@ class ApiEndpoints {
   // Content
   static const String trendingContent = '$discover/content/trending';
   static const String exploreTopics = '$discover/topics';
+
+  // ============================================================================
+  // Chat Endpoints
+  // ============================================================================
+
+  static const String chat = '/chat';
+
+  // Conversations
+  static const String conversations = '$chat/conversations';
+  static String conversationById(String conversationId) =>
+      '$conversations/$conversationId';
+
+  // Messages
+  static const String messages = '$chat/messages';
+  static String conversationMessages(String conversationId) =>
+      '$conversations/$conversationId/messages';
+  static String messageById(String messageId) => '$messages/$messageId';
+
+  // Actions
+  static String markAsReadConversation(String conversationId) =>
+      '$conversations/$conversationId/read';
+  static String typing(String conversationId) =>
+      '$conversations/$conversationId/typing';
+
+  // File upload
+  static const String uploadChatFile = '$chat/upload';
 }
