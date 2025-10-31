@@ -197,7 +197,7 @@ class DevSnapRemoteDataSourceImpl implements DevSnapRemoteDataSource {
     // TODO: Remove this mock data when backend is ready
     await Future.delayed(const Duration(seconds: 1));
 
-    return List.generate(2, (index) {
+    return List.generate(8, (index) {
       return DevSnapModel(
         id: 'snap_$index',
         userId: 'user_$index',

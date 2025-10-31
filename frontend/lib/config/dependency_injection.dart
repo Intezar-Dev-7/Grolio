@@ -1,5 +1,7 @@
 // config/dependency_injection.dart
 
+import 'package:frontend/features/discover/data/datasources/discover_remote_datasource.dart';
+import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -270,6 +272,22 @@ Future<void> init() async {
       getStoriesUseCase: sl<GetStoriesUseCase>(),
       getRecentDevSnapsUseCase: sl<GetRecentDevSnapsUseCase>(),
       createDevSnapUseCase: sl<CreateDevSnapUseCase>(),
+    ),
+  );
+
+  print('📦 Registering Discover dependencies...');
+
+  // Data Sources
+  sl.registerLazySingleton<DiscoverRemoteDataSource>(
+        () => DiscoverRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC
+  sl.registerFactory<DiscoverBloc>(
+        () => DiscoverBloc(
+      remoteDataSource: sl<DiscoverRemoteDataSource>(),
     ),
   );
 

@@ -218,4 +218,26 @@ class ApiEndpoints {
 
   static const String reports = '/reports';
   static const String moderationQueue = '/moderation/queue';
+
+  // ============================================================================
+  // Discover Endpoints
+  // ============================================================================
+
+  static const String discover = '/discover';
+
+  // Recommended Developers
+  static const String recommendedDevelopers = '$discover/developers/recommended';
+  static const String trendingDevelopers = '$discover/developers/trending';
+
+  // Projects
+  static const String trendingProjects = '$discover/projects/trending';
+  static const String recommendedProjects = '$discover/projects/recommended';
+
+  // Events
+  static const String upcomingEvents = '$discover/events/upcoming';
+  static const String trendingEvents = '$discover/events/trending';
+
+  // Content
+  static const String trendingContent = '$discover/content/trending';
+  static const String exploreTopics = '$discover/topics';
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
 import 'core/theme/app_theme.dart';
@@ -53,6 +54,11 @@ class MyApp extends StatelessWidget {
         // DevSnaps BLoC
         BlocProvider<DevSnapBloc>(
           create: (context) => di.sl<DevSnapBloc>(),
+        ),
+
+        // Discover BLoC
+        BlocProvider<DiscoverBloc>(
+          create: (context) => di.sl<DiscoverBloc>(),
         ),
       ],
       child: MaterialApp(

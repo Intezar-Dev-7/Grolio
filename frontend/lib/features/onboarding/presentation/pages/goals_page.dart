@@ -70,46 +70,64 @@ class GoalsView extends StatelessWidget {
                     children: [
                       // Logo and step text
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              gradient: const LinearGradient(
-                                begin: AlignmentGeometry.topLeft,
-                                end: AlignmentGeometry.bottomRight,
-                                colors: [
-                                  AppColors.primaryGreen,
-                                  AppColors.primaryBlue,
+                          Row(
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  gradient: const LinearGradient(
+                                    begin: AlignmentGeometry.topLeft,
+                                    end: AlignmentGeometry.bottomRight,
+                                    colors: [
+                                      AppColors.primaryGreen,
+                                      AppColors.primaryBlue,
+                                    ],
+                                  ),
+                                ),
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.track_changes,
+                                    color: Colors.white,
+                                    size: 24,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Step 2 of 2',
+                                    style: AppTypography.bodySmall.copyWith(
+                                      color: AppColors.textSecondary,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Your Goals',
+                                    style: AppTypography.titleMedium.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ),
-                            child: const Center(
-                              child: Icon(
-                                Icons.track_changes,
-                                color: Colors.white,
-                                size: 24,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Step 2 of 2',
-                                style: AppTypography.bodySmall.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                              Text(
-                                'Your Goals',
-                                style: AppTypography.titleMedium.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
                             ],
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              context.read<GoalsBloc>().add(
+                                    const GoalsSkipped(),
+                                  );
+                            },
+                            child: Text(
+                              'Skip',
+                              style: AppTypography.labelMedium.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
                           ),
                         ],
                       ),
