@@ -52,7 +52,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on ValidationException catch (e) {
       return Left(ValidationFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -80,7 +80,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on AuthenticationException catch (e) {
       return Left(AuthenticationFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -108,7 +108,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on AuthenticationException catch (e) {
       return Left(AuthenticationFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -141,7 +141,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on ValidationException catch (e) {
       return Left(ValidationFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -163,7 +163,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on CacheException catch (e) {
       return Left(CacheFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -191,7 +191,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on AuthenticationException catch (e) {
       return Left(AuthenticationFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -211,8 +211,8 @@ class AuthRepositoryImpl implements AuthRepository {
               refreshToken: refreshToken,
             );
             return refreshResult.fold(
-                  (failure) => const Right(false),
-                  (newToken) => const Right(true),
+              (failure) => const Right(false),
+              (newToken) => const Right(true),
             );
           }
           return const Right(false);
@@ -226,9 +226,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, void>> resetPassword({
-    required String email,
-  }) async {
+  Future<Either<Failure, void>> resetPassword({required String email}) async {
     if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure('No internet connection'));
     }
@@ -241,7 +239,7 @@ class AuthRepositoryImpl implements AuthRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -271,7 +269,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await localDataSource.clearCachedUser();
       return Left(AuthenticationFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
