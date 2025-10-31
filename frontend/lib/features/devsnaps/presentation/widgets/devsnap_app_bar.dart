@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_typography.dart';
 import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
@@ -31,26 +32,30 @@ class DevSnapAppBar extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(
-            Icons.search,
+          icon: Image.asset(
+            AppAssets.searchIcon,
             color: AppColors.iconColor,
+            width: 20,
+            height: 20,
           ),
           onPressed: () {},
         ),
         Stack(
           children: [
             IconButton(
-              icon: const Icon(
-                Icons.notifications_outlined,
+              icon: Image.asset(
+                AppAssets.notificationIcon,
                 color: AppColors.iconColor,
+                width: 22,
+                height: 22,
               ),
               onPressed: () {},
             ),
             Positioned(
               right: 8,
-              top: 8,
+              top: 6,
               child: Container(
-                padding: const EdgeInsets.all(4),
+                padding: const EdgeInsets.all(2),
                 decoration: const BoxDecoration(
                   color: AppColors.error,
                   shape: BoxShape.circle,

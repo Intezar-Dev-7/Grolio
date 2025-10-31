@@ -13,6 +13,7 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
     on<GoalsInitialized>(_onGoalsInitialized);
     on<GoalToggled>(_onGoalToggled);
     on<GoalsSubmitted>(_onGoalsSubmitted);
+    on<GoalsSkipped>(_onGoalsSkipped);
   }
 
   Future<void> _onGoalsInitialized(
@@ -28,6 +29,13 @@ class GoalsBloc extends Bloc<GoalsEvent, GoalsState> {
       status: GoalsStatus.loaded,
       availableGoals: goals,
     ));
+  }
+
+  void _onGoalsSkipped(
+      GoalsSkipped event,
+      Emitter<GoalsState> emit,
+      ) {
+    emit(state.copyWith(status: GoalsStatus.success));
   }
 
   void _onGoalToggled(

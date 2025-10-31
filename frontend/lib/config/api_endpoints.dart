@@ -143,7 +143,7 @@ class ApiEndpoints {
   static String notificationById(String notificationId) =>
       '$notifications/$notificationId';
   static const String markAllRead = '$notifications/mark-all-read';
-  static String markAsRead(String notificationId) =>
+  static String markAsReadNotification(String notificationId) =>
       '$notifications/$notificationId/read';
 
   // ============================================================================
@@ -218,4 +218,52 @@ class ApiEndpoints {
 
   static const String reports = '/reports';
   static const String moderationQueue = '/moderation/queue';
+
+  // ============================================================================
+  // Discover Endpoints
+  // ============================================================================
+
+  static const String discover = '/discover';
+
+  // Recommended Developers
+  static const String recommendedDevelopers = '$discover/developers/recommended';
+  static const String trendingDevelopers = '$discover/developers/trending';
+
+  // Projects
+  static const String trendingProjects = '$discover/projects/trending';
+  static const String recommendedProjects = '$discover/projects/recommended';
+
+  // Events
+  static const String upcomingEvents = '$discover/events/upcoming';
+  static const String trendingEvents = '$discover/events/trending';
+
+  // Content
+  static const String trendingContent = '$discover/content/trending';
+  static const String exploreTopics = '$discover/topics';
+
+  // ============================================================================
+  // Chat Endpoints
+  // ============================================================================
+
+  static const String chat = '/chat';
+
+  // Conversations
+  static const String conversations = '$chat/conversations';
+  static String conversationById(String conversationId) =>
+      '$conversations/$conversationId';
+
+  // Messages
+  static const String messages = '$chat/messages';
+  static String conversationMessages(String conversationId) =>
+      '$conversations/$conversationId/messages';
+  static String messageById(String messageId) => '$messages/$messageId';
+
+  // Actions
+  static String markAsReadConversation(String conversationId) =>
+      '$conversations/$conversationId/read';
+  static String typing(String conversationId) =>
+      '$conversations/$conversationId/typing';
+
+  // File upload
+  static const String uploadChatFile = '$chat/upload';
 }

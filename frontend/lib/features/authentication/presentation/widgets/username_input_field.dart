@@ -16,7 +16,7 @@ class UsernameInputField extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Username', style: AppTypography.inputLabel),
+            // const Text('Username', style: AppTypography.inputLabel),
             const SizedBox(height: 8),
             TextField(
               onChanged: (value) {

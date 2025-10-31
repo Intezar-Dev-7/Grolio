@@ -51,10 +51,10 @@ class SignUpPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const SizedBox(height: 40),
+                      // const SizedBox(height: 40),
 
                       // Logo
-                      const AuthLogo(),
+                      // const AuthLogo(),
 
                       const SizedBox(height: 32),
 

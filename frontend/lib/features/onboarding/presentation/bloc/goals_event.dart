@@ -25,3 +25,7 @@ class GoalToggled extends GoalsEvent {
 class GoalsSubmitted extends GoalsEvent {
   const GoalsSubmitted();
 }
+
+class GoalsSkipped extends GoalsEvent {
+  const GoalsSkipped();
+}

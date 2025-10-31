@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc.dart';
+import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
+import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
 import 'core/theme/app_theme.dart';
@@ -41,13 +45,39 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         // Authentication BLoC
-        BlocProvider<AuthBloc>(create: (context) => di.sl<AuthBloc>()),
+        BlocProvider<AuthBloc>(
+          create: (context) => di.sl<AuthBloc>(),
+        ),
 
         // Feed BLoC
-        BlocProvider<FeedBloc>(create: (context) => di.sl<FeedBloc>()),
+        BlocProvider<FeedBloc>(
+          create: (context) => di.sl<FeedBloc>(),
+        ),
 
         // DevSnaps BLoC
-        BlocProvider<DevSnapBloc>(create: (context) => di.sl<DevSnapBloc>()),
+        BlocProvider<DevSnapBloc>(
+          create: (context) => di.sl<DevSnapBloc>(),
+        ),
+
+        // Discover BLoC
+        BlocProvider<DiscoverBloc>(
+          create: (context) => di.sl<DiscoverBloc>(),
+        ),
+
+        // Chat BLoc
+        BlocProvider<ChatBloc>(
+          create: (context) => di.sl<ChatBloc>(),
+        ),
+
+        // Profile BLoC
+        BlocProvider<ProfileBloc>(
+          create: (context) => di.sl<ProfileBloc>(),
+        ),
+
+        // Create Post BLoC
+        BlocProvider<CreatePostBloc>(
+          create: (context) => di.sl<CreatePostBloc>(),
+        ),
       ],
       child: MaterialApp(
         title: 'Grolio',
