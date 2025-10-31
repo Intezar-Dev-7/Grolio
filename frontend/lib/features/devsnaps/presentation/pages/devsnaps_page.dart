@@ -27,7 +27,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
 
     // Load data on init
     context.read<DevSnapBloc>().add(const DevSnapStoriesLoadRequested());
-    context.read<DevSnapBloc>().add(const DevSnapRecentLoadRequested());
+    // context.read<DevSnapBloc>().add(const DevSnapRecentLoadRequested());
   }
 
   @override
@@ -40,7 +40,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
     if (_scrollController.position.pixels >=
         _scrollController.position.maxScrollExtent * 0.9) {
       // Load more when reaching 90% of scroll
-      context.read<DevSnapBloc>().add(const DevSnapRecentLoadMoreRequested());
+      // context.read<DevSnapBloc>().add(const DevSnapRecentLoadMoreRequested());
     }
   }
 
@@ -51,7 +51,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
       body: RefreshIndicator(
         onRefresh: () async {
           context.read<DevSnapBloc>().add(const DevSnapStoriesLoadRequested());
-          context.read<DevSnapBloc>().add(const DevSnapRecentLoadRequested());
+          // context.read<DevSnapBloc>().add(const DevSnapRecentLoadRequested());
         },
         color: AppColors.primaryGreen,
         backgroundColor: AppColors.surfaceDark,
@@ -197,7 +197,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
               ),
             ),
 
-            // Recent DevSnaps Header
+            /*// Recent DevSnaps Header
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
@@ -211,7 +211,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
             ),
 
             // ✅ Dynamic Recent DevSnaps Grid
-            const RecentDevSnapsGrid(),
+            const RecentDevSnapsGrid(),*/
           ],
         ),
       ),

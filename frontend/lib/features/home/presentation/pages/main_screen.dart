@@ -1,13 +1,13 @@
-// features/home/presentation/pages/main_screen.dart
+// core/presentation/main_screen.dart
 
 import 'package:flutter/material.dart';
-import '../../../../core/constants/app_assets.dart';
-import '../../../../core/theme/app_colors.dart';
-import '../../../feed/presentation/pages/feed_page.dart';
-import '../../../devsnaps/presentation/pages/devsnaps_page.dart';
-import '../../../discover/presentation/pages/discover_page.dart';
-import '../../../chat/presentation/pages/chat_page.dart';
-import '../../../profile/presentation/pages/profile_page.dart';
+import 'package:frontend/core/constants/app_assets.dart';
+import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/core/theme/app_colors.dart';
+import 'package:frontend/features/chat/presentation/pages/chat_page.dart';
+import 'package:frontend/features/devsnaps/presentation/pages/devsnaps_page.dart';
+import 'package:frontend/features/feed/presentation/pages/feed_page.dart';
+import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     const FeedPage(),
     const DevSnapsPage(),
-    const DiscoverPage(),
+    const SizedBox.shrink(), // Placeholder for FAB
     const ChatPage(),
     const ProfilePage(),
   ];
@@ -31,48 +31,88 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundDark,
-      body: IndexedStack(index: _currentIndex, children: _pages),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          color: AppColors.surfaceDark,
-          border: Border(
-            top: BorderSide(color: AppColors.borderColor, width: 1),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
+      floatingActionButton: Container(
+        width: 54,
+        height: 54,
+        decoration: BoxDecoration(
+          gradient: AppColors.logoGradient,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.primaryGreen.withOpacity(0.4),
+              blurRadius: 20,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                AppRouter.createPost
+              );
+            },
+            customBorder: const CircleBorder(),
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+              size: 32,
+            ),
           ),
         ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildNavItem(
-                  icon: AppAssets.homeIcon,
-                  label: 'Feed',
-                  index: 0,
-                ),
-                _buildNavItem(
-                  icon: AppAssets.snapIcon,
-                  label: 'DevSnaps',
-                  index: 1,
-                ),
-                _buildNavItem(
-                  icon: AppAssets.communityIcon,
-                  label: 'Discover',
-                  index: 2,
-                ),
-                _buildNavItem(
-                  icon: AppAssets.chatIcon,
-                  label: 'Chat',
-                  index: 3,
-                  showBadge: true,
-                ),
-                _buildNavItem(
-                  icon: AppAssets.profileIcon,
-                  label: 'Profile',
-                  index: 4,
-                ),
-              ],
-            ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // ✅ Bottom Navigation Bar with notch
+      bottomNavigationBar: _buildBottomNavBar(),
+    );
+  }
+
+  Widget _buildBottomNavBar() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: AppColors.surfaceDark,
+        border: Border(
+          top: BorderSide(
+            color: AppColors.borderColor,
+            width: 1,
+          ),
+        ),
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(
+                icon: AppAssets.homeIcon,
+                label: 'Feed',
+                index: 0,
+              ),
+              _buildNavItem(
+                icon: AppAssets.snapIcon,
+                label: 'DevSnaps',
+                index: 1,
+              ),
+              // ✅ Empty space for FAB
+              const SizedBox(width: 54),
+              _buildNavItem(
+                icon: AppAssets.chatIcon,
+                label: 'Chat',
+                index: 3,
+              ),
+              _buildNavItem(
+                icon: AppAssets.profileIcon,
+                label: 'Profile',
+                index: 4,
+              ),
+            ],
           ),
         ),
       ),
@@ -83,67 +123,36 @@ class _MainScreenState extends State<MainScreen> {
     required String icon,
     required String label,
     required int index,
-    bool showBadge = false,
   }) {
-    final isSelected = _currentIndex == index;
+    final isActive = _currentIndex == index;
 
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         setState(() {
           _currentIndex = index;
         });
       },
+      borderRadius: BorderRadius.circular(12),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color:
-              isSelected
-                  ? AppColors.primaryGreen.withOpacity(0.05)
-                  : Colors.transparent,
-          borderRadius: BorderRadius.circular(12),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [AppColors.black90.withOpacity(0.1), AppColors.white90],
-          ),
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Stack(
-              children: [
-                Image.asset(
-                  icon,
-                  width: 24,
-                  height: 24,
-                  color:
-                      isSelected ? AppColors.primaryGreen : AppColors.iconColor,
-                ),
-                if (showBadge)
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: Container(
-                      width: 8,
-                      height: 8,
-                      decoration: const BoxDecoration(
-                        color: AppColors.error,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ),
-              ],
+            Image.asset(
+              icon,
+              color: isActive ? AppColors.primaryGreen : AppColors.iconColor,
+              width: 20,
+              height: 20,
             ),
             const SizedBox(height: 4),
             Text(
               label,
               style: TextStyle(
                 fontSize: 11,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                color:
-                    isSelected
-                        ? AppColors.primaryGreen
-                        : AppColors.textSecondary,
+                fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
+                color: isActive
+                    ? AppColors.primaryGreen
+                    : AppColors.textTertiary,
               ),
             ),
           ],

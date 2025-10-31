@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -231,8 +232,8 @@ class PostCard extends StatelessWidget {
             children: [
               _buildStatButton(
                 icon: post.stats.isLiked
-                    ? Icons.favorite
-                    : Icons.favorite_outline,
+                    ? AppAssets.filledLikeIcon
+                    : AppAssets.blankLikeIcon,
                 count: post.stats.likes,
                 color: post.stats.isLiked
                     ? AppColors.error
@@ -241,27 +242,29 @@ class PostCard extends StatelessWidget {
               ),
               const SizedBox(width: 20),
               _buildStatButton(
-                icon: Icons.chat_bubble_outline,
+                icon: AppAssets.commentIcon,
                 count: post.stats.comments,
                 color: AppColors.iconColor,
                 onTap: onComment ?? () {},
               ),
               const SizedBox(width: 20),
               _buildStatButton(
-                icon: Icons.share_outlined,
+                icon: AppAssets.shareIcon,
                 count: post.stats.shares,
                 color: AppColors.iconColor,
                 onTap: onShare,
               ),
               const Spacer(),
               IconButton(
-                icon: Icon(
+                icon: Image.asset(
                   post.stats.isBookmarked
-                      ? Icons.bookmark
-                      : Icons.bookmark_outline,
+                      ? AppAssets.filledBookmarkIcon
+                      : AppAssets.blankBookmarkIcon,
                   color: post.stats.isBookmarked
                       ? AppColors.primaryGreen
                       : AppColors.iconColor,
+                  height: 20,
+                  width: 20,
                 ),
                 onPressed: onBookmark,
               ),
@@ -297,7 +300,7 @@ class PostCard extends StatelessWidget {
   }
 
   Widget _buildStatButton({
-    required IconData icon,
+    required String icon,
     required int count,
     required Color color,
     required VoidCallback onTap,
@@ -306,10 +309,11 @@ class PostCard extends StatelessWidget {
       onTap: onTap,
       child: Row(
         children: [
-          Icon(
+          Image.asset(
             icon,
-            size: 20,
             color: color,
+            height: 20,
+            width: 20,
           ),
           const SizedBox(width: 6),
           Text(
@@ -371,9 +375,11 @@ class PostCard extends StatelessWidget {
                 ),
               ),
               ListTile(
-                leading: const Icon(
-                  Icons.bookmark_outline,
+                leading: Image.asset(
+                  AppAssets.blankBookmarkIcon,
                   color: AppColors.iconColor,
+                  height: 20,
+                  width: 20,
                 ),
                 title: const Text(
                   'Save post',

@@ -5,8 +5,8 @@ import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_typography.dart';
 import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
 
-class DevSnapAppBar extends StatelessWidget {
-  const DevSnapAppBar({
+class ChatAppBar extends StatelessWidget {
+  const ChatAppBar({
     super.key,
   });
 
@@ -23,7 +23,7 @@ class DevSnapAppBar extends StatelessWidget {
           const AppBarLogoIcon(),
           const SizedBox(width: 12),
           Text(
-            'Snaps',
+            'Chat',
             style: AppTypography.headlineMedium.copyWith(
               fontWeight: FontWeight.bold,
             ),

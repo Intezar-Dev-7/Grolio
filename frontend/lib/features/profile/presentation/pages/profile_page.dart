@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
+import 'package:frontend/features/profile/presentation/widgets/profile_app_bar.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/profile_bloc.dart';
@@ -87,86 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return CustomScrollView(
             slivers: [
               // App Bar
-              SliverAppBar(
-                floating: true,
-                snap: true,
-                automaticallyImplyLeading: false,
-                backgroundColor: AppColors.backgroundDark,
-                elevation: 0,
-                leading: widget.userId != null
-                    ? IconButton(
-                  icon: const Icon(
-                    Icons.arrow_back_ios_new_rounded,
-                    color: AppColors.iconColor,
-                  ),
-                  onPressed: () => Navigator.pop(context),
-                )
-                    : null,
-                title: Row(
-                  children: [
-                    const AppBarLogoIcon(),
-                    const SizedBox(width: 12),
-                    Text(
-                      'Profile',
-                      style: AppTypography.headlineMedium.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-                actions: [
-                  IconButton(
-                    icon: const Icon(
-                      Icons.search,
-                      color: AppColors.iconColor,
-                    ),
-                    onPressed: () {},
-                  ),
-                  Stack(
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.notifications_outlined,
-                          color: AppColors.iconColor,
-                        ),
-                        onPressed: () {},
-                      ),
-                      Positioned(
-                        right: 8,
-                        top: 8,
-                        child: Container(
-                          padding: const EdgeInsets.all(4),
-                          decoration: const BoxDecoration(
-                            color: AppColors.error,
-                            shape: BoxShape.circle,
-                          ),
-                          constraints: const BoxConstraints(
-                            minWidth: 16,
-                            minHeight: 16,
-                          ),
-                          child: const Center(
-                            child: Text(
-                              '3',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  IconButton(
-                    icon: const Icon(
-                      Icons.filter_list,
-                      color: AppColors.iconColor,
-                    ),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+              ProfileAppBar(widget: widget),
 
               // Profile Header
               SliverToBoxAdapter(

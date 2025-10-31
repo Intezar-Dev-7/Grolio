@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../domain/entities/conversation_entity.dart';
@@ -57,15 +58,21 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundDark,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: AppColors.iconColor,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
+            InkWell(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: const Icon(
+                Icons.arrow_back_ios_new_rounded,
+                color: AppColors.iconColor,
+              ),
+            ),
+            const SizedBox(
+              width: 8,
+            ),
             Stack(
               children: [
                 CircleAvatar(
@@ -133,16 +140,20 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(
-              Icons.call,
+            icon: Image.asset(
+              AppAssets.callIcon,
               color: AppColors.iconColor,
+              width: 20,
+              height: 20,
             ),
             onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(
-              Icons.videocam,
+            icon: Image.asset(
+              AppAssets.videoCallIcon,
               color: AppColors.iconColor,
+              width: 20,
+              height: 20,
             ),
             onPressed: () {},
           ),

@@ -54,7 +54,7 @@ class LoginPage extends StatelessWidget {
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          AuthLogo(),
+                          // AuthLogo(),
 
                           SizedBox(width: 12),
 

@@ -1,6 +1,7 @@
 // features/feed/presentation/widgets/feed_app_bar.dart
 
 import 'package:flutter/material.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -31,33 +32,31 @@ class FeedAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        // Search button
         IconButton(
-          icon: const Icon(
-            Icons.search,
+          icon: Image.asset(
+            AppAssets.searchIcon,
             color: AppColors.iconColor,
+            width: 20,
+            height: 20,
           ),
-          onPressed: () {
-            // Navigate to search
-          },
+          onPressed: () {},
         ),
-        // Notification button with badge
         Stack(
           children: [
             IconButton(
-              icon: const Icon(
-                Icons.notifications_outlined,
+              icon: Image.asset(
+                AppAssets.notificationIcon,
                 color: AppColors.iconColor,
+                width: 22,
+                height: 22,
               ),
-              onPressed: () {
-                // Navigate to notifications
-              },
+              onPressed: () {},
             ),
             Positioned(
               right: 8,
-              top: 8,
+              top: 6,
               child: Container(
-                padding: const EdgeInsets.all(4),
+                padding: const EdgeInsets.all(2),
                 decoration: const BoxDecoration(
                   color: AppColors.error,
                   shape: BoxShape.circle,
@@ -80,15 +79,12 @@ class FeedAppBar extends StatelessWidget {
             ),
           ],
         ),
-        // Filter button
         IconButton(
           icon: const Icon(
             Icons.filter_list,
             color: AppColors.iconColor,
           ),
-          onPressed: () {
-            // Show filter options
-          },
+          onPressed: () {},
         ),
         const SizedBox(width: 4),
       ],

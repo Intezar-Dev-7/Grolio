@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/LoadingScreen.dart';
+import 'package:frontend/features/create_post/presentation/page/create_post_page.dart';
 import 'package:frontend/features/home/presentation/pages/main_screen.dart';
 import 'package:frontend/features/onboarding/presentation/pages/goals_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/tech_stack_page.dart';
@@ -112,6 +113,12 @@ class AppRouter {
       case home:
         return _buildRoute(
           const MainScreen(),
+          settings: settings,
+        );
+
+      case createPost:
+        return _buildRoute(
+          const CreatePostPage(),
           settings: settings,
         );
 

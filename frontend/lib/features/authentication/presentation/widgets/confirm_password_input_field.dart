@@ -29,7 +29,7 @@ class _ConfirmPasswordInputFieldState extends State<ConfirmPasswordInputField> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Confirm Password', style: AppTypography.inputLabel),
+            // const Text('Confirm Password', style: AppTypography.inputLabel),
             const SizedBox(height: 8),
             TextField(
               onChanged: (value) {

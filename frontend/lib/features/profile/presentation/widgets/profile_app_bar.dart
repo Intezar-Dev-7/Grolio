@@ -1,14 +1,17 @@
-
 import 'package:flutter/material.dart';
 import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_typography.dart';
 import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
+import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
-class DevSnapAppBar extends StatelessWidget {
-  const DevSnapAppBar({
+class ProfileAppBar extends StatelessWidget {
+  const ProfileAppBar({
     super.key,
+    required this.widget,
   });
+
+  final ProfilePage? widget;
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +21,21 @@ class DevSnapAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.backgroundDark,
       elevation: 0,
+      leading: widget!.userId != null
+          ? IconButton(
+        icon: const Icon(
+          Icons.arrow_back_ios_new_rounded,
+          color: AppColors.iconColor,
+        ),
+        onPressed: () => Navigator.pop(context),
+      )
+          : null,
       title: Row(
         children: [
           const AppBarLogoIcon(),
           const SizedBox(width: 12),
           Text(
-            'Snaps',
+            'Profile',
             style: AppTypography.headlineMedium.copyWith(
               fontWeight: FontWeight.bold,
             ),

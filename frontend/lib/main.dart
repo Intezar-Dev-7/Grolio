@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -71,6 +72,11 @@ class MyApp extends StatelessWidget {
         // Profile BLoC
         BlocProvider<ProfileBloc>(
           create: (context) => di.sl<ProfileBloc>(),
+        ),
+
+        // Create Post BLoC
+        BlocProvider<CreatePostBloc>(
+          create: (context) => di.sl<CreatePostBloc>(),
         ),
       ],
       child: MaterialApp(

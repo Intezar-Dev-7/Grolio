@@ -2,6 +2,8 @@
 
 import 'package:frontend/features/chat/data/datasources/chat_remote_datasource.dart';
 import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:frontend/features/create_post/data/datasource/create_post_remote_datasource.dart';
+import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc.dart';
 import 'package:frontend/features/discover/data/datasources/discover_remote_datasource.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:frontend/features/profile/data/datasources/profile_remote_datasource.dart';
@@ -339,6 +341,27 @@ Future<void> init() async {
   sl.registerFactory<ProfileBloc>(
         () => ProfileBloc(
       remoteDataSource: sl<ProfileRemoteDataSource>(),
+    ),
+  );
+
+
+  // ============================================================================
+  // Features - Create Post
+  // ============================================================================
+
+  print('📦 Registering Create Post dependencies...');
+
+  // Data Sources
+  sl.registerLazySingleton<CreatePostRemoteDataSource>(
+        () => CreatePostRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC
+  sl.registerFactory<CreatePostBloc>(
+        () => CreatePostBloc(
+      remoteDataSource: sl<CreatePostRemoteDataSource>(),
     ),
   );
 
