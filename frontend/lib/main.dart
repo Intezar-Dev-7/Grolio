@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
+import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
 import 'core/theme/app_theme.dart';
@@ -65,6 +66,11 @@ class MyApp extends StatelessWidget {
         // Chat BLoc
         BlocProvider<ChatBloc>(
           create: (context) => di.sl<ChatBloc>(),
+        ),
+
+        // Profile BLoC
+        BlocProvider<ProfileBloc>(
+          create: (context) => di.sl<ProfileBloc>(),
         ),
       ],
       child: MaterialApp(

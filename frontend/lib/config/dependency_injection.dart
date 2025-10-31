@@ -4,6 +4,8 @@ import 'package:frontend/features/chat/data/datasources/chat_remote_datasource.d
 import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:frontend/features/discover/data/datasources/discover_remote_datasource.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
+import 'package:frontend/features/profile/data/datasources/profile_remote_datasource.dart';
+import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -277,6 +279,11 @@ Future<void> init() async {
     ),
   );
 
+  // ============================================================================
+  // Features - Discover
+  // ============================================================================
+
+
   print('📦 Registering Discover dependencies...');
 
   // Data Sources
@@ -293,6 +300,11 @@ Future<void> init() async {
     ),
   );
 
+  // ============================================================================
+  // Features - Chat, Conversation
+  // ============================================================================
+
+
   print('📦 Registering Chat dependencies...');
 
   // Data Sources
@@ -308,6 +320,28 @@ Future<void> init() async {
       remoteDataSource: sl<ChatRemoteDataSource>(),
     ),
   );
+
+  // ============================================================================
+  // Features - Profile
+  // ============================================================================
+
+
+  print('📦 Registering Profile dependencies...');
+
+  // Data Sources
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+        () => ProfileRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC
+  sl.registerFactory<ProfileBloc>(
+        () => ProfileBloc(
+      remoteDataSource: sl<ProfileRemoteDataSource>(),
+    ),
+  );
+
 
   print('✅ Dependency injection completed successfully!');
 }

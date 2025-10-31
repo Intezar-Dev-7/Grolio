@@ -63,6 +63,7 @@ dependencies:
   # UI
   cached_network_image: ^3.3.1
   timeago: ^3.6.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   flutter_test:
