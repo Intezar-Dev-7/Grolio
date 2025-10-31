@@ -32,14 +32,14 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
   @override
   Future<Either<Failure, List<DevSnapEntity>>> getUserDevSnaps(
-      String userId,
-      ) async {
+    String userId,
+  ) async {
     if (!await networkInfo.isConnected) {
       return const Left(NetworkFailure('No internet connection'));
     }
@@ -52,7 +52,7 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -76,7 +76,7 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -104,7 +104,7 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -120,7 +120,7 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -136,7 +136,7 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -152,7 +152,7 @@ class DevSnapRepositoryImpl implements DevSnapRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 }

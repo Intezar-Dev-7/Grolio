@@ -59,7 +59,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
           controller: _scrollController,
           slivers: [
             // App Bar
-            DevSnapAppBar(),
+            const DevSnapAppBar(),
 
             // Stories Section
             BlocBuilder<DevSnapBloc, DevSnapState>(
@@ -174,7 +174,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
                       iconColor: Color(0xFF2196F3),
                       title: 'Share Developer Moments',
                       description:
-                      'Capture and share your coding wins, workspace setups, and dev life with fellow developers. Add code snippets, text, or hashtags to your snaps.',
+                          'Capture and share your coding wins, workspace setups, and dev life with fellow developers. Add code snippets, text, or hashtags to your snaps.',
                     ),
                     const SizedBox(height: 12),
                     const DevSnapsInfoCard(
@@ -182,7 +182,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
                       iconColor: Color(0xFFFFA726),
                       title: '24-Hour Stories',
                       description:
-                      'All DevSnaps disappear after 24 hours. Snapshots freely without worrying about your feed getting cluttered with old content.',
+                          'All DevSnaps disappear after 24 hours. Snapshots freely without worrying about your feed getting cluttered with old content.',
                     ),
                     const SizedBox(height: 12),
                     const DevSnapsInfoCard(
@@ -190,7 +190,7 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
                       iconColor: Color(0xFF4CAF93),
                       title: 'Developer Tools',
                       description:
-                      'Add code snippets with syntax highlighting, tech stack hashtags, and custom text overlays to make your snaps unique.',
+                          'Add code snippets with syntax highlighting, tech stack hashtags, and custom text overlays to make your snaps unique.',
                     ),
                   ],
                 ),
@@ -218,4 +218,3 @@ class _DevSnapsPageState extends State<DevSnapsPage> {
     );
   }
 }
-

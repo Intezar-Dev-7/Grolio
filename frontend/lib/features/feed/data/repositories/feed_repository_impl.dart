@@ -37,7 +37,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -55,7 +55,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on NetworkException catch (e) {
       return Left(NetworkFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -71,7 +71,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -87,7 +87,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -103,7 +103,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -119,7 +119,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -135,7 +135,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -163,7 +163,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 
@@ -179,7 +179,7 @@ class FeedRepositoryImpl implements FeedRepository {
     } on ServerException catch (e) {
       return Left(ServerFailure(e.message));
     } catch (e) {
-      return Left(ServerFailure('An unexpected error occurred'));
+      return const Left(ServerFailure('An unexpected error occurred'));
     }
   }
 }
