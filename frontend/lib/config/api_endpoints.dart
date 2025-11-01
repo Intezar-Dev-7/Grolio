@@ -133,6 +133,10 @@ class ApiEndpoints {
   static const String onboarding = '/onboarding';
   static const String onboardingComplete = '$onboarding/complete';
   static const String onboardingSkip = '$onboarding/skip';
+  // Profile setup
+  static const String uploadProfileImage = '$onboarding/upload-profile-image';
+  static const String checkUsername = '$onboarding/check-username';
+  static const String completeProfile = '$onboarding/complete-profile';
 
   // ============================================================================
   // Notification Endpoints

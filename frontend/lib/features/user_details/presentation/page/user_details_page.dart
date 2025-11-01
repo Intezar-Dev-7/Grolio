@@ -134,7 +134,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
-                      Icons.arrow_back,
+                      Icons.arrow_back_ios_new_rounded,
                       color: Colors.white,
                       size: 20,
                     ),

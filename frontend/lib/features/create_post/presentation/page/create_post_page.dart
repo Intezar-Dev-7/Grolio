@@ -67,7 +67,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
           elevation: 0,
           leading: IconButton(
             icon: const Icon(
-              Icons.close,
+              Icons.arrow_back_ios_new_rounded,
               color: AppColors.iconColor,
             ),
             onPressed: () {

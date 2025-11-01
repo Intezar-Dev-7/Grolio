@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/LoadingScreen.dart';
+import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/features/create_post/presentation/page/create_post_page.dart';
 import 'package:frontend/features/home/presentation/pages/main_screen.dart';
+import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
 import 'package:frontend/features/onboarding/presentation/pages/goals_page.dart';
+import 'package:frontend/features/onboarding/presentation/pages/profile_setup_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/tech_stack_page.dart';
 import '../../../features/authentication/presentation/page/login_page.dart';
 import '../../../features/authentication/presentation/page/signup_page.dart';
@@ -26,6 +30,7 @@ class AppRouter {
   static const String resetPasswordSuccess = '/reset-password-success';
   static const String home = '/home';
   static const String profile = '/profile';
+  static const String profileSetup = '/profile-setup';
   static const String postDetail = '/post-detail';
   static const String createPost = '/create-post';
   static const String editProfile = '/edit-profile';
@@ -114,6 +119,14 @@ class AppRouter {
         return _buildRoute(
           const MainScreen(),
           settings: settings,
+        );
+
+      case profileSetup:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => di.sl<ProfileSetupBloc>(),
+            child: const ProfileSetupPage(),
+          ),
         );
 
       case createPost:

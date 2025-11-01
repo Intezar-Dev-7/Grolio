@@ -6,6 +6,8 @@ import 'package:frontend/features/create_post/data/datasource/create_post_remote
 import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc.dart';
 import 'package:frontend/features/discover/data/datasources/discover_remote_datasource.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
+import 'package:frontend/features/onboarding/data/datasources/onboarding_remote_datasource.dart';
+import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
 import 'package:frontend/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:frontend/features/user_details/data/datasources/user_details_remote_datasource.dart';
@@ -196,6 +198,20 @@ Future<void> init() async {
   // BLoCs
   sl.registerFactory<TechStackBloc>(() => TechStackBloc());
   sl.registerFactory<GoalsBloc>(() => GoalsBloc());
+
+  // Data Sources
+  sl.registerLazySingleton<OnboardingRemoteDataSource>(
+        () => OnboardingRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC
+  sl.registerFactory<ProfileSetupBloc>(
+        () => ProfileSetupBloc(
+      remoteDataSource: sl<OnboardingRemoteDataSource>(),
+    ),
+  );
 
   // ============================================================================
   // Features - Feed

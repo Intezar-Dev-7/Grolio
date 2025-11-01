@@ -33,7 +33,7 @@ class GoalsView extends StatelessWidget {
       body: BlocConsumer<GoalsBloc, GoalsState>(
         listener: (context, state) {
           if (state.status == GoalsStatus.success) {
-            Navigator.pushReplacementNamed(context, AppRouter.home);
+            Navigator.pushReplacementNamed(context, AppRouter.profileSetup);
           } else if (state.status == GoalsStatus.error) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -101,7 +101,7 @@ class GoalsView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Step 2 of 2',
+                                    'Step 2 of 3',
                                     style: AppTypography.bodySmall.copyWith(
                                       color: AppColors.textSecondary,
                                     ),
@@ -137,7 +137,7 @@ class GoalsView extends StatelessWidget {
                       // Progress bar
                       const StepProgressIndicator(
                         currentStep: 2,
-                        totalSteps: 2,
+                        totalSteps: 3,
                       ),
                     ],
                   ),

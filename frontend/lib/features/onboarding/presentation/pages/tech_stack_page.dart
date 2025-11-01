@@ -92,7 +92,7 @@ class TechStackView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Step 1 of 2',
+                                    'Step 1 of 3',
                                     style: AppTypography.bodySmall.copyWith(
                                       color: AppColors.textSecondary,
                                     ),
@@ -130,7 +130,7 @@ class TechStackView extends StatelessWidget {
                       // Progress bar
                       const StepProgressIndicator(
                         currentStep: 1,
-                        totalSteps: 2,
+                        totalSteps: 3,
                       ),
                     ],
                   ),
