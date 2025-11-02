@@ -6,10 +6,10 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../domain/entities/user_profile_entity.dart';
 
-class PinnedProjectsSection extends StatelessWidget {
+class ProjectsSection extends StatelessWidget {
   final List<ProjectEntity> projects;
 
-  const PinnedProjectsSection({
+  const ProjectsSection({
     super.key,
     required this.projects,
   });
@@ -22,7 +22,7 @@ class PinnedProjectsSection extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 12),
           child: Text(
-            'Pinned Projects',
+            'Projects',
             style: AppTypography.titleMedium.copyWith(
               fontWeight: FontWeight.bold,
             ),

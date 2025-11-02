@@ -2,16 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
 import 'package:frontend/features/profile/presentation/widgets/profile_app_bar.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../bloc/profile_bloc.dart';
 import '../widgets/profile_header.dart';
-import '../widgets/profile_tabs.dart';
-import '../widgets/achievements_section.dart';
 import '../widgets/pinned_projects_section.dart';
-import '../widgets/stats_progress_section.dart';
 import '../widgets/tech_stack_section.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -105,25 +100,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
 
-              // Profile Tabs (Feed, Projects, About)
-              const SliverToBoxAdapter(
-                child: ProfileTabs(),
-              ),
-
-              // Achievements Section
-              SliverToBoxAdapter(
-                child: AchievementsSection(
-                  achievements: profile.achievements,
-                ),
-              ),
-
-              // Stats & Progress Section
-              SliverToBoxAdapter(
-                child: StatsProgressSection(
-                  stats: profile.stats,
-                ),
-              ),
-
               // Tech Stack Section
               SliverToBoxAdapter(
                 child: TechStackSection(
@@ -131,9 +107,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
 
-              // Pinned Projects Section
+              // Projects Section
               SliverToBoxAdapter(
-                child: PinnedProjectsSection(
+                child: ProjectsSection(
                   projects: profile.pinnedProjects,
                 ),
               ),
