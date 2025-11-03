@@ -82,63 +82,6 @@ class ApiEndpoints {
   static const String loginGithub = '$phoneAuth/github';
 
   // ============================================================================
-  // DevSnaps Endpoints (NEW)
-  // ============================================================================
-
-  static const String devSnaps = '/devsnaps';
-
-  // Stories
-  static const String devSnapStories = '$devSnaps/stories';
-  static const String myDevSnapStories = '$devSnaps/stories/me';
-
-  // Recent DevSnaps
-  static const String recentDevSnaps = '$devSnaps/recent';
-  static const String trendingDevSnaps = '$devSnaps/trending';
-
-  // User DevSnaps
-  static String userDevSnaps(String userId) => '$devSnaps/user/$userId';
-  static const String myDevSnaps = '$devSnaps/me';
-
-  // Single DevSnap
-  static String devSnapById(String devSnapId) => '$devSnaps/$devSnapId';
-
-  // DevSnap Actions
-  static String viewDevSnap(String devSnapId) => '$devSnaps/$devSnapId/view';
-  static String likeDevSnap(String devSnapId) => '$devSnaps/$devSnapId/like';
-  static String unlikeDevSnap(String devSnapId) => '$devSnaps/$devSnapId/unlike';
-  static String shareDevSnap(String devSnapId) => '$devSnaps/$devSnapId/share';
-  static String reportDevSnap(String devSnapId) => '$devSnaps/$devSnapId/report';
-
-  // DevSnap Comments
-  static String devSnapComments(String devSnapId) => '$devSnaps/$devSnapId/comments';
-  static String devSnapComment(String devSnapId, String commentId) =>
-      '$devSnaps/$devSnapId/comments/$commentId';
-
-  // DevSnap Upload
-  static const String uploadDevSnap = '$devSnaps/upload';
-  static const String uploadDevSnapMedia = '$devSnaps/upload/media';
-
-  // ============================================================================
-  // Tech Stack Endpoints
-  // ============================================================================
-
-  static const String techStacks = '/tech-stacks';
-
-  static String techStackById(String techId) => '$techStacks/$techId';
-  static const String userTechStacks = '/users/me/tech-stacks';
-  static const String popularTechStacks = '$techStacks/popular';
-
-  // ============================================================================
-  // Goals Endpoints
-  // ============================================================================
-
-  static const String goals = '/goals';
-
-  static String goalById(String goalId) => '$goals/$goalId';
-  static const String userGoals = '/users/me/goals';
-  static String goalProgress(String goalId) => '$goals/$goalId/progress';
-
-  // ============================================================================
   // Onboarding Endpoints
   // ============================================================================
 

@@ -13,7 +13,6 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
 import 'core/theme/app_theme.dart';
 import 'features/feed/presentation/bloc/feed_bloc.dart';
-import 'features/devsnaps/presentation/bloc/devsnap_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,10 +53,6 @@ class MyApp extends StatelessWidget {
           create: (context) => di.sl<FeedBloc>(),
         ),
 
-        // DevSnaps BLoC
-        BlocProvider<DevSnapBloc>(
-          create: (context) => di.sl<DevSnapBloc>(),
-        ),
 
         // Discover BLoC
         BlocProvider<DiscoverBloc>(

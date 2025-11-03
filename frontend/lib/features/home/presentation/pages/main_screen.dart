@@ -5,7 +5,7 @@ import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/features/chat/presentation/pages/chat_page.dart';
-import 'package:frontend/features/devsnaps/presentation/pages/devsnaps_page.dart';
+import 'package:frontend/features/discover/presentation/pages/discover_page.dart';
 import 'package:frontend/features/feed/presentation/pages/feed_page.dart';
 import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _pages = [
     const FeedPage(),
-    const DevSnapsPage(),
+    const DiscoverPage(),
     const SizedBox.shrink(), // Placeholder for FAB
     const ChatPage(),
     const ProfilePage(),
@@ -97,7 +97,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
               _buildNavItem(
                 icon: AppAssets.snapIcon,
-                label: 'DevSnaps',
+                label: 'Discover',
                 index: 1,
               ),
               // ✅ Empty space for FAB

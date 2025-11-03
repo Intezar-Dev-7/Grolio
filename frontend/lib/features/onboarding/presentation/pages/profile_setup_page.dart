@@ -373,7 +373,7 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
                               const SizedBox(width: 12),
                               Expanded(
                                 child: Text(
-                                  'You can always update your profile later from settings',
+                                  'You can always update your profile later',
                                   style: AppTypography.bodySmall.copyWith(
                                     color: AppColors.textSecondary,
                                     fontSize: 12,

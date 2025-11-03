@@ -5,8 +5,8 @@ import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_typography.dart';
 import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
 
-class DevSnapAppBar extends StatelessWidget {
-  const DevSnapAppBar({
+class DiscoverAppBar extends StatelessWidget {
+  const DiscoverAppBar({
     super.key,
   });
 
@@ -23,7 +23,7 @@ class DevSnapAppBar extends StatelessWidget {
           const AppBarLogoIcon(),
           const SizedBox(width: 12),
           Text(
-            'Snaps',
+            'Discover',
             style: AppTypography.headlineMedium.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -31,15 +31,6 @@ class DevSnapAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        IconButton(
-          icon: Image.asset(
-            AppAssets.searchIcon,
-            color: AppColors.iconColor,
-            width: 20,
-            height: 20,
-          ),
-          onPressed: () {},
-        ),
         Stack(
           children: [
             IconButton(
@@ -80,7 +71,7 @@ class DevSnapAppBar extends StatelessWidget {
         ),
         IconButton(
           icon: const Icon(
-            Icons.filter_list,
+            Icons.more_vert,
             color: AppColors.iconColor,
           ),
           onPressed: () {},

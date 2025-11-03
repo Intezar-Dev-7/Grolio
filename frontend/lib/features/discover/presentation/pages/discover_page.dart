@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/features/discover/presentation/widgets/discover_app_bar.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/discover_bloc.dart';
@@ -53,8 +54,10 @@ class _DiscoverPageState extends State<DiscoverPage> {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
+            const DiscoverAppBar(),
+
             // Header with icon, title, and search
-            const DiscoverHeader(),
+            const DiscoverSearchBar(),
 
             // Tech Stack Filter Section
             const TechFilterSection(),

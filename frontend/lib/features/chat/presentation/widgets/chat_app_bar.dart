@@ -80,7 +80,7 @@ class ChatAppBar extends StatelessWidget {
         ),
         IconButton(
           icon: const Icon(
-            Icons.filter_list,
+            Icons.more_vert,
             color: AppColors.iconColor,
           ),
           onPressed: () {},

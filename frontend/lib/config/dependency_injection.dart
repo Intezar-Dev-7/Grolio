@@ -32,15 +32,6 @@ import '../features/feed/domain/usecases/like_post_usecase.dart';
 import '../features/feed/domain/usecases/bookmark_post_usecase.dart';
 import '../features/feed/presentation/bloc/feed_bloc.dart';
 
-// DevSnaps
-import '../features/devsnaps/data/datasources/devsnap_remote_datasource.dart';
-import '../features/devsnaps/data/repositories/devsnap_repository_impl.dart';
-import '../features/devsnaps/domain/repositories/devsnap_repository.dart';
-import '../features/devsnaps/domain/usecases/get_stories_usecase.dart';
-import '../features/devsnaps/domain/usecases/get_recent_devsnaps_usecase.dart';
-import '../features/devsnaps/domain/usecases/create_devsnap_usecase.dart';
-import '../features/devsnaps/presentation/bloc/devsnap_bloc.dart';
-
 final sl = GetIt.instance;
 
 Future<void> init() async {
@@ -170,49 +161,6 @@ Future<void> init() async {
       getFeedPostsUseCase: sl<GetFeedPostsUseCase>(),
       likePostUseCase: sl<LikePostUseCase>(),
       bookmarkPostUseCase: sl<BookmarkPostUseCase>(),
-    ),
-  );
-
-  // ============================================================================
-  // Features - DevSnaps
-  // ============================================================================
-
-  print('📦 Registering DevSnaps dependencies...');
-
-  // Data Sources
-  sl.registerLazySingleton<DevSnapRemoteDataSource>(
-        () => DevSnapRemoteDataSourceImpl(
-      dioClient: sl<DioClient>(),
-    ),
-  );
-
-  // Repository
-  sl.registerLazySingleton<DevSnapRepository>(
-        () => DevSnapRepositoryImpl(
-      remoteDataSource: sl<DevSnapRemoteDataSource>(),
-      networkInfo: sl<NetworkInfo>(),
-    ),
-  );
-
-  // Use Cases
-  sl.registerLazySingleton<GetStoriesUseCase>(
-        () => GetStoriesUseCase(sl<DevSnapRepository>()),
-  );
-
-  sl.registerLazySingleton<GetRecentDevSnapsUseCase>(
-        () => GetRecentDevSnapsUseCase(sl<DevSnapRepository>()),
-  );
-
-  sl.registerLazySingleton<CreateDevSnapUseCase>(
-        () => CreateDevSnapUseCase(sl<DevSnapRepository>()),
-  );
-
-  // BLoC
-  sl.registerFactory<DevSnapBloc>(
-        () => DevSnapBloc(
-      getStoriesUseCase: sl<GetStoriesUseCase>(),
-      getRecentDevSnapsUseCase: sl<GetRecentDevSnapsUseCase>(),
-      createDevSnapUseCase: sl<CreateDevSnapUseCase>(),
     ),
   );
 
