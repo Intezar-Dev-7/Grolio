@@ -3,12 +3,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
-import '../../domain/entities/create_post_entity.dart';
 import '../bloc/create_post_bloc.dart';
-import '../widgets/post_type_selector.dart';
 import '../widgets/image_picker_section.dart';
 import '../widgets/tag_input_section.dart';
 import '../widgets/link_input_section.dart';
@@ -127,10 +124,19 @@ class _CreatePostPageState extends State<CreatePostPage> {
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Post Type Selector
-              const PostTypeSelector(),
+
+              const SizedBox(height: 24),
+
+              // Image Picker Section
+              ImagePickerSection(
+                onImagePicked: (image) {
+                  context
+                      .read<CreatePostBloc>()
+                      .add(CreatePostImagePicked(image));
+                },
+              ),
 
               const SizedBox(height: 24),
 
@@ -157,17 +163,6 @@ class _CreatePostPageState extends State<CreatePostPage> {
                     border: InputBorder.none,
                   ),
                 ),
-              ),
-
-              const SizedBox(height: 24),
-
-              // Image Picker Section
-              ImagePickerSection(
-                onImagePicked: (image) {
-                  context
-                      .read<CreatePostBloc>()
-                      .add(CreatePostImagePicked(image));
-                },
               ),
 
               const SizedBox(height: 24),

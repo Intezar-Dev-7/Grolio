@@ -166,7 +166,6 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                   ),
                   backgroundColor: Colors.transparent, // ✅ Important!
                   onCompleted: (code) {
-                    print('================= on completed =================');
                     context.read<PhoneAuthBloc>().add(
                       PhoneAuthOtpVerified(code),
                     );
@@ -210,7 +209,6 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
                             ? null
                             : () {
                           if (_otpController.text.length == 6) {
-                            print('================= on VERIFY =================');
                             context.read<PhoneAuthBloc>().add(
                               PhoneAuthOtpVerified(_otpController.text),
                             );
