@@ -8,6 +8,8 @@ import 'package:frontend/features/discover/data/datasources/discover_remote_data
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:frontend/features/onboarding/data/datasources/onboarding_remote_datasource.dart';
 import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
+import 'package:frontend/features/phone_auth/data/datasources/phone_auth_remote_datasource.dart';
+import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:frontend/features/user_details/data/datasources/user_details_remote_datasource.dart';
@@ -22,18 +24,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:frontend/config/api_config.dart';
 import '../core/network/dio_client.dart';
 import '../core/network/network_info.dart';
-
-// Authentication
-import '../features/authentication/data/datasources/auth_remote_datasource.dart';
-import '../features/authentication/data/datasources/auth_local_datasource.dart';
-import '../features/authentication/data/repositories/auth_repository_impl.dart';
-import '../features/authentication/domain/repositories/auth_repository.dart';
-import '../features/authentication/domain/usecases/forgot_password_usecase.dart';
-import '../features/authentication/domain/usecases/sign_in_with_email_usecase.dart';
-import '../features/authentication/domain/usecases/sign_in_with_github_usecase.dart';
-import '../features/authentication/domain/usecases/sign_in_with_google_usecase.dart';
-import '../features/authentication/domain/usecases/sign_up_with_email_usecase.dart';
-import '../features/authentication/presentation/bloc/auth_bloc.dart';
 
 // Onboarding
 import '../features/onboarding/presentation/bloc/tech_stack_bloc.dart';
@@ -126,67 +116,6 @@ Future<void> init() async {
   print('📦 Registering DioClient...');
   sl.registerLazySingleton<DioClient>(
         () => DioClient(dio: sl<Dio>()),
-  );
-
-  // ============================================================================
-  // Features - Authentication
-  // ============================================================================
-
-  print('📦 Registering Authentication dependencies...');
-
-  // Data Sources
-  sl.registerLazySingleton<AuthLocalDataSource>(
-        () => AuthLocalDataSourceImpl(
-      sharedPreferences: sl<SharedPreferences>(),
-      secureStorage: sl<FlutterSecureStorage>(),
-    ),
-  );
-
-  sl.registerLazySingleton<AuthRemoteDataSource>(
-        () => AuthRemoteDataSourceImpl(
-      dioClient: sl<DioClient>(),
-    ),
-  );
-
-  // Repository
-  sl.registerLazySingleton<AuthRepository>(
-        () => AuthRepositoryImpl(
-      remoteDataSource: sl<AuthRemoteDataSource>(),
-      localDataSource: sl<AuthLocalDataSource>(),
-      networkInfo: sl<NetworkInfo>(),
-    ),
-  );
-
-  // Use Cases
-  sl.registerLazySingleton<SignInWithEmailUseCase>(
-        () => SignInWithEmailUseCase(sl<AuthRepository>()),
-  );
-
-  sl.registerLazySingleton<SignInWithGitHubUseCase>(
-        () => SignInWithGitHubUseCase(sl<AuthRepository>()),
-  );
-
-  sl.registerLazySingleton<SignInWithGoogleUseCase>(
-        () => SignInWithGoogleUseCase(sl<AuthRepository>()),
-  );
-
-  sl.registerLazySingleton<SignUpWithEmailUseCase>(
-        () => SignUpWithEmailUseCase(sl<AuthRepository>()),
-  );
-  sl.registerLazySingleton<ForgotPasswordUseCase>(
-        () => ForgotPasswordUseCase(sl<AuthRepository>()),
-  );
-
-
-  // BLoC
-  sl.registerFactory<AuthBloc>(
-        () => AuthBloc(
-      signInWithEmailUseCase: sl<SignInWithEmailUseCase>(),
-      signInWithGitHubUseCase: sl<SignInWithGitHubUseCase>(),
-      signInWithGoogleUseCase: sl<SignInWithGoogleUseCase>(),
-      signUpWithEmailUseCase: sl<SignUpWithEmailUseCase>(),
-      forgotPasswordUseCase: sl<ForgotPasswordUseCase>(),
-    ),
   );
 
   // ============================================================================
@@ -400,6 +329,26 @@ Future<void> init() async {
   sl.registerFactory<UserDetailsBloc>(
         () => UserDetailsBloc(
       remoteDataSource: sl<UserDetailsRemoteDataSource>(),
+    ),
+  );
+
+  // ============================================================================
+  // Features - Phone Auth
+  // ============================================================================
+
+  print('📦 Registering Phone Auth dependencies...');
+
+  // Data Sources
+  sl.registerLazySingleton<PhoneAuthRemoteDataSource>(
+        () => PhoneAuthRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC
+  sl.registerFactory<PhoneAuthBloc>(
+        () => PhoneAuthBloc(
+      remoteDataSource: sl<PhoneAuthRemoteDataSource>(),
     ),
   );
 

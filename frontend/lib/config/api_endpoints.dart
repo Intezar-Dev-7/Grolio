@@ -70,6 +70,18 @@ class ApiEndpoints {
   static const String feedFollowing = '$feed/following';
 
   // ============================================================================
+  // Phone Auth Endpoints
+  // ============================================================================
+
+  static const String phoneAuth = '/auth/phone';
+
+  static const String sendOtp = '$phoneAuth/send-otp';
+  static const String verifyOtp = '$phoneAuth/verify-otp';
+  static const String loginGoogle = '$phoneAuth/google';
+  static const String loginApple = '$phoneAuth/apple';
+  static const String loginGithub = '$phoneAuth/github';
+
+  // ============================================================================
   // DevSnaps Endpoints (NEW)
   // ============================================================================
 

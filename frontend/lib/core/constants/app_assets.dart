@@ -16,7 +16,7 @@ class AppAssets {
   static const String socialIconPath = 'assets/icons/auth_social_icon/';
 
   static const String gitHubIcon = '${socialIconPath}github_auth_icon.png';
-  static const String mailIcon = '${socialIconPath}google_auth_icon.png';
+  static const String googleIcon = '${socialIconPath}google_auth_icon.png';
 
 
   // General icons

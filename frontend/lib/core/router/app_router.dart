@@ -8,12 +8,9 @@ import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_blo
 import 'package:frontend/features/onboarding/presentation/pages/goals_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/profile_setup_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/tech_stack_page.dart';
-import '../../../features/authentication/presentation/page/login_page.dart';
-import '../../../features/authentication/presentation/page/signup_page.dart';
-import '../../../features/authentication/presentation/page/forgot_password_page.dart';
-import '../../../features/authentication/presentation/page/forgot_password_sent_page.dart';
-import '../../../features/authentication/presentation/page/reset_password_page.dart';
-import '../../../features/authentication/presentation/page/reset_password_success_page.dart';
+import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
+import 'package:frontend/features/phone_auth/presentation/pages/otp_verification_page.dart';
+import 'package:frontend/features/phone_auth/presentation/pages/phone_auth_page.dart';
 
 class AppRouter {
   // ============================================================================
@@ -24,6 +21,8 @@ class AppRouter {
   static const String loading = '/loading';
   static const String login = '/login';
   static const String signup = '/signup';
+  static const String phoneAuth = '/phoneAuth';
+  static const String otpVerification = '/otp-verification';
   static const String forgotPassword = '/forgot-password';
   static const String forgotPasswordSent = '/forgot-password-sent';
   static const String resetPassword = '/reset-password';
@@ -49,55 +48,13 @@ class AppRouter {
 
     switch (settings.name) {
       // ========================================================================
-      // Authentication Routes
+      // Initial Route
       // ========================================================================
 
       case initial:
       case loading:
         return _buildRoute(const LoadingScreen(), settings: settings);
 
-      case login:
-        return _buildRoute(const LoginPage(), settings: settings);
-
-      case signup:
-        return _buildRoute(const SignUpPage(), settings: settings);
-
-      // ========================================================================
-      // Forgot Password Flow (WITH DATA PASSING)
-      // ========================================================================
-
-      case forgotPassword:
-        return _buildRoute(const ForgotPasswordPage(), settings: settings);
-
-      case forgotPasswordSent:
-        // Extract email from arguments
-        if (args is String) {
-          return _buildRoute(
-            ForgotPasswordSentPage(email: args),
-            settings: settings,
-          );
-        }
-        // Fallback if no email provided
-        return _buildRoute(
-          const ForgotPasswordSentPage(email: 'your-email@example.com'),
-          settings: settings,
-        );
-
-      case resetPassword:
-        // Extract token from arguments
-        if (args is String) {
-          return _buildRoute(
-            ResetPasswordPage(token: args),
-            settings: settings,
-          );
-        }
-        return _errorRoute(settings);
-
-      case resetPasswordSuccess:
-        return _buildRoute(
-          const ResetPasswordSuccessPage(),
-          settings: settings,
-        );
 
       // ========================================================================
       // App Routes (Example with complex data)
@@ -126,6 +83,27 @@ class AppRouter {
           builder: (_) => BlocProvider(
             create: (_) => di.sl<ProfileSetupBloc>(),
             child: const ProfileSetupPage(),
+          ),
+        );
+
+      case phoneAuth:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => di.sl<PhoneAuthBloc>(),
+            child: const PhoneAuthPage(),
+          ),
+        );
+
+      case '/otp-verification':
+      // ✅ Extract arguments
+        final args = settings.arguments as Map<String, String>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: di.sl<PhoneAuthBloc>(),
+            child: OtpVerificationPage(
+              phoneNumber: args['phoneNumber']!,
+              countryCode: args['countryCode']!,
+            ),
           ),
         );
 

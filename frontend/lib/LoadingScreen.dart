@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/router/app_router.dart';
 
 class LoadingScreen extends StatefulWidget {
@@ -52,7 +53,7 @@ class _LoadingScreenState extends State<LoadingScreen>
 
     // Navigate to home screen after data is loaded
     if (mounted) {
-      Navigator.pushReplacementNamed(context, AppRouter.login);
+      Navigator.pushReplacementNamed(context, AppRouter.phoneAuth);
     }
   }
 
@@ -96,7 +97,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                       ),
                       child: Center(
                         child: Image.asset(
-                          'assets/grolio_logo.png',
+                          AppAssets.grolioLogo,
                           width: 100,
                           height: 100,
                         ),

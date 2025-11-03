@@ -7,11 +7,11 @@ import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
+import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'config/dependency_injection.dart' as di;
 import 'core/theme/app_theme.dart';
-import 'features/authentication/presentation/bloc/auth_bloc.dart';
 import 'features/feed/presentation/bloc/feed_bloc.dart';
 import 'features/devsnaps/presentation/bloc/devsnap_bloc.dart';
 
@@ -45,8 +45,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         // Authentication BLoC
-        BlocProvider<AuthBloc>(
-          create: (context) => di.sl<AuthBloc>(),
+        BlocProvider<PhoneAuthBloc>(
+          create: (context) => di.sl<PhoneAuthBloc>(),
         ),
 
         // Feed BLoC
@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
         title: 'Grolio',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.darkTheme,
-        initialRoute: '/',
+        initialRoute: AppRouter.initial,
         onGenerateRoute: AppRouter.onGenerateRoute,
       ),
     );
