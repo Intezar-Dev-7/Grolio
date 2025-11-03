@@ -5,9 +5,7 @@ import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/features/create_post/presentation/page/create_post_page.dart';
 import 'package:frontend/features/home/presentation/pages/main_screen.dart';
 import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
-import 'package:frontend/features/onboarding/presentation/pages/goals_page.dart';
 import 'package:frontend/features/onboarding/presentation/pages/profile_setup_page.dart';
-import 'package:frontend/features/onboarding/presentation/pages/tech_stack_page.dart';
 import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/phone_auth/presentation/pages/otp_verification_page.dart';
 import 'package:frontend/features/phone_auth/presentation/pages/phone_auth_page.dart';
@@ -59,18 +57,6 @@ class AppRouter {
       // ========================================================================
       // App Routes (Example with complex data)
       // ========================================================================
-
-      case techStack:
-        return _buildRoute(
-            const TechStackPage(),
-            settings: settings
-        );
-
-      case goals:
-        return _buildRoute(
-          const GoalsPage(),
-          settings: settings,
-        );
 
       case home:
         return _buildRoute(

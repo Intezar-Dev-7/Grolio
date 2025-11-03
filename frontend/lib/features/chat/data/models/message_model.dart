@@ -1,5 +1,8 @@
 // features/chat/data/models/message_model.dart
 
+import 'package:frontend/features/chat/data/models/meeting_info_model.dart';
+import 'package:frontend/features/chat/domain/entities/meeting_info_entity.dart';
+
 import '../../domain/entities/message_entity.dart';
 
 class MessageModel {
@@ -12,10 +15,12 @@ class MessageModel {
   final String type;
   final DateTime timestamp;
   final bool isSentByMe;
+  final bool isRead;
   final String? codeLanguage;
   final String? fileName;
   final String? fileSize;
   final String? fileUrl;
+  final MeetingInfoModel? meetingInfomodel;
 
   MessageModel({
     required this.id,
@@ -27,10 +32,12 @@ class MessageModel {
     required this.type,
     required this.timestamp,
     required this.isSentByMe,
+    required this.isRead,
     this.codeLanguage,
     this.fileName,
     this.fileSize,
     this.fileUrl,
+    this.meetingInfomodel,
   });
 
   factory MessageModel.fromJson(Map<String, dynamic> json) {
@@ -42,12 +49,16 @@ class MessageModel {
       senderAvatar: json['sender_avatar'] as String?,
       content: json['content'] as String,
       type: json['type'] as String,
+      isRead: json['is_read'] as bool,
       timestamp: DateTime.parse(json['timestamp'] as String),
       isSentByMe: json['is_sent_by_me'] as bool,
       codeLanguage: json['code_language'] as String?,
       fileName: json['file_name'] as String?,
       fileSize: json['file_size'] as String?,
       fileUrl: json['file_url'] as String?,
+      meetingInfomodel: json['meeting_info'] != null
+          ? MeetingInfoModel.fromJson(json['meeting_info'])
+          : null,
     );
   }
 
@@ -62,10 +73,12 @@ class MessageModel {
       'type': type,
       'timestamp': timestamp.toIso8601String(),
       'is_sent_by_me': isSentByMe,
+      'is_read': isRead,
       'code_language': codeLanguage,
       'file_name': fileName,
       'file_size': fileSize,
       'file_url': fileUrl,
+      'meeting_info': meetingInfomodel,
     };
   }
 
@@ -81,6 +94,9 @@ class MessageModel {
       case 'image':
         messageType = MessageType.image;
         break;
+      case 'meeting':
+        messageType = MessageType.meeting;
+        break;
       default:
         messageType = MessageType.text;
     }
@@ -95,10 +111,12 @@ class MessageModel {
       type: messageType,
       timestamp: timestamp,
       isSentByMe: isSentByMe,
+      isRead: isRead,
       codeLanguage: codeLanguage,
       fileName: fileName,
       fileSize: fileSize,
       fileUrl: fileUrl,
+      meetingInfo: meetingInfomodel?.toEntity(),
     );
   }
 }

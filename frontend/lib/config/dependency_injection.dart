@@ -25,10 +25,6 @@ import 'package:frontend/config/api_config.dart';
 import '../core/network/dio_client.dart';
 import '../core/network/network_info.dart';
 
-// Onboarding
-import '../features/onboarding/presentation/bloc/tech_stack_bloc.dart';
-import '../features/onboarding/presentation/bloc/goals_bloc.dart';
-
 // Feed
 import '../features/feed/data/datasources/feed_remote_datasource.dart';
 import '../features/feed/data/repositories/feed_repository_impl.dart';
@@ -121,12 +117,6 @@ Future<void> init() async {
   // ============================================================================
   // Features - Onboarding
   // ============================================================================
-
-  print('📦 Registering Onboarding dependencies...');
-
-  // BLoCs
-  sl.registerFactory<TechStackBloc>(() => TechStackBloc());
-  sl.registerFactory<GoalsBloc>(() => GoalsBloc());
 
   // Data Sources
   sl.registerLazySingleton<OnboardingRemoteDataSource>(

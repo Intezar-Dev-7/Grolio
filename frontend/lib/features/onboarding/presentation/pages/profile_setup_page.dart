@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/features/onboarding/presentation/widgets/step_progress_indicator.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/profile_setup_bloc.dart';

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:frontend/features/chat/presentation/widgets/meeting_bubble.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../domain/entities/message_entity.dart';
@@ -18,6 +19,12 @@ class MessageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (message.type == MessageType.meeting) {
+      return MeetingBubble(
+        message: message,
+        isMe: message.isSentByMe,
+      );
+    }
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Row(
