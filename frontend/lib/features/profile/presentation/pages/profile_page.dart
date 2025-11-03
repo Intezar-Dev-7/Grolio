@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
               SliverToBoxAdapter(
                 child: ProfileHeader(
                   profile: profile,
-                  isOwnProfile: isOwnProfile,
+                  isOwnProfile: true,
                   onFollowTap: () {
                     if (!isOwnProfile) {
                       context.read<ProfileBloc>().add(

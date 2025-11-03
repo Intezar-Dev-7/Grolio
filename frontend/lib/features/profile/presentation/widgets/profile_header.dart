@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:frontend/core/router/app_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -32,19 +33,21 @@ class ProfileHeader extends StatelessWidget {
               CircleAvatar(
                 radius: 40,
                 backgroundColor: AppColors.primaryGreen.withOpacity(0.2),
-                backgroundImage: profile.avatar != null
-                    ? CachedNetworkImageProvider(profile.avatar!)
-                    : null,
-                child: profile.avatar == null
-                    ? Text(
-                  profile.name[0].toUpperCase(),
-                  style: const TextStyle(
-                    color: AppColors.primaryGreen,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
-                  ),
-                )
-                    : null,
+                backgroundImage:
+                    profile.avatar != null
+                        ? CachedNetworkImageProvider(profile.avatar!)
+                        : null,
+                child:
+                    profile.avatar == null
+                        ? Text(
+                          profile.name[0].toUpperCase(),
+                          style: const TextStyle(
+                            color: AppColors.primaryGreen,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                          ),
+                        )
+                        : null,
               ),
 
               const SizedBox(width: 16),
@@ -54,18 +57,93 @@ class ProfileHeader extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      profile.name,
-                      style: AppTypography.headlineSmall.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      profile.username,
-                      style: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              profile.name,
+                              style: AppTypography.headlineSmall.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              profile.username,
+                              style: AppTypography.bodyMedium.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // Follow/Edit button
+                        isOwnProfile
+                            ? GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRouter.profileSetup,
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 16,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  gradient: AppColors.primaryButtonGradient,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: Text(
+                                  'EDIT',
+                                  style: AppTypography.bodyMedium.copyWith(
+                                    color: AppColors.textPrimary,
+                                  ),
+                                )
+                              ),
+                            )
+                            : Container(
+                              decoration: BoxDecoration(
+                                color:
+                                    profile.isFollowing
+                                        ? AppColors.surfaceDark
+                                        : AppColors.primaryGreen,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color:
+                                      profile.isFollowing
+                                          ? AppColors.borderColor
+                                          : AppColors.primaryGreen,
+                                ),
+                              ),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: onFollowTap,
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 8,
+                                    ),
+                                    child: Text(
+                                      profile.isFollowing
+                                          ? 'FOLLOW'
+                                          : 'UNFOLLOW',
+                                      style: TextStyle(
+                                        color:
+                                            profile.isFollowing
+                                                ? AppColors.textPrimary
+                                                : Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                      ],
                     ),
                     const SizedBox(height: 12),
                     Row(
@@ -92,57 +170,6 @@ class ProfileHeader extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Follow/Edit button
-              isOwnProfile
-                  ? Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  gradient: AppColors.primaryButtonGradient,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              )
-                  : Container(
-                decoration: BoxDecoration(
-                  color: profile.isFollowing
-                      ? AppColors.surfaceDark
-                      : AppColors.primaryGreen,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: profile.isFollowing
-                        ? AppColors.borderColor
-                        : AppColors.primaryGreen,
-                  ),
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: onFollowTap,
-                    borderRadius: BorderRadius.circular(8),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      child: Icon(
-                        profile.isFollowing ? Icons.check : Icons.add,
-                        color: profile.isFollowing
-                            ? AppColors.textPrimary
-                            : Colors.white,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
 
@@ -151,9 +178,7 @@ class ProfileHeader extends StatelessWidget {
           // Bio
           Text(
             profile.bio,
-            style: AppTypography.bodyMedium.copyWith(
-              height: 1.5,
-            ),
+            style: AppTypography.bodyMedium.copyWith(height: 1.5),
           ),
 
           const SizedBox(height: 16),
@@ -186,18 +211,12 @@ class ProfileHeader extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: AppColors.surfaceDark,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: AppColors.borderColor,
-                          ),
+                          border: Border.all(color: AppColors.borderColor),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
-                              icon,
-                              size: 16,
-                              color: AppColors.primaryGreen,
-                            ),
+                            Icon(icon, size: 16, color: AppColors.primaryGreen),
                             const SizedBox(width: 6),
                             Text(
                               link.contains('github')

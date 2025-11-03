@@ -12,8 +12,6 @@ import 'package:frontend/features/phone_auth/data/datasources/phone_auth_remote_
 import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:frontend/features/user_details/data/datasources/user_details_remote_datasource.dart';
-import 'package:frontend/features/user_details/presentation/bloc/user_details_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -299,26 +297,6 @@ Future<void> init() async {
   sl.registerFactory<CreatePostBloc>(
         () => CreatePostBloc(
       remoteDataSource: sl<CreatePostRemoteDataSource>(),
-    ),
-  );
-
-  // ============================================================================
-  // Features - User Details
-  // ============================================================================
-
-  print('📦 Registering User Details dependencies...');
-
-  // Data Sources
-  sl.registerLazySingleton<UserDetailsRemoteDataSource>(
-        () => UserDetailsRemoteDataSourceImpl(
-      dioClient: sl<DioClient>(),
-    ),
-  );
-
-  // BLoC
-  sl.registerFactory<UserDetailsBloc>(
-        () => UserDetailsBloc(
-      remoteDataSource: sl<UserDetailsRemoteDataSource>(),
     ),
   );
 

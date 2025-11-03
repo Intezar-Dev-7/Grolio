@@ -2,10 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/core/constants/app_assets.dart';
-import 'package:frontend/features/user_details/presentation/bloc/user_details_bloc.dart';
-import 'package:frontend/features/user_details/presentation/page/user_details_page.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../domain/entities/conversation_entity.dart';
@@ -64,18 +61,8 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
         automaticallyImplyLeading: false,
         title: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BlocProvider(
-                  create: (context) => di.sl<UserDetailsBloc>(),
-                  child: UserDetailsPage(
-                    userId: widget.conversation.userId,
-                  ),
-                ),
-              ),
-            );
-          },
+            // navigate to user profile
+            },
           child: Row(
             children: [
               InkWell(
