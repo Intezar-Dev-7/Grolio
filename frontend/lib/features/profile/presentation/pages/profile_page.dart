@@ -12,10 +12,7 @@ import '../widgets/tech_stack_section.dart';
 class ProfilePage extends StatefulWidget {
   final String? userId;
 
-  const ProfilePage({
-    super.key,
-    this.userId,
-  });
+  const ProfilePage({super.key, this.userId});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -25,7 +22,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    context.read<ProfileBloc>().add(ProfileLoadRequested(userId: widget.userId));
+    context.read<ProfileBloc>().add(
+      ProfileLoadRequested(userId: widget.userId),
+    );
   }
 
   @override
@@ -83,7 +82,35 @@ class _ProfilePageState extends State<ProfilePage> {
           return CustomScrollView(
             slivers: [
               // App Bar
-              ProfileAppBar(widget: widget),
+              isOwnProfile
+                  ? ProfileAppBar(widget: widget)
+                  : SliverAppBar(
+                    floating: true,
+                    snap: true,
+                    automaticallyImplyLeading: false,
+                    backgroundColor: AppColors.backgroundDark,
+                    elevation: 0,
+                    actions: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.more_vert,
+                          color: AppColors.iconColor,
+                        ),
+                        onPressed: () {},
+                      ),
+                      const SizedBox(width: 4),
+                    ],
+                    leading: InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: AppColors.iconColor,
+                      ),
+                    ),
+                    title: Text(profile.name),
+                  ),
 
               // Profile Header
               SliverToBoxAdapter(
@@ -102,16 +129,12 @@ class _ProfilePageState extends State<ProfilePage> {
 
               // Tech Stack Section
               SliverToBoxAdapter(
-                child: TechStackSection(
-                  techStack: profile.techStack,
-                ),
+                child: TechStackSection(techStack: profile.techStack),
               ),
 
               // Projects Section
               SliverToBoxAdapter(
-                child: ProjectsSection(
-                  projects: profile.pinnedProjects,
-                ),
+                child: ProjectsSection(projects: profile.pinnedProjects),
               ),
             ],
           );

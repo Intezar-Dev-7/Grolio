@@ -9,6 +9,7 @@ import 'package:frontend/features/onboarding/presentation/pages/profile_setup_pa
 import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/phone_auth/presentation/pages/otp_verification_page.dart';
 import 'package:frontend/features/phone_auth/presentation/pages/phone_auth_page.dart';
+import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
 class AppRouter {
   // ============================================================================
@@ -41,9 +42,6 @@ class AppRouter {
   // ============================================================================
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    // Extract arguments from settings
-    final args = settings.arguments;
-
     switch (settings.name) {
       // ========================================================================
       // Initial Route
@@ -80,7 +78,7 @@ class AppRouter {
           ),
         );
 
-      case '/otp-verification':
+      case otpVerification:
       // ✅ Extract arguments
         final args = settings.arguments as Map<String, String>;
         return MaterialPageRoute(
@@ -100,15 +98,11 @@ class AppRouter {
         );
 
       case profile:
-        // Example: Passing user ID
-        if (args is String) {
-          return _buildRoute(
-            Scaffold(
-              body: Center(child: Text('Profile Page - User ID: $args')),
-            ),
-            settings: settings,
-          );
-        }
+        final args = settings.arguments as Map<String,String>;
+        return _buildRoute(
+          ProfilePage(userId: args['userId']),
+          settings: settings,
+        );
         return _errorRoute(settings);
 
       // ========================================================================

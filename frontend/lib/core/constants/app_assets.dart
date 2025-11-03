@@ -33,6 +33,7 @@ class AppAssets {
   static const String commentIcon = '${iconsPath}comment.png';
   static const String notificationIcon = '${iconsPath}notification.png';
   static const String searchIcon = '${iconsPath}search.png';
+  static const String cameraIcon = '${iconsPath}camera.png';
 
 
   // App logo
