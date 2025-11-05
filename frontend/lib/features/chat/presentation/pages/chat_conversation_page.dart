@@ -5,6 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/features/groups/data/datasources/group_remote_datasource.dart';
+import 'package:frontend/features/groups/presentation/bloc/group_details_bloc.dart';
+import 'package:frontend/features/groups/presentation/page/group_details_page.dart';
 import 'package:frontend/features/user_details/data/datasources/user_details_remote_datasource.dart';
 import 'package:frontend/features/user_details/presentation/bloc/user_details_bloc.dart';
 import 'package:frontend/features/user_details/presentation/page/user_profile.dart';
@@ -67,19 +70,35 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
         title: GestureDetector(
           onTap: () {
             // Navigator.pushNamed(context, AppRouter.profile,arguments: {'userId' : widget.conversation.userId});
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BlocProvider(
-                  create: (context) => UserDetailsBloc(
-                    remoteDataSource: di.sl<UserDetailsRemoteDataSource>(),
-                  ),
-                  child: const UserProfile(
-                    userId: 'user_123',
+            if (widget.conversation.isGroup) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => GroupDetailsBloc(
+                      remoteDataSource: di.sl<GroupRemoteDataSource>(),
+                    ),
+                    child: GroupDetailsPage(
+                      groupId: 'group_003',
+                    ),
                   ),
                 ),
-              ),
-            );
+              );
+            }else{
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider(
+                    create: (context) => UserDetailsBloc(
+                      remoteDataSource: di.sl<UserDetailsRemoteDataSource>(),
+                    ),
+                    child: UserProfile(
+                      userId: widget.conversation.userId,
+                    ),
+                  ),
+                ),
+              );
+            }
             },
           child: Row(
             children: [

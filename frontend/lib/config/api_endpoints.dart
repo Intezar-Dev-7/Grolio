@@ -86,6 +86,24 @@ class ApiEndpoints {
   static const String loginGithub = '$phoneAuth/github';
 
   // ============================================================================
+  // Groups Endpoints
+  // ============================================================================
+
+  static const String groups = '/groups';
+
+  // Group operations
+  static String getGroupDetails(String groupId) => '$groups/$groupId';
+  static String exitGroup(String groupId) => '$groups/$groupId/exit';
+  static String addMember(String groupId) => '$groups/$groupId/members';
+  static String removeMember(String groupId, String memberId) =>
+      '$groups/$groupId/members/$memberId';
+  static String promoteToAdmin(String groupId) => '$groups/$groupId/admins';
+  static String demoteAdmin(String groupId, String adminId) =>
+      '$groups/$groupId/admins/$adminId';
+  static String reportGroup(String groupId) => '$groups/$groupId/report';
+  static String getGroupMedia(String groupId) => '$groups/$groupId/media';
+
+  // ============================================================================
   // Onboarding Endpoints
   // ============================================================================
 
