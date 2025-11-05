@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/core/services/auth_service.dart';
 import 'package:frontend/features/profile/presentation/widgets/profile_app_bar.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../bloc/profile_bloc.dart';
@@ -19,12 +20,22 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  bool _isCurrentUser = true;
+
   @override
   void initState() {
     super.initState();
+    _checkIfCurrentUser();
     context.read<ProfileBloc>().add(
       ProfileLoadRequested(userId: widget.userId),
     );
+  }
+
+  Future<void> _checkIfCurrentUser() async {
+    final isCurrentUser = await AuthService.isCurrentUser(widget.userId!);
+    setState(() {
+      _isCurrentUser = isCurrentUser;
+    });
   }
 
   @override
@@ -77,7 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
           }
 
           final profile = state.profile!;
-          final isOwnProfile = widget.userId == null;
+          final isOwnProfile = _isCurrentUser;
 
           return CustomScrollView(
             slivers: [
@@ -116,14 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
               SliverToBoxAdapter(
                 child: ProfileHeader(
                   profile: profile,
-                  isOwnProfile: true,
-                  onFollowTap: () {
-                    if (!isOwnProfile) {
-                      context.read<ProfileBloc>().add(
-                        ProfileFollowToggled(profile.id),
-                      );
-                    }
-                  },
+                  isOwnProfile: isOwnProfile,
                 ),
               ),
 

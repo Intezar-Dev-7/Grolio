@@ -52,6 +52,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       name: state.profile!.name,
       username: state.profile!.username,
       avatar: state.profile!.avatar,
+      phone: state.profile!.phone,
       bio: state.profile!.bio,
       followersCount: state.profile!.isFollowing
           ? state.profile!.followersCount - 1

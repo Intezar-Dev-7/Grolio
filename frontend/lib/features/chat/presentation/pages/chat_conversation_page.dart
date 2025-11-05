@@ -2,8 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/features/user_details/data/datasources/user_details_remote_datasource.dart';
+import 'package:frontend/features/user_details/presentation/bloc/user_details_bloc.dart';
+import 'package:frontend/features/user_details/presentation/page/user_profile.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../domain/entities/conversation_entity.dart';
@@ -62,7 +66,20 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
         automaticallyImplyLeading: false,
         title: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, AppRouter.profile,arguments: {'userId' : widget.conversation.userId});
+            // Navigator.pushNamed(context, AppRouter.profile,arguments: {'userId' : widget.conversation.userId});
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => UserDetailsBloc(
+                    remoteDataSource: di.sl<UserDetailsRemoteDataSource>(),
+                  ),
+                  child: const UserProfile(
+                    userId: 'user_123',
+                  ),
+                ),
+              ),
+            );
             },
           child: Row(
             children: [

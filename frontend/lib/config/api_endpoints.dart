@@ -44,6 +44,10 @@ class ApiEndpoints {
   static String unfollowUser(String userId) => '$users/$userId/unfollow';
   static String blockUser(String userId) => '$users/$userId/block';
   static String reportUser(String userId) => '$users/$userId/report';
+  static String commonGroups(String userId) => '$users/$userId/common-groups';
+  static String userMedia(String userId) => '$users/$userId/media';
+  static String favourites(String userId) => '$users/$userId/favourites';
+  static String removeFromFavourites(String userId) => '$users/$userId/remove-from-favourites';
 
   // ============================================================================
   // Post Endpoints

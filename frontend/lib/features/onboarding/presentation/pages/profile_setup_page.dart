@@ -22,6 +22,8 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _techInputController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   final Map<String, TextEditingController> _socialControllers = {
     'github': TextEditingController(),
@@ -37,6 +39,8 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
     _usernameController.dispose();
     _bioController.dispose();
     _techInputController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
     _socialControllers.forEach((_, controller) => controller.dispose());
     super.dispose();
   }
@@ -135,6 +139,98 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
                         ),
 
                         const SizedBox(height: 32),
+
+                        // Full Name
+                        Text(
+                          'Email *',
+                          style: AppTypography.bodyMedium.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextField(
+                          controller: _emailController,
+                          style: AppTypography.bodyMedium,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: 'johndoe@gmail.com',
+                            hintStyle: AppTypography.bodyMedium.copyWith(
+                              color: AppColors.textTertiary,
+                            ),
+                            filled: true,
+                            fillColor: AppColors.surfaceDark,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.borderColor,
+                                width: 1,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.borderColor,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.primaryGreen,
+                                width: 1,
+                              ),
+                            ),
+                            contentPadding: const EdgeInsets.all(16),
+                          ),
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        // Full Name
+                        Text(
+                          'Phone  *',
+                          style: AppTypography.bodyMedium.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextField(
+                          controller: _phoneController,
+                          style: AppTypography.bodyMedium,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: '9098541236',
+                            hintStyle: AppTypography.bodyMedium.copyWith(
+                              color: AppColors.textTertiary,
+                            ),
+                            filled: true,
+                            fillColor: AppColors.surfaceDark,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.borderColor,
+                                width: 1,
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.borderColor,
+                                width: 1,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(
+                                color: AppColors.primaryGreen,
+                                width: 1,
+                              ),
+                            ),
+                            contentPadding: const EdgeInsets.all(16),
+                          ),
+                        ),
+
+                        const SizedBox(height: 24),
 
                         // Full Name
                         Text(
@@ -411,6 +507,8 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
                                   ProfileSetupSubmitted(
                                     fullName: _fullNameController.text,
                                     username: _usernameController.text,
+                                    email: _emailController.text,
+                                    phone: _phoneController.text,
                                     bio: _bioController.text,
                                     socialLinks: socialLinks,
                                   ),
@@ -439,7 +537,7 @@ class _ProfileSetupPageState extends State<ProfileSetupPage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Continue to Dashboard',
+                                    'Complete Profile',
                                     style: AppTypography.bodyLarge.copyWith(
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white,

@@ -104,6 +104,24 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
       ProfileSetupSubmitted event,
       Emitter<ProfileSetupState> emit,
       ) async {
+
+    if(event.email.trim().isEmpty){
+      emit(state.copyWith(
+        status: ProfileSetupStatus.error,
+        errorMessage: 'Please enter your email',
+      ));
+      return;
+    }else{
+      final emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
+      if (!emailRegex.hasMatch(event.email)) {
+        emit(state.copyWith(
+          status: ProfileSetupStatus.error,
+          errorMessage: 'Please enter a valid email address',
+        ));
+        return;
+      }
+    }
+
     if (event.fullName.trim().isEmpty) {
       emit(state.copyWith(
         status: ProfileSetupStatus.error,
@@ -120,17 +138,36 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
       return;
     }
 
+    if(event.phone.trim().isEmpty){
+      emit(state.copyWith(
+        status: ProfileSetupStatus.error,
+        errorMessage: 'Please enter your phone number',
+      ));
+      return;
+    }else{
+      final phoneRegex = RegExp(r'^\d{10}$');
+      if (!phoneRegex.hasMatch(event.phone)) {
+        emit(state.copyWith(
+          status: ProfileSetupStatus.error,
+          errorMessage: 'Please enter a valid phone number',
+        ));
+        return;
+      }
+    }
+
     emit(state.copyWith(status: ProfileSetupStatus.submitting));
 
     try {
-      /*await remoteDataSource.completeProfileSetup(
+      await remoteDataSource.completeProfileSetup(
         fullName: event.fullName,
         username: event.username,
+        email: event.email,
+        phone: event.phone,
         bio: event.bio,
         techStack: state.techStack,
         socialLinks: event.socialLinks,
         profileImageUrl: state.uploadedImageUrl,
-      );*/
+      );
       await Future.delayed(const Duration(seconds: 2));
 
       emit(state.copyWith(status: ProfileSetupStatus.success));

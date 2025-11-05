@@ -2,6 +2,7 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:frontend/core/services/auth_service.dart';
 import '../../data/datasources/phone_auth_remote_datasource.dart';
 
 part 'phone_auth_event.dart';
@@ -29,7 +30,13 @@ class PhoneAuthBloc extends Bloc<PhoneAuthEvent, PhoneAuthState> {
     /*  final result = await remoteDataSource.sendOtp(
         phoneNumber: event.phoneNumber,
         countryCode: event.countryCode,
-      );*/
+      );
+
+      // ✅ Save user ID after successful login
+      await AuthService.setCurrentUserId(result['user']['id']);
+      await AuthService.setUserToken(result['token']);
+
+      */
       await Future.delayed(const Duration(seconds: 2));
 
       emit(state.copyWith(

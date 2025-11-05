@@ -48,16 +48,20 @@ class ProfileSetupTechRemoved extends ProfileSetupEvent {
 class ProfileSetupSubmitted extends ProfileSetupEvent {
   final String fullName;
   final String username;
+  final String email;
+  final String phone;
   final String bio;
   final Map<String, String> socialLinks;
 
   const ProfileSetupSubmitted({
     required this.fullName,
     required this.username,
+    required this.email,
+    required this.phone,
     required this.bio,
     required this.socialLinks,
   });
 
   @override
-  List<Object?> get props => [fullName, username, bio, socialLinks];
+  List<Object?> get props => [fullName, username, bio, email, phone, socialLinks];
 }

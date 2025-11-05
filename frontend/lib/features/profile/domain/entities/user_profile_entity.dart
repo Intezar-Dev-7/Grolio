@@ -7,6 +7,7 @@ class UserProfileEntity extends Equatable {
   final String name;
   final String username;
   final String? avatar;
+  final String phone;
   final String bio;
   final int followersCount;
   final int followingCount;
@@ -23,6 +24,7 @@ class UserProfileEntity extends Equatable {
     required this.name,
     required this.username,
     this.avatar,
+    required this.phone,
     required this.bio,
     required this.followersCount,
     required this.followingCount,
@@ -41,6 +43,7 @@ class UserProfileEntity extends Equatable {
     name,
     username,
     avatar,
+    phone,
     bio,
     followersCount,
     followingCount,

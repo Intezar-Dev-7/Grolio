@@ -144,11 +144,7 @@ class _ChatPageState extends State<ChatPage> {
                   return ListView.separated(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     itemCount: state.conversations.length,
-                    separatorBuilder: (context, index) => const Divider(
-                      height: 1,
-                      color: AppColors.borderColor,
-                      indent: 76,
-                    ),
+                    separatorBuilder: (context, index) => Container(),
                     itemBuilder: (context, index) {
                       final conversation = state.conversations[index];
                       return ConversationTile(

@@ -71,7 +71,7 @@ class _OtpVerificationPageState extends State<OtpVerificationPage> {
     return BlocListener<PhoneAuthBloc, PhoneAuthState>(
       listener: (context, state) {
         if (state.status == PhoneAuthStatus.authenticated) {
-          Navigator.pushReplacementNamed(context, AppRouter.home);
+          Navigator.pushNamedAndRemoveUntil(context, AppRouter.home, (route) => false,);
         } else if (state.status == PhoneAuthStatus.error) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

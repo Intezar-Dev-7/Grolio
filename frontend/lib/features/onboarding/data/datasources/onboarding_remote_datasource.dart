@@ -11,6 +11,8 @@ abstract class OnboardingRemoteDataSource {
   Future<void> completeProfileSetup({
     required String fullName,
     required String username,
+    required String email,
+    required String phone,
     required String bio,
     required List<String> techStack,
     required Map<String, String> socialLinks,
@@ -68,6 +70,8 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
   Future<void> completeProfileSetup({
     required String fullName,
     required String username,
+    required String email,
+    required String phone,
     required String bio,
     required List<String> techStack,
     required Map<String, String> socialLinks,
@@ -79,6 +83,8 @@ class OnboardingRemoteDataSourceImpl implements OnboardingRemoteDataSource {
         data: {
           'full_name': fullName,
           'username': username,
+          'email': email,
+          'phone': phone,
           'bio': bio,
           'tech_stack': techStack,
           'social_links': socialLinks,

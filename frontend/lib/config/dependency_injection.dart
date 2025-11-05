@@ -12,6 +12,7 @@ import 'package:frontend/features/phone_auth/data/datasources/phone_auth_remote_
 import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/profile/data/datasources/profile_remote_datasource.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:frontend/features/user_details/data/datasources/user_details_remote_datasource.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -227,6 +228,17 @@ Future<void> init() async {
     ),
   );
 
+  // ============================================================================
+  // Features - User Details
+  // ============================================================================
+
+  print('📦 Registering User Details dependencies...');
+
+  sl.registerLazySingleton<UserDetailsRemoteDataSource>(
+        () => UserDetailsRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
 
   // ============================================================================
   // Features - Create Post

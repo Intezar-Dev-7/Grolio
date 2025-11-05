@@ -11,13 +11,11 @@ import '../../domain/entities/user_profile_entity.dart';
 class ProfileHeader extends StatelessWidget {
   final UserProfileEntity profile;
   final bool isOwnProfile;
-  final VoidCallback onFollowTap;
 
   const ProfileHeader({
     super.key,
     required this.profile,
     required this.isOwnProfile,
-    required this.onFollowTap,
   });
 
   @override
@@ -78,7 +76,7 @@ class ProfileHeader extends StatelessWidget {
                           ],
                         ),
 
-                        // Follow/Edit button
+                        // Edit button
                         isOwnProfile
                             ? GestureDetector(
                               onTap: () {
@@ -89,60 +87,20 @@ class ProfileHeader extends StatelessWidget {
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
+                                  horizontal: 8,
                                   vertical: 8,
                                 ),
                                 decoration: BoxDecoration(
                                   gradient: AppColors.primaryButtonGradient,
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(16),
                                 ),
-                                child: Text(
-                                  'EDIT',
-                                  style: AppTypography.bodyMedium.copyWith(
-                                    color: AppColors.textPrimary,
-                                  ),
+                                child: const Icon(Icons.edit_rounded,
+                                  color: AppColors.textPrimary,
+                                  size: 20,
                                 )
                               ),
                             )
-                            : Container(
-                              decoration: BoxDecoration(
-                                color:
-                                    profile.isFollowing
-                                        ? AppColors.surfaceDark
-                                        : AppColors.primaryGreen,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color:
-                                      profile.isFollowing
-                                          ? AppColors.borderColor
-                                          : AppColors.primaryGreen,
-                                ),
-                              ),
-                              child: Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: onFollowTap,
-                                  borderRadius: BorderRadius.circular(8),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 16,
-                                      vertical: 8,
-                                    ),
-                                    child: Text(
-                                      profile.isFollowing
-                                          ? 'FOLLOW'
-                                          : 'UNFOLLOW',
-                                      style: TextStyle(
-                                        color:
-                                            profile.isFollowing
-                                                ? AppColors.textPrimary
-                                                : Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            : Container(),
                       ],
                     ),
                     const SizedBox(height: 12),
@@ -234,7 +192,7 @@ class ProfileHeader extends StatelessWidget {
                       ),
                     ),
                   );
-                }).toList(),
+                }),
             ],
           ),
         ],
