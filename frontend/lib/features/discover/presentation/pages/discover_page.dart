@@ -6,8 +6,7 @@ import 'package:frontend/features/discover/presentation/widgets/discover_app_bar
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/discover_bloc.dart';
-import '../widgets/discover_header.dart';
-import '../widgets/tech_filter_section.dart';
+import '../widgets/discover_search_bar.dart';
 import '../widgets/discover_tabs.dart';
 import '../widgets/developer_card.dart';
 
@@ -55,12 +54,6 @@ class _DiscoverPageState extends State<DiscoverPage> {
           controller: _scrollController,
           slivers: [
             const DiscoverAppBar(),
-
-            // Header with icon, title, and search
-            const DiscoverSearchBar(),
-
-            // Tech Stack Filter Section
-            const TechFilterSection(),
 
             // Tabs (Projects, Events)
             const DiscoverTabs(),
