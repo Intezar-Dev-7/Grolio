@@ -10,8 +10,6 @@ class DiscoverSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      // width: double.infinity,
-      // padding: const EdgeInsets.symmetric(horizontal: 24,vertical: 12),
       child: Container(
         height: 42,
         decoration: BoxDecoration(
