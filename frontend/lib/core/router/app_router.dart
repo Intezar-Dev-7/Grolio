@@ -4,6 +4,8 @@ import 'package:frontend/LoadingScreen.dart';
 import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/features/create_post/presentation/page/create_post_page.dart';
 import 'package:frontend/features/home/presentation/pages/main_screen.dart';
+import 'package:frontend/features/notifications/presentation/bloc/notification_bloc.dart';
+import 'package:frontend/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
 import 'package:frontend/features/onboarding/presentation/pages/profile_setup_page.dart';
 import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
@@ -103,7 +105,14 @@ class AppRouter {
           ProfilePage(userId: args['userId']),
           settings: settings,
         );
-        return _errorRoute(settings);
+
+      case notifications:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => di.sl<NotificationBloc>(),
+            child: const NotificationsPage(),
+          ),
+        );
 
       // ========================================================================
       // Default/Error Route

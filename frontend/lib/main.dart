@@ -7,6 +7,7 @@ import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/features/chat/presentation/bloc/chat_bloc.dart';
 import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
+import 'package:frontend/features/notifications/presentation/bloc/notification_bloc.dart';
 import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
 import 'package:frontend/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -72,6 +73,11 @@ class MyApp extends StatelessWidget {
         // Create Post BLoC
         BlocProvider<CreatePostBloc>(
           create: (context) => di.sl<CreatePostBloc>(),
+        ),
+
+        BlocProvider<NotificationBloc>(
+          create: (context) => di.sl<NotificationBloc>()
+            ..add(const NotificationLoadRequested()),
         ),
       ],
       child: MaterialApp(

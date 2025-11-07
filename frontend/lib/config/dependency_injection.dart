@@ -7,6 +7,8 @@ import 'package:frontend/features/create_post/presentation/bloc/create_post_bloc
 import 'package:frontend/features/discover/data/datasources/discover_remote_datasource.dart';
 import 'package:frontend/features/discover/presentation/bloc/discover_bloc.dart';
 import 'package:frontend/features/groups/data/datasources/group_remote_datasource.dart';
+import 'package:frontend/features/notifications/data/datasources/notification_remote_datasource.dart';
+import 'package:frontend/features/notifications/presentation/bloc/notification_bloc.dart';
 import 'package:frontend/features/onboarding/data/datasources/onboarding_remote_datasource.dart';
 import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
 import 'package:frontend/features/phone_auth/data/datasources/phone_auth_remote_datasource.dart';
@@ -290,6 +292,26 @@ Future<void> init() async {
   sl.registerFactory<PhoneAuthBloc>(
         () => PhoneAuthBloc(
       remoteDataSource: sl<PhoneAuthRemoteDataSource>(),
+    ),
+  );
+
+  // ============================================================================
+  // Features - Notifications
+  // ============================================================================
+
+  print('📦 Registering Notifications dependencies...');
+
+  // Data Sources
+  sl.registerLazySingleton<NotificationRemoteDataSource>(
+        () => NotificationRemoteDataSourceImpl(
+      dioClient: sl<DioClient>(),
+    ),
+  );
+
+  // BLoC - Register as Factory (per-screen)
+  sl.registerFactory<NotificationBloc>(
+        () => NotificationBloc(
+      remoteDataSource: sl<NotificationRemoteDataSource>(),
     ),
   );
 

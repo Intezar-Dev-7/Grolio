@@ -116,16 +116,17 @@ class ApiEndpoints {
   static const String completeProfile = '$onboarding/complete-profile';
 
   // ============================================================================
-  // Notification Endpoints
+  // Notifications Endpoints
   // ============================================================================
 
   static const String notifications = '/notifications';
 
-  static String notificationById(String notificationId) =>
-      '$notifications/$notificationId';
-  static const String markAllRead = '$notifications/mark-all-read';
-  static String markAsReadNotification(String notificationId) =>
-      '$notifications/$notificationId/read';
+  static const String getNotifications = notifications;
+  static const String unreadCount = '$notifications/unread-count';
+  static const String markAsRead = '$notifications/mark-read';
+  static const String markAllAsRead = '$notifications/mark-all-read';
+  static const String deleteNotification = notifications;
+  static const String clearAll = '$notifications/clear-all';
 
   // ============================================================================
   // Search Endpoints
