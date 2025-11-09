@@ -1,8 +1,5 @@
-// features/feed/presentation/widgets/feed_app_bar.dart
-
 import 'package:flutter/material.dart';
 import 'package:frontend/core/constants/app_assets.dart';
-import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 
@@ -17,30 +14,14 @@ class FeedAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.backgroundDark,
       elevation: 0,
-      title: Row(
-        children: [
-          // Logo
-          const AppBarLogoIcon(),
-          const SizedBox(width: 12),
-          // App name
-          Text(
-            'Feed',
-            style: AppTypography.headlineMedium.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-      actions: [
-        IconButton(
-          icon: Image.asset(
-            AppAssets.searchIcon,
-            color: AppColors.iconColor,
-            width: 20,
-            height: 20,
-          ),
-          onPressed: () {},
+      centerTitle: false,
+      title: Text(
+        'Feed',
+        style: AppTypography.headlineMedium.copyWith(
+          fontWeight: FontWeight.bold,
         ),
+      ),
+      /*actions: [
         Stack(
           children: [
             IconButton(
@@ -79,15 +60,8 @@ class FeedAppBar extends StatelessWidget {
             ),
           ],
         ),
-        IconButton(
-          icon: const Icon(
-            Icons.filter_list,
-            color: AppColors.iconColor,
-          ),
-          onPressed: () {},
-        ),
         const SizedBox(width: 4),
-      ],
+      ],*/
     );
   }
 }

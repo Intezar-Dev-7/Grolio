@@ -16,7 +16,7 @@ class AppAssets {
   static const String socialIconPath = 'assets/icons/auth_social_icon/';
 
   static const String gitHubIcon = '${socialIconPath}github_auth_icon.png';
-  static const String mailIcon = '${socialIconPath}google_auth_icon.png';
+  static const String googleIcon = '${socialIconPath}google_auth_icon.png';
 
 
   // General icons
@@ -33,6 +33,7 @@ class AppAssets {
   static const String commentIcon = '${iconsPath}comment.png';
   static const String notificationIcon = '${iconsPath}notification.png';
   static const String searchIcon = '${iconsPath}search.png';
+  static const String cameraIcon = '${iconsPath}camera.png';
 
 
   // App logo

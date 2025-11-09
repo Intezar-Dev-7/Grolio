@@ -58,9 +58,7 @@ class CreatePostRemoteDataSourceImpl implements CreatePostRemoteDataSource {
     required String type,
   }) async {
     try {
-      final endpoint = type == 'devsnap'
-          ? ApiEndpoints.devSnaps
-          : ApiEndpoints.posts;
+      const endpoint = ApiEndpoints.posts;
 
       final response = await dioClient.post(
         endpoint,

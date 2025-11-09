@@ -15,8 +15,6 @@ class _DiscoverTabsState extends State<DiscoverTabs> {
   int _selectedIndex = 0;
 
   final List<Map<String, dynamic>> _tabs = [
-    {'icon': Icons.auto_awesome, 'label': 'AI Picks'},
-    {'icon': Icons.trending_up, 'label': 'Trending'},
     {'icon': Icons.code, 'label': 'Projects'},
     {'icon': Icons.event, 'label': 'Events'},
   ];

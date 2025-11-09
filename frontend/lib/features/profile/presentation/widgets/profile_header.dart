@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:frontend/core/router/app_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -10,13 +11,11 @@ import '../../domain/entities/user_profile_entity.dart';
 class ProfileHeader extends StatelessWidget {
   final UserProfileEntity profile;
   final bool isOwnProfile;
-  final VoidCallback onFollowTap;
 
   const ProfileHeader({
     super.key,
     required this.profile,
     required this.isOwnProfile,
-    required this.onFollowTap,
   });
 
   @override
@@ -56,18 +55,54 @@ class ProfileHeader extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      profile.name,
-                      style: AppTypography.headlineSmall.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      profile.username,
-                      style: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              profile.name,
+                              style: AppTypography.headlineSmall.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              profile.username,
+                              style: AppTypography.bodyMedium.copyWith(
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // Edit button
+                        isOwnProfile
+                            ? GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  AppRouter.profileSetup,
+                                );
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 8,
+                                ),
+                                decoration: BoxDecoration(
+                                  gradient: AppColors.primaryButtonGradient,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: const Icon(
+                                  Icons.edit_rounded,
+                                  color: AppColors.textPrimary,
+                                  size: 20,
+                                ),
+                              ),
+                            )
+                            : Container(),
+                      ],
                     ),
                     const SizedBox(height: 12),
                     Row(

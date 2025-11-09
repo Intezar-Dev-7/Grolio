@@ -13,6 +13,7 @@ class ConversationEntity extends Equatable {
   final bool isOnline;
   final bool isGroup;
   final String? messageType; // 'text', 'code', 'file'
+  final bool isPinned;
 
   const ConversationEntity({
     required this.id,
@@ -25,6 +26,7 @@ class ConversationEntity extends Equatable {
     required this.isOnline,
     required this.isGroup,
     this.messageType,
+    this.isPinned = false,
   });
 
   String get timeAgo {
@@ -75,5 +77,6 @@ class ConversationEntity extends Equatable {
     isOnline,
     isGroup,
     messageType,
+    isPinned,
   ];
 }

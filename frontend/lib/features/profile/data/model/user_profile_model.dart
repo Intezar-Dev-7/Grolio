@@ -8,6 +8,7 @@ class UserProfileModel {
   final String username;
   final String? avatar;
   final String bio;
+  final String phone;
   final int followersCount;
   final int followingCount;
   final int postsCount;
@@ -23,6 +24,7 @@ class UserProfileModel {
     required this.name,
     required this.username,
     this.avatar,
+    required this.phone,
     required this.bio,
     required this.followersCount,
     required this.followingCount,
@@ -42,6 +44,7 @@ class UserProfileModel {
       username: json['username'] as String,
       avatar: json['avatar'] as String?,
       bio: json['bio'] as String,
+      phone: json['phone'] as String,
       followersCount: json['followers_count'] as int,
       followingCount: json['following_count'] as int,
       postsCount: json['posts_count'] as int,
@@ -68,6 +71,7 @@ class UserProfileModel {
       name: name,
       username: username,
       avatar: avatar,
+      phone: phone,
       bio: bio,
       followersCount: followersCount,
       followingCount: followingCount,

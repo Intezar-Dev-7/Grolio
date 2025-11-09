@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/features/chat/presentation/widgets/chat_app_bar.dart';
+import 'package:frontend/features/chat/presentation/widgets/chat_search_bar.dart';
 import '../../../../core/theme/app_colors.dart';
-import '../../../../core/theme/app_typography.dart';
 import '../bloc/chat_bloc.dart';
 import '../widgets/conversation_tile.dart';
 import 'chat_conversation_page.dart';
@@ -17,6 +17,8 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  final TextEditingController searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -32,44 +34,9 @@ class _ChatPageState extends State<ChatPage> {
             // Custom App Bar
             const ChatAppBar(),
 
-            // Search Bar
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Container(
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: AppColors.surfaceDark,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: AppColors.borderColor,
-                      width: 1,
-                    ),
-                  ),
-                  child: TextField(
-                    style: AppTypography.bodyMedium,
-                    decoration: InputDecoration(
-                      hintText: 'Search messages...',
-                      hintStyle: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.textTertiary,
-                      ),
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: AppColors.iconColor,
-                        size: 20,
-                      ),
-                      border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 14,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+            ChatSearchBar(
+              searchController: searchController,
             ),
-
-            const SliverToBoxAdapter(child: SizedBox(height: 16)),
 
             // Conversations List
             SliverFillRemaining(
@@ -143,11 +110,7 @@ class _ChatPageState extends State<ChatPage> {
                   return ListView.separated(
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     itemCount: state.conversations.length,
-                    separatorBuilder: (context, index) => const Divider(
-                      height: 1,
-                      color: AppColors.borderColor,
-                      indent: 76,
-                    ),
+                    separatorBuilder: (context, index) => Container(),
                     itemBuilder: (context, index) {
                       final conversation = state.conversations[index];
                       return ConversationTile(

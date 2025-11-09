@@ -44,6 +44,10 @@ class ApiEndpoints {
   static String unfollowUser(String userId) => '$users/$userId/unfollow';
   static String blockUser(String userId) => '$users/$userId/block';
   static String reportUser(String userId) => '$users/$userId/report';
+  static String commonGroups(String userId) => '$users/$userId/common-groups';
+  static String userMedia(String userId) => '$users/$userId/media';
+  static String favourites(String userId) => '$users/$userId/favourites';
+  static String removeFromFavourites(String userId) => '$users/$userId/remove-from-favourites';
 
   // ============================================================================
   // Post Endpoints
@@ -70,61 +74,34 @@ class ApiEndpoints {
   static const String feedFollowing = '$feed/following';
 
   // ============================================================================
-  // DevSnaps Endpoints (NEW)
+  // Phone Auth Endpoints
   // ============================================================================
 
-  static const String devSnaps = '/devsnaps';
+  static const String phoneAuth = '/auth/phone';
 
-  // Stories
-  static const String devSnapStories = '$devSnaps/stories';
-  static const String myDevSnapStories = '$devSnaps/stories/me';
-
-  // Recent DevSnaps
-  static const String recentDevSnaps = '$devSnaps/recent';
-  static const String trendingDevSnaps = '$devSnaps/trending';
-
-  // User DevSnaps
-  static String userDevSnaps(String userId) => '$devSnaps/user/$userId';
-  static const String myDevSnaps = '$devSnaps/me';
-
-  // Single DevSnap
-  static String devSnapById(String devSnapId) => '$devSnaps/$devSnapId';
-
-  // DevSnap Actions
-  static String viewDevSnap(String devSnapId) => '$devSnaps/$devSnapId/view';
-  static String likeDevSnap(String devSnapId) => '$devSnaps/$devSnapId/like';
-  static String unlikeDevSnap(String devSnapId) => '$devSnaps/$devSnapId/unlike';
-  static String shareDevSnap(String devSnapId) => '$devSnaps/$devSnapId/share';
-  static String reportDevSnap(String devSnapId) => '$devSnaps/$devSnapId/report';
-
-  // DevSnap Comments
-  static String devSnapComments(String devSnapId) => '$devSnaps/$devSnapId/comments';
-  static String devSnapComment(String devSnapId, String commentId) =>
-      '$devSnaps/$devSnapId/comments/$commentId';
-
-  // DevSnap Upload
-  static const String uploadDevSnap = '$devSnaps/upload';
-  static const String uploadDevSnapMedia = '$devSnaps/upload/media';
+  static const String sendOtp = '$phoneAuth/send-otp';
+  static const String verifyOtp = '$phoneAuth/verify-otp';
+  static const String loginGoogle = '$phoneAuth/google';
+  static const String loginApple = '$phoneAuth/apple';
+  static const String loginGithub = '$phoneAuth/github';
 
   // ============================================================================
-  // Tech Stack Endpoints
+  // Groups Endpoints
   // ============================================================================
 
-  static const String techStacks = '/tech-stacks';
+  static const String groups = '/groups';
 
-  static String techStackById(String techId) => '$techStacks/$techId';
-  static const String userTechStacks = '/users/me/tech-stacks';
-  static const String popularTechStacks = '$techStacks/popular';
-
-  // ============================================================================
-  // Goals Endpoints
-  // ============================================================================
-
-  static const String goals = '/goals';
-
-  static String goalById(String goalId) => '$goals/$goalId';
-  static const String userGoals = '/users/me/goals';
-  static String goalProgress(String goalId) => '$goals/$goalId/progress';
+  // Group operations
+  static String getGroupDetails(String groupId) => '$groups/$groupId';
+  static String exitGroup(String groupId) => '$groups/$groupId/exit';
+  static String addMember(String groupId) => '$groups/$groupId/members';
+  static String removeMember(String groupId, String memberId) =>
+      '$groups/$groupId/members/$memberId';
+  static String promoteToAdmin(String groupId) => '$groups/$groupId/admins';
+  static String demoteAdmin(String groupId, String adminId) =>
+      '$groups/$groupId/admins/$adminId';
+  static String reportGroup(String groupId) => '$groups/$groupId/report';
+  static String getGroupMedia(String groupId) => '$groups/$groupId/media';
 
   // ============================================================================
   // Onboarding Endpoints
@@ -133,18 +110,23 @@ class ApiEndpoints {
   static const String onboarding = '/onboarding';
   static const String onboardingComplete = '$onboarding/complete';
   static const String onboardingSkip = '$onboarding/skip';
+  // Profile setup
+  static const String uploadProfileImage = '$onboarding/upload-profile-image';
+  static const String checkUsername = '$onboarding/check-username';
+  static const String completeProfile = '$onboarding/complete-profile';
 
   // ============================================================================
-  // Notification Endpoints
+  // Notifications Endpoints
   // ============================================================================
 
   static const String notifications = '/notifications';
 
-  static String notificationById(String notificationId) =>
-      '$notifications/$notificationId';
-  static const String markAllRead = '$notifications/mark-all-read';
-  static String markAsReadNotification(String notificationId) =>
-      '$notifications/$notificationId/read';
+  static const String getNotifications = notifications;
+  static const String unreadCount = '$notifications/unread-count';
+  static const String markAsRead = '$notifications/mark-read';
+  static const String markAllAsRead = '$notifications/mark-all-read';
+  static const String deleteNotification = notifications;
+  static const String clearAll = '$notifications/clear-all';
 
   // ============================================================================
   // Search Endpoints

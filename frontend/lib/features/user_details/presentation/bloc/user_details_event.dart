@@ -19,7 +19,8 @@ class UserDetailsLoadRequested extends UserDetailsEvent {
 }
 
 class UserDetailsFollowToggled extends UserDetailsEvent {
-  const UserDetailsFollowToggled();
+  final String userId;
+  const UserDetailsFollowToggled(this.userId);
 }
 
 class UserDetailsBlockRequested extends UserDetailsEvent {
@@ -28,4 +29,8 @@ class UserDetailsBlockRequested extends UserDetailsEvent {
 
 class UserDetailsReportRequested extends UserDetailsEvent {
   const UserDetailsReportRequested();
+}
+
+class UserDetailsRefreshed extends UserDetailsEvent {
+  const UserDetailsRefreshed();
 }

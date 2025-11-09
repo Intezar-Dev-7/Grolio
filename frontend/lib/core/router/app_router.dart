@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/LoadingScreen.dart';
+import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/features/create_post/presentation/page/create_post_page.dart';
 import 'package:frontend/features/home/presentation/pages/main_screen.dart';
-import 'package:frontend/features/onboarding/presentation/pages/goals_page.dart';
-import 'package:frontend/features/onboarding/presentation/pages/tech_stack_page.dart';
-import '../../../features/authentication/presentation/page/login_page.dart';
-import '../../../features/authentication/presentation/page/signup_page.dart';
-import '../../../features/authentication/presentation/page/forgot_password_page.dart';
-import '../../../features/authentication/presentation/page/forgot_password_sent_page.dart';
-import '../../../features/authentication/presentation/page/reset_password_page.dart';
-import '../../../features/authentication/presentation/page/reset_password_success_page.dart';
+import 'package:frontend/features/notifications/presentation/bloc/notification_bloc.dart';
+import 'package:frontend/features/notifications/presentation/pages/notifications_page.dart';
+import 'package:frontend/features/onboarding/presentation/bloc/profile_setup_bloc.dart';
+import 'package:frontend/features/onboarding/presentation/pages/profile_setup_page.dart';
+import 'package:frontend/features/phone_auth/presentation/bloc/phone_auth_bloc.dart';
+import 'package:frontend/features/phone_auth/presentation/pages/otp_verification_page.dart';
+import 'package:frontend/features/phone_auth/presentation/pages/phone_auth_page.dart';
+import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
 class AppRouter {
   // ============================================================================
@@ -20,12 +22,15 @@ class AppRouter {
   static const String loading = '/loading';
   static const String login = '/login';
   static const String signup = '/signup';
+  static const String phoneAuth = '/phoneAuth';
+  static const String otpVerification = '/otp-verification';
   static const String forgotPassword = '/forgot-password';
   static const String forgotPasswordSent = '/forgot-password-sent';
   static const String resetPassword = '/reset-password';
   static const String resetPasswordSuccess = '/reset-password-success';
   static const String home = '/home';
   static const String profile = '/profile';
+  static const String profileSetup = '/profile-setup';
   static const String postDetail = '/post-detail';
   static const String createPost = '/create-post';
   static const String editProfile = '/edit-profile';
@@ -39,81 +44,53 @@ class AppRouter {
   // ============================================================================
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    // Extract arguments from settings
-    final args = settings.arguments;
-
     switch (settings.name) {
       // ========================================================================
-      // Authentication Routes
+      // Initial Route
       // ========================================================================
 
       case initial:
       case loading:
         return _buildRoute(const LoadingScreen(), settings: settings);
 
-      case login:
-        return _buildRoute(const LoginPage(), settings: settings);
-
-      case signup:
-        return _buildRoute(const SignUpPage(), settings: settings);
-
-      // ========================================================================
-      // Forgot Password Flow (WITH DATA PASSING)
-      // ========================================================================
-
-      case forgotPassword:
-        return _buildRoute(const ForgotPasswordPage(), settings: settings);
-
-      case forgotPasswordSent:
-        // Extract email from arguments
-        if (args is String) {
-          return _buildRoute(
-            ForgotPasswordSentPage(email: args),
-            settings: settings,
-          );
-        }
-        // Fallback if no email provided
-        return _buildRoute(
-          const ForgotPasswordSentPage(email: 'your-email@example.com'),
-          settings: settings,
-        );
-
-      case resetPassword:
-        // Extract token from arguments
-        if (args is String) {
-          return _buildRoute(
-            ResetPasswordPage(token: args),
-            settings: settings,
-          );
-        }
-        return _errorRoute(settings);
-
-      case resetPasswordSuccess:
-        return _buildRoute(
-          const ResetPasswordSuccessPage(),
-          settings: settings,
-        );
 
       // ========================================================================
       // App Routes (Example with complex data)
       // ========================================================================
 
-      case techStack:
-        return _buildRoute(
-            const TechStackPage(),
-            settings: settings
-        );
-
-      case goals:
-        return _buildRoute(
-          const GoalsPage(),
-          settings: settings,
-        );
-
       case home:
         return _buildRoute(
           const MainScreen(),
           settings: settings,
+        );
+
+      case profileSetup:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => di.sl<ProfileSetupBloc>(),
+            child: const ProfileSetupPage(),
+          ),
+        );
+
+      case phoneAuth:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => di.sl<PhoneAuthBloc>(),
+            child: const PhoneAuthPage(),
+          ),
+        );
+
+      case otpVerification:
+      // ✅ Extract arguments
+        final args = settings.arguments as Map<String, String>;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider.value(
+            value: di.sl<PhoneAuthBloc>(),
+            child: OtpVerificationPage(
+              phoneNumber: args['phoneNumber']!,
+              countryCode: args['countryCode']!,
+            ),
+          ),
         );
 
       case createPost:
@@ -123,16 +100,19 @@ class AppRouter {
         );
 
       case profile:
-        // Example: Passing user ID
-        if (args is String) {
-          return _buildRoute(
-            Scaffold(
-              body: Center(child: Text('Profile Page - User ID: $args')),
-            ),
-            settings: settings,
-          );
-        }
-        return _errorRoute(settings);
+        final args = settings.arguments as Map<String,String>;
+        return _buildRoute(
+          ProfilePage(userId: args['userId']),
+          settings: settings,
+        );
+
+      case notifications:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => di.sl<NotificationBloc>(),
+            child: const NotificationsPage(),
+          ),
+        );
 
       // ========================================================================
       // Default/Error Route

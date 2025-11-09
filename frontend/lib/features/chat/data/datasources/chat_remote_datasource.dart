@@ -1,5 +1,7 @@
 // features/chat/data/datasources/chat_remote_datasource.dart
 
+import 'package:frontend/features/chat/data/models/meeting_info_model.dart';
+
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/dio_client.dart';
 import '../models/conversation_model.dart';
@@ -121,6 +123,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         type: 'text',
         timestamp: DateTime.now().subtract(const Duration(minutes: 30)),
         isSentByMe: false,
+        isRead: false,
       ),
       MessageModel(
         id: 'msg_2',
@@ -130,6 +133,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         type: 'text',
         timestamp: DateTime.now().subtract(const Duration(minutes: 28)),
         isSentByMe: true,
+        isRead: false,
       ),
       MessageModel(
         id: 'msg_3',
@@ -141,6 +145,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         type: 'text',
         timestamp: DateTime.now().subtract(const Duration(minutes: 27)),
         isSentByMe: false,
+        isRead: false,
       ),
       MessageModel(
         id: 'msg_4',
@@ -160,6 +165,26 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         codeLanguage: 'typescript',
         timestamp: DateTime.now().subtract(const Duration(minutes: 26)),
         isSentByMe: false,
+        isRead: false,
+      ),
+      MessageModel(
+        id: 'msg_meeting_1',
+        senderId: 'user_456',
+        senderName: 'Intezaar',
+        content: 'Meeting scheduled',
+        type: 'meeting',
+        timestamp: DateTime.now().subtract(const Duration(hours: 5)),
+        isRead: true,
+        isSentByMe: true,
+        conversationId: conversationId,
+        meetingInfomodel: MeetingInfoModel(
+          title: 'Grolio',
+          platform: 'Zoom',
+          startTime: DateTime(2025, 10, 7, 10, 30),
+          endTime: DateTime(2025, 10, 7, 12, 0),
+          meetingLink: 'https://zoom.us/j/123456789',
+          isAttending: true,
+        ),
       ),
       MessageModel(
         id: 'msg_5',
@@ -169,6 +194,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         type: 'text',
         timestamp: DateTime.now().subtract(const Duration(minutes: 25)),
         isSentByMe: true,
+        isRead: false,
       ),
       MessageModel(
         id: 'msg_6',
@@ -180,6 +206,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         type: 'text',
         timestamp: DateTime.now().subtract(const Duration(minutes: 20)),
         isSentByMe: false,
+        isRead: false,
       ),
       MessageModel(
         id: 'msg_7',
@@ -193,6 +220,7 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
         fileSize: '3.2 KB',
         timestamp: DateTime.now().subtract(const Duration(minutes: 20)),
         isSentByMe: false,
+        isRead: false,
       ),
     ];
   }

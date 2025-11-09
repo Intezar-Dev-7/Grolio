@@ -5,18 +5,18 @@ part of 'user_details_bloc.dart';
 enum UserDetailsStatus {
   initial,
   loading,
-  success,
+  loaded,
   error,
 }
 
 class UserDetailsState extends Equatable {
   final UserDetailsStatus status;
-  final UserDetailsEntity? userDetails;
+  final UserProfileEntity? userProfile;
   final String? errorMessage;
 
   const UserDetailsState({
     required this.status,
-    this.userDetails,
+    this.userProfile,
     this.errorMessage,
   });
 
@@ -28,16 +28,16 @@ class UserDetailsState extends Equatable {
 
   UserDetailsState copyWith({
     UserDetailsStatus? status,
-    UserDetailsEntity? userDetails,
+    UserProfileEntity? userProfile,
     String? errorMessage,
   }) {
     return UserDetailsState(
       status: status ?? this.status,
-      userDetails: userDetails ?? this.userDetails,
+      userProfile: userProfile ?? this.userProfile,
       errorMessage: errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [status, userDetails, errorMessage];
+  List<Object?> get props => [status, userProfile, errorMessage];
 }

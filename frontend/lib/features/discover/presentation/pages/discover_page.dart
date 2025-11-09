@@ -2,11 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/features/discover/presentation/widgets/discover_app_bar.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/discover_bloc.dart';
-import '../widgets/discover_header.dart';
-import '../widgets/tech_filter_section.dart';
+import '../widgets/discover_search_bar.dart';
 import '../widgets/discover_tabs.dart';
 import '../widgets/developer_card.dart';
 
@@ -53,28 +53,17 @@ class _DiscoverPageState extends State<DiscoverPage> {
         child: CustomScrollView(
           controller: _scrollController,
           slivers: [
-            // Header with icon, title, and search
-            const DiscoverHeader(),
+            const DiscoverAppBar(),
 
-            // Tech Stack Filter Section
-            const TechFilterSection(),
-
-            // Tabs (AI Picks, Trending, Projects, Events)
+            // Tabs (Projects, Events)
             const DiscoverTabs(),
 
             // AI Recommended Developers Header
             SliverToBoxAdapter(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
                 child: Row(
                   children: [
-                    Text(
-                      'AI Recommended Developers',
-                      style: AppTypography.titleMedium.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const Spacer(),
                     BlocBuilder<DiscoverBloc, DiscoverState>(
                       builder: (context, state) {
                         if (state.selectedTechFilters.isEmpty) {
@@ -90,7 +79,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Text(
-                            'Based on your tech stack',
+                            'Based on your tech stack ${state.selectedTechFilters.join(', ')}',
                             style: AppTypography.bodySmall.copyWith(
                               color: AppColors.primaryGreen,
                               fontSize: 11,

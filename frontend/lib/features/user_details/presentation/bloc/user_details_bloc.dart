@@ -2,7 +2,7 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../domain/entities/user_details_entity.dart';
+import '../../../profile/domain/entities/user_profile_entity.dart';
 import '../../data/datasources/user_details_remote_datasource.dart';
 
 part 'user_details_event.dart';
@@ -17,6 +17,7 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
     on<UserDetailsFollowToggled>(_onFollowToggled);
     on<UserDetailsBlockRequested>(_onBlockRequested);
     on<UserDetailsReportRequested>(_onReportRequested);
+    on<UserDetailsRefreshed>(_onRefreshed);
   }
 
   Future<void> _onLoadRequested(
@@ -26,15 +27,16 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
     emit(state.copyWith(status: UserDetailsStatus.loading));
 
     try {
-      final userDetails = await remoteDataSource.getUserDetails(event.userId);
+      final userProfile = await remoteDataSource.getUserProfile(event.userId);
+
       emit(state.copyWith(
-        status: UserDetailsStatus.success,
-        userDetails: userDetails.toEntity(),
+        status: UserDetailsStatus.loaded,
+        userProfile: userProfile,
       ));
     } catch (e) {
       emit(state.copyWith(
         status: UserDetailsStatus.error,
-        errorMessage: e.toString(),
+        errorMessage: 'Failed to load user profile: ${e.toString()}',
       ));
     }
   }
@@ -43,42 +45,43 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
       UserDetailsFollowToggled event,
       Emitter<UserDetailsState> emit,
       ) async {
-    if (state.userDetails == null) return;
+    if (state.userProfile == null) return;
 
-    final updatedUser = UserDetailsEntity(
-      id: state.userDetails!.id,
-      name: state.userDetails!.name,
-      username: state.userDetails!.username,
-      avatar: state.userDetails!.avatar,
-      coverImage: state.userDetails!.coverImage,
-      bio: state.userDetails!.bio,
-      location: state.userDetails!.location,
-      website: state.userDetails!.website,
-      joinedDate: state.userDetails!.joinedDate,
-      followersCount: state.userDetails!.isFollowing
-          ? state.userDetails!.followersCount - 1
-          : state.userDetails!.followersCount + 1,
-      followingCount: state.userDetails!.followingCount,
-      postsCount: state.userDetails!.postsCount,
-      isFollowing: !state.userDetails!.isFollowing,
-      isOnline: state.userDetails!.isOnline,
-      lastSeen: state.userDetails!.lastSeen,
-      socialLinks: state.userDetails!.socialLinks,
-      techStack: state.userDetails!.techStack,
-      recentPosts: state.userDetails!.recentPosts,
-      stats: state.userDetails!.stats,
-    );
+    final currentUser = state.userProfile!;
+    final isFollowing = currentUser.isFollowing;
 
-    emit(state.copyWith(userDetails: updatedUser));
+    // Optimistically update UI
+    emit(state.copyWith(
+      userProfile: UserProfileEntity(
+        id: currentUser.id,
+        name: currentUser.name,
+        username: currentUser.username,
+        avatar: currentUser.avatar,
+        phone: currentUser.phone,
+        bio: currentUser.bio,
+        followersCount: isFollowing
+            ? currentUser.followersCount - 1
+            : currentUser.followersCount + 1,
+        followingCount: currentUser.followingCount,
+        postsCount: currentUser.postsCount,
+        isFollowing: !isFollowing,
+        socialLinks: currentUser.socialLinks,
+        stats: currentUser.stats,
+        achievements: currentUser.achievements,
+        pinnedProjects: currentUser.pinnedProjects,
+        techStack: currentUser.techStack,
+      ),
+    ));
 
     try {
-      if (updatedUser.isFollowing) {
-        await remoteDataSource.followUser(state.userDetails!.id);
+      if (isFollowing) {
+        await remoteDataSource.unfollowUser(event.userId);
       } else {
-        await remoteDataSource.unfollowUser(state.userDetails!.id);
+        await remoteDataSource.followUser(event.userId);
       }
     } catch (e) {
-      emit(state.copyWith(userDetails: state.userDetails));
+      // Revert on error
+      emit(state.copyWith(userProfile: currentUser));
     }
   }
 
@@ -86,10 +89,10 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
       UserDetailsBlockRequested event,
       Emitter<UserDetailsState> emit,
       ) async {
-    if (state.userDetails == null) return;
+    if (state.userProfile == null) return;
 
     try {
-      await remoteDataSource.blockUser(state.userDetails!.id);
+      await remoteDataSource.blockUser(state.userProfile!.id);
     } catch (e) {
       emit(state.copyWith(
         status: UserDetailsStatus.error,
@@ -102,14 +105,37 @@ class UserDetailsBloc extends Bloc<UserDetailsEvent, UserDetailsState> {
       UserDetailsReportRequested event,
       Emitter<UserDetailsState> emit,
       ) async {
-    if (state.userDetails == null) return;
+    if (state.userProfile == null) return;
 
     try {
-      await remoteDataSource.reportUser(state.userDetails!.id);
+      await remoteDataSource.reportUser(state.userProfile!.id);
     } catch (e) {
       emit(state.copyWith(
         status: UserDetailsStatus.error,
         errorMessage: 'Failed to report user',
+      ));
+    }
+  }
+
+  Future<void> _onRefreshed(
+      UserDetailsRefreshed event,
+      Emitter<UserDetailsState> emit,
+      ) async {
+    if (state.userProfile == null) return;
+
+    try {
+      final userProfile = await remoteDataSource.getUserProfile(
+        state.userProfile!.id,
+      );
+
+      emit(state.copyWith(
+        status: UserDetailsStatus.loaded,
+        userProfile: userProfile,
+      ));
+    } catch (e) {
+      emit(state.copyWith(
+        status: UserDetailsStatus.error,
+        errorMessage: 'Failed to refresh user profile',
       ));
     }
   }

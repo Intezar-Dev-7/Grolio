@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/core/constants/app_assets.dart';
+import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_typography.dart';
-import 'package:frontend/core/widgets/app_bar_logo_icon.dart';
+import 'package:frontend/core/widgets/notification_badge.dart';
+import 'package:frontend/features/notifications/presentation/bloc/notification_bloc.dart';
+import 'package:frontend/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
 class ProfileAppBar extends StatelessWidget {
-  const ProfileAppBar({
-    super.key,
-    required this.widget,
-  });
+  const ProfileAppBar({super.key, required this.widget});
 
   final ProfilePage? widget;
 
@@ -21,80 +23,76 @@ class ProfileAppBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       backgroundColor: AppColors.backgroundDark,
       elevation: 0,
-      leading: widget!.userId != null
-          ? IconButton(
-        icon: const Icon(
-          Icons.arrow_back_ios_new_rounded,
-          color: AppColors.iconColor,
+      centerTitle: false,
+      title: Text(
+        'Profile',
+        style: AppTypography.headlineMedium.copyWith(
+          fontWeight: FontWeight.bold,
         ),
-        onPressed: () => Navigator.pop(context),
-      )
-          : null,
-      title: Row(
-        children: [
-          const AppBarLogoIcon(),
-          const SizedBox(width: 12),
-          Text(
-            'Profile',
-            style: AppTypography.headlineMedium.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
       actions: [
-        IconButton(
-          icon: Image.asset(
-            AppAssets.searchIcon,
-            color: AppColors.iconColor,
-            width: 20,
-            height: 20,
-          ),
-          onPressed: () {},
-        ),
-        Stack(
-          children: [
-            IconButton(
-              icon: Image.asset(
-                AppAssets.notificationIcon,
-                color: AppColors.iconColor,
-                width: 22,
-                height: 22,
-              ),
-              onPressed: () {},
+        InkWell(
+          onTap: (){
+            Navigator.pushNamed(context, AppRouter.notifications);
+          },
+          child: NotificationBadge(
+            child: Image.asset(
+              AppAssets.notificationIcon,
+              height: 22,
+              width: 22,
+              color: AppColors.iconActive,
             ),
-            Positioned(
-              right: 8,
-              top: 6,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                  color: AppColors.error,
-                  shape: BoxShape.circle,
-                ),
-                constraints: const BoxConstraints(
-                  minWidth: 16,
-                  minHeight: 16,
-                ),
-                child: const Center(
-                  child: Text(
-                    '3',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold,
+          ),
+        ),
+        /*BlocBuilder<NotificationBloc, NotificationState>(
+          builder: (context, state) {
+            if (state.unreadCount > 0) {
+              return Stack(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRouter.notifications);
+                    },
+                    icon: Image.asset(
+                      AppAssets.notificationIcon,
+                      width: 24,
+                      height: 24,
+                      color: AppColors.iconActive,
                     ),
                   ),
-                ),
-              ),
-            ),
-          ],
-        ),
+                  Positioned(
+                    right: 0,
+                    top: -6,
+                    child: Container(
+                      padding: const EdgeInsets.all(4),
+                      margin: const EdgeInsets.all(8),
+                      decoration: const BoxDecoration(
+                        color: AppColors.error,
+                        shape: BoxShape.circle,
+                      ),
+                      constraints: const BoxConstraints(
+                        minWidth: 16,
+                        minHeight: 16,
+                      ),
+                      child: Text(
+                        state.unreadCount > 9 ? '9+' : '${state.unreadCount}',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),*/
         IconButton(
-          icon: const Icon(
-            Icons.filter_list,
-            color: AppColors.iconColor,
-          ),
+          icon: const Icon(Icons.more_vert, color: AppColors.iconColor),
           onPressed: () {},
         ),
         const SizedBox(width: 4),

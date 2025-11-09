@@ -1,8 +1,9 @@
 // features/chat/domain/entities/message_entity.dart
 
 import 'package:equatable/equatable.dart';
+import 'package:frontend/features/chat/domain/entities/meeting_info_entity.dart';
 
-enum MessageType { text, code, file, image }
+enum MessageType { text, code, file, image, meeting }
 
 class MessageEntity extends Equatable {
   final String id;
@@ -14,10 +15,12 @@ class MessageEntity extends Equatable {
   final MessageType type;
   final DateTime timestamp;
   final bool isSentByMe;
+  final bool isRead;
   final String? codeLanguage;
   final String? fileName;
   final String? fileSize;
   final String? fileUrl;
+  final MeetingInfo? meetingInfo;
 
   const MessageEntity({
     required this.id,
@@ -29,10 +32,13 @@ class MessageEntity extends Equatable {
     required this.type,
     required this.timestamp,
     required this.isSentByMe,
+    required this.isRead,
     this.codeLanguage,
     this.fileName,
     this.fileSize,
     this.fileUrl,
+    this.meetingInfo,
+
   });
 
   String get formattedTime {
@@ -54,9 +60,12 @@ class MessageEntity extends Equatable {
     type,
     timestamp,
     isSentByMe,
+    isRead,
     codeLanguage,
     fileName,
     fileSize,
     fileUrl,
+    meetingInfo,
+
   ];
 }
