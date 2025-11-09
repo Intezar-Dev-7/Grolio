@@ -111,7 +111,7 @@ class _CreatePostPageState extends State<CreatePostPage> {
                       ),
                     ),
                   )
-                      : Text(
+                      : const Text(
                     'Post',
                     style: TextStyle(
                       color: AppColors.primaryGreen,

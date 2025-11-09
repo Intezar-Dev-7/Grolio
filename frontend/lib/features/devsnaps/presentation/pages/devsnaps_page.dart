@@ -8,7 +8,6 @@ import '../../../../core/theme/app_typography.dart';
 import '../bloc/devsnap_bloc.dart';
 import '../widgets/story_circle.dart';
 import '../widgets/devsnaps_info_card.dart';
-import '../widgets/recent_devsnaps_grid.dart';
 
 class DevSnapsPage extends StatefulWidget {
   const DevSnapsPage({super.key});

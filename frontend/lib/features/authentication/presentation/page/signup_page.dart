@@ -9,7 +9,6 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../../../../core/widgets/loading_overlay.dart';
 import '../bloc/auth_bloc.dart';
-import '../widgets/auth_logo.dart';
 import '../widgets/email_input_field.dart';
 import '../widgets/password_input_field.dart';
 import '../widgets/confirm_password_input_field.dart';
@@ -55,7 +54,6 @@ class SignUpPage extends StatelessWidget {
 
                       // Logo
                       // const AuthLogo(),
-
                       const SizedBox(height: 32),
 
                       // Title
@@ -80,13 +78,14 @@ class SignUpPage extends StatelessWidget {
                       SocialAuthButton(
                         icon: AppAssets.gitHubIcon,
                         label: 'Sign up with GitHub',
-                        onPressed: state.status == AuthStatus.loading
-                            ? null
-                            : () {
-                          context.read<AuthBloc>().add(
-                            const SignInWithGitHubRequested(),
-                          );
-                        },
+                        onPressed:
+                            state.status == AuthStatus.loading
+                                ? null
+                                : () {
+                                  context.read<AuthBloc>().add(
+                                    const SignInWithGitHubRequested(),
+                                  );
+                                },
                       ),
 
                       const SizedBox(height: 16),
@@ -95,13 +94,14 @@ class SignUpPage extends StatelessWidget {
                       SocialAuthButton(
                         icon: AppAssets.mailIcon,
                         label: 'Sign up with Google',
-                        onPressed: state.status == AuthStatus.loading
-                            ? null
-                            : () {
-                          context.read<AuthBloc>().add(
-                            const SignInWithGoogleRequested(),
-                          );
-                        },
+                        onPressed:
+                            state.status == AuthStatus.loading
+                                ? null
+                                : () {
+                                  context.read<AuthBloc>().add(
+                                    const SignInWithGoogleRequested(),
+                                  );
+                                },
                       ),
 
                       const SizedBox(height: 24),
@@ -134,18 +134,19 @@ class SignUpPage extends StatelessWidget {
                       // Create account button
                       PrimaryButton(
                         label: 'Create account',
-                        onPressed: state.isSignUpFormValid &&
-                            state.status != AuthStatus.loading
-                            ? () {
-                          context.read<AuthBloc>().add(
-                            SignUpWithEmailRequested(
-                              email: state.email,
-                              password: state.password,
-                              username: state.username,
-                            ),
-                          );
-                        }
-                            : null,
+                        onPressed:
+                            state.isSignUpFormValid &&
+                                    state.status != AuthStatus.loading
+                                ? () {
+                                  context.read<AuthBloc>().add(
+                                    SignUpWithEmailRequested(
+                                      email: state.email,
+                                      password: state.password,
+                                      username: state.username,
+                                    ),
+                                  );
+                                }
+                                : null,
                       ),
 
                       const SizedBox(height: 24),
@@ -227,7 +228,6 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
 
-
                       const SizedBox(height: 16),
                       const TermsAndPrivacyText(),
                       const SizedBox(height: 40),
@@ -237,8 +237,7 @@ class SignUpPage extends StatelessWidget {
               ),
 
               // Loading overlay
-              if (state.status == AuthStatus.loading)
-                const LoadingOverlay(),
+              if (state.status == AuthStatus.loading) const LoadingOverlay(),
             ],
           );
         },

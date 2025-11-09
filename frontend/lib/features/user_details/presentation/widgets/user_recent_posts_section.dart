@@ -10,10 +10,7 @@ import '../../domain/entities/user_details_entity.dart';
 class UserRecentPostsSection extends StatelessWidget {
   final List<UserPostEntity> posts;
 
-  const UserRecentPostsSection({
-    super.key,
-    required this.posts,
-  });
+  const UserRecentPostsSection({super.key, required this.posts});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +36,7 @@ class UserRecentPostsSection extends StatelessWidget {
                 onPressed: () {
                   // TODO: Navigate to all posts
                 },
-                child: Text(
+                child: const Text(
                   'View All',
                   style: TextStyle(
                     color: AppColors.primaryGreen,
@@ -68,10 +65,7 @@ class UserRecentPostsSection extends StatelessWidget {
 class UserPostCard extends StatelessWidget {
   final UserPostEntity post;
 
-  const UserPostCard({
-    super.key,
-    required this.post,
-  });
+  const UserPostCard({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
@@ -79,10 +73,7 @@ class UserPostCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surfaceDark,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.borderColor,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.borderColor, width: 1),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -92,9 +83,7 @@ class UserPostCard extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Text(
               post.content,
-              style: AppTypography.bodyMedium.copyWith(
-                height: 1.5,
-              ),
+              style: AppTypography.bodyMedium.copyWith(height: 1.5),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
@@ -111,26 +100,28 @@ class UserPostCard extends StatelessWidget {
                 height: 200,
                 width: double.infinity,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => Container(
-                  height: 200,
-                  color: AppColors.borderColor,
-                  child: const Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.primaryGreen,
+                placeholder:
+                    (context, url) => Container(
+                      height: 200,
+                      color: AppColors.borderColor,
+                      child: const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            AppColors.primaryGreen,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  height: 200,
-                  color: AppColors.borderColor,
-                  child: const Icon(
-                    Icons.broken_image_outlined,
-                    color: AppColors.iconColor,
-                    size: 48,
-                  ),
-                ),
+                errorWidget:
+                    (context, url, error) => Container(
+                      height: 200,
+                      color: AppColors.borderColor,
+                      child: const Icon(
+                        Icons.broken_image_outlined,
+                        color: AppColors.iconColor,
+                        size: 48,
+                      ),
+                    ),
               ),
             ),
 
@@ -139,7 +130,7 @@ class UserPostCard extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             child: Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.favorite_border,
                   size: 18,
                   color: AppColors.iconColor,
@@ -152,7 +143,7 @@ class UserPostCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 16),
-                Icon(
+                const Icon(
                   Icons.chat_bubble_outline,
                   size: 18,
                   color: AppColors.iconColor,

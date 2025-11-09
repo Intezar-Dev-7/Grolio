@@ -22,33 +22,22 @@ class ChatInputBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.surfaceDark,
-        border: Border(
-          top: BorderSide(
-            color: AppColors.borderColor,
-            width: 1,
-          ),
-        ),
+        border: Border(top: BorderSide(color: AppColors.borderColor, width: 1)),
       ),
       child: SafeArea(
         child: Row(
           children: [
             // Attachment button
             IconButton(
-              icon: const Icon(
-                Icons.attach_file,
-                color: AppColors.iconColor,
-              ),
+              icon: const Icon(Icons.attach_file, color: AppColors.iconColor),
               onPressed: onAttach,
             ),
 
             // Code snippet button
             IconButton(
-              icon: const Icon(
-                Icons.code,
-                color: AppColors.iconColor,
-              ),
+              icon: const Icon(Icons.code, color: AppColors.iconColor),
               onPressed: onCodeSnippet,
             ),
 
@@ -58,10 +47,7 @@ class ChatInputBar extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: AppColors.backgroundDark,
                   borderRadius: BorderRadius.circular(24),
-                  border: Border.all(
-                    color: AppColors.borderColor,
-                    width: 1,
-                  ),
+                  border: Border.all(color: AppColors.borderColor, width: 1),
                 ),
                 child: Row(
                   children: [
@@ -112,15 +98,11 @@ class ChatInputBar extends StatelessWidget {
               child: Container(
                 width: 44,
                 height: 44,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: AppColors.primaryButtonGradient,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.send,
-                  color: Colors.white,
-                  size: 20,
-                ),
+                child: const Icon(Icons.send, color: Colors.white, size: 20),
               ),
             ),
           ],

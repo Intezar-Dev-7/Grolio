@@ -1,6 +1,5 @@
 // features/discover/data/datasources/discover_remote_datasource.dart
 
-import 'package:dio/dio.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/dio_client.dart';
 import '../models/developer_model.dart';

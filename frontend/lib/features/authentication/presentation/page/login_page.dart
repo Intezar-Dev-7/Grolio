@@ -4,7 +4,6 @@ import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/widgets/loading_overlay.dart';
 import 'package:frontend/features/authentication/presentation/bloc/auth_bloc.dart';
-import 'package:frontend/features/authentication/presentation/widgets/auth_logo.dart';
 import 'package:frontend/features/authentication/presentation/widgets/divider_with_text.dart';
 import 'package:frontend/features/authentication/presentation/widgets/email_input_field.dart';
 import 'package:frontend/features/authentication/presentation/widgets/password_input_field.dart';

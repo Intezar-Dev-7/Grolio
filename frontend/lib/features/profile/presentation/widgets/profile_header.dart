@@ -32,19 +32,21 @@ class ProfileHeader extends StatelessWidget {
               CircleAvatar(
                 radius: 40,
                 backgroundColor: AppColors.primaryGreen.withOpacity(0.2),
-                backgroundImage: profile.avatar != null
-                    ? CachedNetworkImageProvider(profile.avatar!)
-                    : null,
-                child: profile.avatar == null
-                    ? Text(
-                  profile.name[0].toUpperCase(),
-                  style: const TextStyle(
-                    color: AppColors.primaryGreen,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 32,
-                  ),
-                )
-                    : null,
+                backgroundImage:
+                    profile.avatar != null
+                        ? CachedNetworkImageProvider(profile.avatar!)
+                        : null,
+                child:
+                    profile.avatar == null
+                        ? Text(
+                          profile.name[0].toUpperCase(),
+                          style: const TextStyle(
+                            color: AppColors.primaryGreen,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32,
+                          ),
+                        )
+                        : null,
               ),
 
               const SizedBox(width: 16),
@@ -96,53 +98,52 @@ class ProfileHeader extends StatelessWidget {
               // Follow/Edit button
               isOwnProfile
                   ? Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  gradient: AppColors.primaryButtonGradient,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              )
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    decoration: BoxDecoration(
+                      gradient: AppColors.primaryButtonGradient,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: const Icon(Icons.add, color: Colors.white, size: 20),
+                  )
                   : Container(
-                decoration: BoxDecoration(
-                  color: profile.isFollowing
-                      ? AppColors.surfaceDark
-                      : AppColors.primaryGreen,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: profile.isFollowing
-                        ? AppColors.borderColor
-                        : AppColors.primaryGreen,
-                  ),
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: onFollowTap,
-                    borderRadius: BorderRadius.circular(8),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
+                    decoration: BoxDecoration(
+                      color:
+                          profile.isFollowing
+                              ? AppColors.surfaceDark
+                              : AppColors.primaryGreen,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color:
+                            profile.isFollowing
+                                ? AppColors.borderColor
+                                : AppColors.primaryGreen,
                       ),
-                      child: Icon(
-                        profile.isFollowing ? Icons.check : Icons.add,
-                        color: profile.isFollowing
-                            ? AppColors.textPrimary
-                            : Colors.white,
-                        size: 20,
+                    ),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: onFollowTap,
+                        borderRadius: BorderRadius.circular(8),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          child: Icon(
+                            profile.isFollowing ? Icons.check : Icons.add,
+                            color:
+                                profile.isFollowing
+                                    ? AppColors.textPrimary
+                                    : Colors.white,
+                            size: 20,
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ),
             ],
           ),
 
@@ -151,9 +152,7 @@ class ProfileHeader extends StatelessWidget {
           // Bio
           Text(
             profile.bio,
-            style: AppTypography.bodyMedium.copyWith(
-              height: 1.5,
-            ),
+            style: AppTypography.bodyMedium.copyWith(height: 1.5),
           ),
 
           const SizedBox(height: 16),
@@ -186,18 +185,12 @@ class ProfileHeader extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: AppColors.surfaceDark,
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: AppColors.borderColor,
-                          ),
+                          border: Border.all(color: AppColors.borderColor),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Icon(
-                              icon,
-                              size: 16,
-                              color: AppColors.primaryGreen,
-                            ),
+                            Icon(icon, size: 16, color: AppColors.primaryGreen),
                             const SizedBox(width: 6),
                             Text(
                               link.contains('github')
@@ -215,7 +208,7 @@ class ProfileHeader extends StatelessWidget {
                       ),
                     ),
                   );
-                }).toList(),
+                }),
             ],
           ),
         ],

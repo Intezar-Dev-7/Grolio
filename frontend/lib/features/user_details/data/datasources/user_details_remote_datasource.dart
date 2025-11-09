@@ -1,6 +1,5 @@
 // features/user_details/data/datasources/user_details_remote_datasource.dart
 
-import 'package:dio/dio.dart';
 import 'package:frontend/config/api_endpoints.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/dio_client.dart';
@@ -30,7 +29,8 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
       username: '@jordanlee',
       avatar: 'https://i.pravatar.cc/150?u=jordan',
       coverImage: 'https://picsum.photos/seed/cover$userId/1200/400',
-      bio: 'Full-stack developer passionate about building scalable web applications. Open source contributor. Always learning new technologies.',
+      bio:
+          'Full-stack developer passionate about building scalable web applications. Open source contributor. Always learning new technologies.',
       location: 'San Francisco, CA',
       website: 'https://jordanlee.dev',
       joinedDate: DateTime.now().subtract(const Duration(days: 547)),
@@ -58,7 +58,8 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
       recentPosts: [
         UserPostModel(
           id: 'post_1',
-          content: 'Just deployed a new microservices architecture using Docker and Kubernetes. The scalability improvements are impressive! 🚀',
+          content:
+              'Just deployed a new microservices architecture using Docker and Kubernetes. The scalability improvements are impressive! 🚀',
           imageUrl: 'https://picsum.photos/seed/post1/800/400',
           likes: 234,
           comments: 45,
@@ -66,7 +67,8 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
         ),
         UserPostModel(
           id: 'post_2',
-          content: 'Working on a new open source project for developer productivity tools. Check it out on GitHub!',
+          content:
+              'Working on a new open source project for developer productivity tools. Check it out on GitHub!',
           imageUrl: null,
           likes: 189,
           comments: 32,
@@ -74,7 +76,8 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
         ),
         UserPostModel(
           id: 'post_3',
-          content: 'Built a real-time chat application with WebSockets. The performance is amazing! Here\'s what I learned...',
+          content:
+              'Built a real-time chat application with WebSockets. The performance is amazing! Here\'s what I learned...',
           imageUrl: 'https://picsum.photos/seed/post3/800/400',
           likes: 312,
           comments: 67,
@@ -92,9 +95,7 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
   @override
   Future<void> followUser(String userId) async {
     try {
-      final response = await dioClient.post(
-        ApiEndpoints.followUser(userId),
-      );
+      final response = await dioClient.post(ApiEndpoints.followUser(userId));
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw ServerException(message: 'Failed to follow user');
       }
@@ -106,9 +107,7 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
   @override
   Future<void> unfollowUser(String userId) async {
     try {
-      final response = await dioClient.post(
-        ApiEndpoints.unfollowUser(userId),
-      );
+      final response = await dioClient.post(ApiEndpoints.unfollowUser(userId));
       if (response.statusCode != 200 && response.statusCode != 204) {
         throw ServerException(message: 'Failed to unfollow user');
       }
@@ -120,9 +119,7 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
   @override
   Future<void> blockUser(String userId) async {
     try {
-      final response = await dioClient.post(
-        ApiEndpoints.blockUser(userId),
-      );
+      final response = await dioClient.post(ApiEndpoints.blockUser(userId));
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw ServerException(message: 'Failed to block user');
       }
@@ -134,9 +131,7 @@ class UserDetailsRemoteDataSourceImpl implements UserDetailsRemoteDataSource {
   @override
   Future<void> reportUser(String userId) async {
     try {
-      final response = await dioClient.post(
-        ApiEndpoints.reportUser(userId),
-      );
+      final response = await dioClient.post(ApiEndpoints.reportUser(userId));
       if (response.statusCode != 200 && response.statusCode != 201) {
         throw ServerException(message: 'Failed to report user');
       }
