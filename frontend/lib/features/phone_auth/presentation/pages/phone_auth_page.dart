@@ -35,8 +35,8 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  OtpVerificationPage(
+              builder:
+                  (context) => OtpVerificationPage(
                     phoneNumber: _phoneController.text,
                     countryCode: _selectedCountryCode,
                   ),
@@ -82,11 +82,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                     borderRadius: BorderRadius.circular(20),
                     gradient: AppColors.logoGradient,
                   ),
-                  child: const Icon(
-                    Icons.code,
-                    color: Colors.white,
-                    size: 40,
-                  ),
+                  child: const Icon(Icons.code, color: Colors.white, size: 40),
                 ),
 
                 const SizedBox(height: 24),
@@ -186,18 +182,19 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                       width: double.infinity,
                       height: 56,
                       child: ElevatedButton(
-                        onPressed: state.status == PhoneAuthStatus.sendingOtp
-                            ? null
-                            : () {
-                          if (_phoneController.text.length >= 10) {
-                            context.read<PhoneAuthBloc>().add(
-                              PhoneAuthOtpRequested(
-                                phoneNumber: _phoneController.text,
-                                countryCode: _selectedCountryCode,
-                              ),
-                            );
-                          }
-                        },
+                        onPressed:
+                            state.status == PhoneAuthStatus.sendingOtp
+                                ? null
+                                : () {
+                                  if (_phoneController.text.length >= 10) {
+                                    context.read<PhoneAuthBloc>().add(
+                                      PhoneAuthOtpRequested(
+                                        phoneNumber: _phoneController.text,
+                                        countryCode: _selectedCountryCode,
+                                      ),
+                                    );
+                                  }
+                                },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryGreen,
                           shape: RoundedRectangleBorder(
@@ -205,24 +202,25 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                           ),
                           elevation: 0,
                         ),
-                        child: state.status == PhoneAuthStatus.sendingOtp
-                            ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.white,
-                            ),
-                          ),
-                        )
-                            : Text(
-                          'Continue',
-                          style: AppTypography.bodyLarge.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
+                        child:
+                            state.status == PhoneAuthStatus.sendingOtp
+                                ? const SizedBox(
+                                  width: 24,
+                                  height: 24,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white,
+                                    ),
+                                  ),
+                                )
+                                : Text(
+                                  'Continue',
+                                  style: AppTypography.bodyLarge.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
                       ),
                     );
                   },
@@ -233,7 +231,9 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                 // Divider
                 Row(
                   children: [
-                    const Expanded(child: Divider(color: AppColors.borderColor)),
+                    const Expanded(
+                      child: Divider(color: AppColors.borderColor),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Text(
@@ -243,7 +243,9 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                         ),
                       ),
                     ),
-                    const Expanded(child: Divider(color: AppColors.borderColor)),
+                    const Expanded(
+                      child: Divider(color: AppColors.borderColor),
+                    ),
                   ],
                 ),
 
@@ -262,7 +264,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                     style: AppTypography.bodySmall.copyWith(
                       color: AppColors.textSecondary,
                     ),
-                    children: [
+                    children: const [
                       TextSpan(
                         text: 'Terms',
                         style: TextStyle(
@@ -270,7 +272,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const TextSpan(text: ' & '),
+                      TextSpan(text: ' & '),
                       TextSpan(
                         text: 'Privacy Policy',
                         style: TextStyle(

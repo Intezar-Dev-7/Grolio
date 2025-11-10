@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/core/theme/app_colors.dart';
 import 'package:frontend/core/theme/app_typography.dart';
 import 'package:frontend/core/widgets/notification_badge.dart';
-import 'package:frontend/features/notifications/presentation/bloc/notification_bloc.dart';
-import 'package:frontend/features/notifications/presentation/pages/notifications_page.dart';
 import 'package:frontend/features/profile/presentation/pages/profile_page.dart';
 
 class ProfileAppBar extends StatelessWidget {
@@ -32,7 +28,7 @@ class ProfileAppBar extends StatelessWidget {
       ),
       actions: [
         InkWell(
-          onTap: (){
+          onTap: () {
             Navigator.pushNamed(context, AppRouter.notifications);
           },
           child: NotificationBadge(

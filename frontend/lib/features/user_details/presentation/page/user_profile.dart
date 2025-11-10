@@ -136,7 +136,7 @@ class _UserProfileState extends State<UserProfile> {
 
                     // Phone Number (or username)
                     Text(
-                      '${profile.username}', // or use actual phone
+                      profile.username, // or use actual phone
                       style: AppTypography.bodyMedium.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -355,7 +355,7 @@ class _UserProfileState extends State<UserProfile> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(
+                child: const Text(
                   'Cancel',
                   style: TextStyle(color: AppColors.textSecondary),
                 ),
@@ -371,7 +371,7 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   );
                 },
-                child: Text(
+                child: const Text(
                   'Add',
                   style: TextStyle(
                     color: AppColors.primaryGreen,
@@ -525,7 +525,7 @@ class _UserProfileState extends State<UserProfile> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(
+                child: const Text(
                   'Cancel',
                   style: TextStyle(color: AppColors.textSecondary),
                 ),
@@ -545,7 +545,7 @@ class _UserProfileState extends State<UserProfile> {
                     ),
                   );
                 },
-                child: Text(
+                child: const Text(
                   'Block',
                   style: TextStyle(
                     color: AppColors.error,
@@ -613,7 +613,7 @@ class _UserProfileState extends State<UserProfile> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text(
+                child: const Text(
                   'Cancel',
                   style: TextStyle(color: AppColors.textSecondary),
                 ),

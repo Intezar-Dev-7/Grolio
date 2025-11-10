@@ -21,10 +21,7 @@ import '../widgets/chat_input_bar.dart';
 class ChatConversationPage extends StatefulWidget {
   final ConversationEntity conversation;
 
-  const ChatConversationPage({
-    super.key,
-    required this.conversation,
-  });
+  const ChatConversationPage({super.key, required this.conversation});
 
   @override
   State<ChatConversationPage> createState() => _ChatConversationPageState();
@@ -74,32 +71,33 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                    create: (context) => GroupDetailsBloc(
-                      remoteDataSource: di.sl<GroupRemoteDataSource>(),
-                    ),
-                    child: GroupDetailsPage(
-                      groupId: 'group_003',
-                    ),
-                  ),
+                  builder:
+                      (context) => BlocProvider(
+                        create:
+                            (context) => GroupDetailsBloc(
+                              remoteDataSource: di.sl<GroupRemoteDataSource>(),
+                            ),
+                        child: const GroupDetailsPage(groupId: 'group_003'),
+                      ),
                 ),
               );
-            }else{
+            } else {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => BlocProvider(
-                    create: (context) => UserDetailsBloc(
-                      remoteDataSource: di.sl<UserDetailsRemoteDataSource>(),
-                    ),
-                    child: UserProfile(
-                      userId: widget.conversation.userId,
-                    ),
-                  ),
+                  builder:
+                      (context) => BlocProvider(
+                        create:
+                            (context) => UserDetailsBloc(
+                              remoteDataSource:
+                                  di.sl<UserDetailsRemoteDataSource>(),
+                            ),
+                        child: UserProfile(userId: widget.conversation.userId),
+                      ),
                 ),
               );
             }
-            },
+          },
           child: Row(
             children: [
               InkWell(
@@ -111,31 +109,32 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                   color: AppColors.iconColor,
                 ),
               ),
-              const SizedBox(
-                width: 8,
-              ),
+              const SizedBox(width: 8),
               Stack(
                 children: [
                   CircleAvatar(
                     radius: 20,
-                    backgroundColor: widget.conversation.isGroup
-                        ? AppColors.primaryBlue.withOpacity(0.2)
-                        : AppColors.primaryGreen.withOpacity(0.2),
-                    child: widget.conversation.isGroup
-                        ? const Icon(
-                      Icons.group,
-                      color: AppColors.primaryBlue,
-                      size: 20,
-                    )
-                        : Text(
-                      widget.conversation.userName[0].toUpperCase(),
-                      style: const TextStyle(
-                        color: AppColors.primaryGreen,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    backgroundColor:
+                        widget.conversation.isGroup
+                            ? AppColors.primaryBlue.withOpacity(0.2)
+                            : AppColors.primaryGreen.withOpacity(0.2),
+                    child:
+                        widget.conversation.isGroup
+                            ? const Icon(
+                              Icons.group,
+                              color: AppColors.primaryBlue,
+                              size: 20,
+                            )
+                            : Text(
+                              widget.conversation.userName[0].toUpperCase(),
+                              style: const TextStyle(
+                                color: AppColors.primaryGreen,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                   ),
-                  if (widget.conversation.isOnline && !widget.conversation.isGroup)
+                  if (widget.conversation.isOnline &&
+                      !widget.conversation.isGroup)
                     Positioned(
                       right: 0,
                       bottom: 0,
@@ -168,9 +167,10 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                     Text(
                       widget.conversation.isOnline ? 'Active now' : 'Offline',
                       style: AppTypography.bodySmall.copyWith(
-                        color: widget.conversation.isOnline
-                            ? AppColors.success
-                            : AppColors.textSecondary,
+                        color:
+                            widget.conversation.isOnline
+                                ? AppColors.success
+                                : AppColors.textSecondary,
                         fontSize: 12,
                       ),
                     ),
@@ -204,60 +204,58 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
             color: AppColors.surfaceDark,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
-              side: const BorderSide(
-                color: AppColors.borderColor,
-                width: 1,
-              ),
+              side: const BorderSide(color: AppColors.borderColor, width: 1),
             ),
             offset: const Offset(0, 50),
-            itemBuilder: (context) => [
-              _buildPopupMenuItem(
-                value: 'search',
-                icon: Icons.search,
-                label: 'Search',
-              ),
-              _buildPopupMenuItem(
-                value: 'pin',
-                icon: Icons.push_pin_outlined,
-                label: 'Pin',
-              ),
-              _buildPopupMenuItem(
-                value: 'meeting',
-                icon: Icons.video_call_outlined,
-                label: 'Schedule meeting',
-              ),
-              _buildPopupMenuItem(
-                value: 'mute',
-                icon: Icons.notifications_off_outlined,
-                label: 'Mute',
-              ),
-              _buildPopupMenuItem(
-                value: 'background',
-                icon: Icons.image_outlined,
-                label: 'Chat background',
-              ),
-              const PopupMenuDivider(height: 1),
-              PopupMenuItem<String>(
-                value: 'clear',
-                height: 48,
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.delete_outline,
-                      color: AppColors.error,
-                      size: 20,
+            itemBuilder:
+                (context) => [
+                  _buildPopupMenuItem(
+                    value: 'search',
+                    icon: Icons.search,
+                    label: 'Search',
+                  ),
+                  _buildPopupMenuItem(
+                    value: 'pin',
+                    icon: Icons.push_pin_outlined,
+                    label: 'Pin',
+                  ),
+                  _buildPopupMenuItem(
+                    value: 'meeting',
+                    icon: Icons.video_call_outlined,
+                    label: 'Schedule meeting',
+                  ),
+                  _buildPopupMenuItem(
+                    value: 'mute',
+                    icon: Icons.notifications_off_outlined,
+                    label: 'Mute',
+                  ),
+                  _buildPopupMenuItem(
+                    value: 'background',
+                    icon: Icons.image_outlined,
+                    label: 'Chat background',
+                  ),
+                  const PopupMenuDivider(height: 1),
+                  PopupMenuItem<String>(
+                    value: 'clear',
+                    height: 48,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.delete_outline,
+                          color: AppColors.error,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 12),
+                        Text(
+                          'Clear chat',
+                          style: AppTypography.bodyMedium.copyWith(
+                            color: AppColors.error,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 12),
-                    Text(
-                      'Clear chat',
-                      style: AppTypography.bodyMedium.copyWith(
-                        color: AppColors.error,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                ],
             onSelected: (value) {
               _handleMenuAction(value);
             },
@@ -285,9 +283,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                   return const Center(
                     child: Text(
                       'No messages yet',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                      ),
+                      style: TextStyle(color: AppColors.textSecondary),
                     ),
                   );
                 }
@@ -303,7 +299,8 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
                   itemCount: state.messages.length,
                   itemBuilder: (context, index) {
                     final message = state.messages[index];
-                    final showAvatar = index == state.messages.length - 1 ||
+                    final showAvatar =
+                        index == state.messages.length - 1 ||
                         state.messages[index + 1].senderId != message.senderId;
 
                     return MessageBubble(
@@ -344,6 +341,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
       ),
     );
   }
+
   PopupMenuItem<String> _buildPopupMenuItem({
     required String value,
     required IconData icon,
@@ -354,11 +352,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
       height: 48,
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: AppColors.iconColor,
-            size: 20,
-          ),
+          Icon(icon, color: AppColors.iconColor, size: 20),
           const SizedBox(width: 12),
           Text(
             label,
@@ -371,7 +365,7 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
     );
   }
 
-// ✅ ADD THIS METHOD - Handle menu actions
+  // ✅ ADD THIS METHOD - Handle menu actions
   void _handleMenuAction(String action) {
     switch (action) {
       case 'search':
@@ -398,68 +392,69 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
   void _showSearchDialog() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Text(
-          'Search Messages',
-          style: AppTypography.titleMedium.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: TextField(
-          autofocus: true,
-          style: AppTypography.bodyMedium,
-          decoration: InputDecoration(
-            hintText: 'Search in conversation...',
-            hintStyle: AppTypography.bodyMedium.copyWith(
-              color: AppColors.textTertiary,
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-            prefixIcon: const Icon(
-              Icons.search,
-              color: AppColors.iconColor,
-            ),
-            filled: true,
-            fillColor: AppColors.backgroundDark,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.borderColor,
-                width: 1,
+            title: Text(
+              'Search Messages',
+              style: AppTypography.titleMedium.copyWith(
+                fontWeight: FontWeight.bold,
               ),
             ),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.borderColor,
-                width: 1,
+            content: TextField(
+              autofocus: true,
+              style: AppTypography.bodyMedium,
+              decoration: InputDecoration(
+                hintText: 'Search in conversation...',
+                hintStyle: AppTypography.bodyMedium.copyWith(
+                  color: AppColors.textTertiary,
+                ),
+                prefixIcon: const Icon(
+                  Icons.search,
+                  color: AppColors.iconColor,
+                ),
+                filled: true,
+                fillColor: AppColors.backgroundDark,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: AppColors.borderColor,
+                    width: 1,
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: AppColors.borderColor,
+                    width: 1,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: const BorderSide(
+                    color: AppColors.primaryGreen,
+                    width: 1,
+                  ),
+                ),
               ),
+              onChanged: (query) {
+                // TODO: Implement search logic
+                print('Searching for: $query');
+              },
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: AppColors.primaryGreen,
-                width: 1,
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
               ),
-            ),
+            ],
           ),
-          onChanged: (query) {
-            // TODO: Implement search logic
-            print('Searching for: $query');
-          },
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
@@ -567,9 +562,10 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
 
   void _muteFor(Duration? duration) {
     // TODO: Implement mute logic with backend
-    final message = duration != null
-        ? 'Muted for ${duration.inHours} hours'
-        : 'Muted until you unmute';
+    final message =
+        duration != null
+            ? 'Muted for ${duration.inHours} hours'
+            : 'Muted until you unmute';
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -984,73 +980,74 @@ class _ChatConversationPageState extends State<ChatConversationPage> {
   void _clearChat() {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: AppColors.error.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Icon(
-                Icons.delete_outline,
-                color: AppColors.error,
-                size: 20,
-              ),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-            const SizedBox(width: 12),
-            Text(
-              'Clear Chat',
-              style: AppTypography.titleMedium.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        content: Text(
-          'Are you sure you want to clear all messages in this conversation? This action cannot be undone.',
-          style: AppTypography.bodyMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-
-              // TODO: Implement clear chat with backend
-              // context.read<ChatBloc>().add(ChatMessagesCleared(widget.conversation.id));
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Chat cleared successfully'),
-                  backgroundColor: AppColors.success,
-                  duration: Duration(seconds: 2),
+            title: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.error,
+                    size: 20,
+                  ),
                 ),
-              );
-            },
-            child: const Text(
-              'Clear',
-              style: TextStyle(
-                color: AppColors.error,
-                fontWeight: FontWeight.w600,
+                const SizedBox(width: 12),
+                Text(
+                  'Clear Chat',
+                  style: AppTypography.titleMedium.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            content: Text(
+              'Are you sure you want to clear all messages in this conversation? This action cannot be undone.',
+              style: AppTypography.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
               ),
             ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+
+                  // TODO: Implement clear chat with backend
+                  // context.read<ChatBloc>().add(ChatMessagesCleared(widget.conversation.id));
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Chat cleared successfully'),
+                      backgroundColor: AppColors.success,
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Clear',
+                  style: TextStyle(
+                    color: AppColors.error,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }

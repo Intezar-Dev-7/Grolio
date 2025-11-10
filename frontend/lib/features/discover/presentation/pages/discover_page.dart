@@ -6,7 +6,6 @@ import 'package:frontend/features/discover/presentation/widgets/discover_app_bar
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/discover_bloc.dart';
-import '../widgets/discover_search_bar.dart';
 import '../widgets/discover_tabs.dart';
 import '../widgets/developer_card.dart';
 
@@ -129,9 +128,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           const SizedBox(height: 16),
                           ElevatedButton(
                             onPressed: () {
-                              context
-                                  .read<DiscoverBloc>()
-                                  .add(const DiscoverLoadRequested());
+                              context.read<DiscoverBloc>().add(
+                                const DiscoverLoadRequested(),
+                              );
                             },
                             child: const Text('Retry'),
                           ),
@@ -170,7 +169,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   sliver: SliverList(
                     delegate: SliverChildBuilderDelegate(
-                          (context, index) {
+                      (context, index) {
                         if (index == state.developers.length) {
                           if (state.status == DiscoverStatus.loadingMore) {
                             return const Padding(
@@ -201,9 +200,10 @@ class _DiscoverPageState extends State<DiscoverPage> {
                           ),
                         );
                       },
-                      childCount: state.status == DiscoverStatus.loadingMore
-                          ? state.developers.length + 1
-                          : state.developers.length + 1,
+                      childCount:
+                          state.status == DiscoverStatus.loadingMore
+                              ? state.developers.length + 1
+                              : state.developers.length + 1,
                     ),
                   ),
                 );

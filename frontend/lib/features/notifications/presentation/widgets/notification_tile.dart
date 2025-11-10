@@ -35,51 +35,51 @@ class NotificationTile extends StatelessWidget {
             ],
           ),
         ),
-        child: const Icon(
-          Icons.delete_outline,
-          color: Colors.white,
-          size: 28,
-        ),
+        child: const Icon(Icons.delete_outline, color: Colors.white, size: 28),
       ),
       confirmDismiss: (direction) async {
         return await showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            backgroundColor: AppColors.surfaceDark,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            title: const Text('Delete Notification'),
-            content: const Text('Are you sure you want to delete this notification?'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: Text(
-                  'Cancel',
-                  style: TextStyle(color: AppColors.textSecondary),
+          builder:
+              (context) => AlertDialog(
+                backgroundColor: AppColors.surfaceDark,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, true),
-                child: Text(
-                  'Delete',
-                  style: TextStyle(
-                    color: AppColors.error,
-                    fontWeight: FontWeight.w600,
+                title: const Text('Delete Notification'),
+                content: const Text(
+                  'Are you sure you want to delete this notification?',
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(color: AppColors.textSecondary),
+                    ),
                   ),
-                ),
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, true),
+                    child: const Text(
+                      'Delete',
+                      style: TextStyle(
+                        color: AppColors.error,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
         );
       },
       onDismissed: (direction) => onDismiss(),
       child: InkWell(
         onTap: onTap,
         child: Container(
-          color: notification.isRead
-              ? Colors.transparent
-              : AppColors.primaryGreen.withOpacity(0.05),
+          color:
+              notification.isRead
+                  ? Colors.transparent
+                  : AppColors.primaryGreen.withOpacity(0.05),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,9 +97,10 @@ class NotificationTile extends StatelessWidget {
                     Text(
                       notification.message,
                       style: AppTypography.bodyMedium.copyWith(
-                        fontWeight: notification.isRead
-                            ? FontWeight.normal
-                            : FontWeight.w600,
+                        fontWeight:
+                            notification.isRead
+                                ? FontWeight.normal
+                                : FontWeight.w600,
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -129,28 +130,30 @@ class NotificationTile extends StatelessWidget {
                     width: 56,
                     height: 56,
                     fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: AppColors.borderColor,
-                      child: const Center(
-                        child: SizedBox(
-                          width: 20,
-                          height: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              AppColors.primaryGreen,
+                    placeholder:
+                        (context, url) => Container(
+                          color: AppColors.borderColor,
+                          child: const Center(
+                            child: SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  AppColors.primaryGreen,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Container(
-                      color: AppColors.borderColor,
-                      child: const Icon(
-                        Icons.image,
-                        color: AppColors.iconColor,
-                      ),
-                    ),
+                    errorWidget:
+                        (context, url, error) => Container(
+                          color: AppColors.borderColor,
+                          child: const Icon(
+                            Icons.image,
+                            color: AppColors.iconColor,
+                          ),
+                        ),
                   ),
                 ),
 
@@ -228,11 +231,7 @@ class NotificationTile extends StatelessWidget {
         color: backgroundColor.withOpacity(0.15),
         shape: BoxShape.circle,
       ),
-      child: Icon(
-        icon,
-        color: backgroundColor,
-        size: 24,
-      ),
+      child: Icon(icon, color: backgroundColor, size: 24),
     );
   }
 }

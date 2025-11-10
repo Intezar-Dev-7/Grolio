@@ -7,10 +7,7 @@ import '../../../../core/theme/app_typography.dart';
 class EmptyNotifications extends StatelessWidget {
   final String? message;
 
-  const EmptyNotifications({
-    super.key,
-    this.message,
-  });
+  const EmptyNotifications({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +17,7 @@ class EmptyNotifications extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(32),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.surfaceDark,
               shape: BoxShape.circle,
             ),

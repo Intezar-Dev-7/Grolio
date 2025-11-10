@@ -7,10 +7,7 @@ import '../../../../core/theme/app_typography.dart';
 class SocialLinksInput extends StatelessWidget {
   final Map<String, TextEditingController> controllers;
 
-  const SocialLinksInput({
-    super.key,
-    required this.controllers,
-  });
+  const SocialLinksInput({super.key, required this.controllers});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +16,7 @@ class SocialLinksInput extends StatelessWidget {
       children: [
         Text(
           'Social Links',
-          style: AppTypography.bodyMedium.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 12),
 
@@ -37,7 +32,7 @@ class SocialLinksInput extends StatelessWidget {
         // LinkedIn
         _buildSocialInput(
           icon: Icons.work_outline,
-          iconColor: Color(0xFF0077B5),
+          iconColor: const Color(0xFF0077B5),
           controller: controllers['linkedin']!,
           hint: 'linkedin.com/in/username',
         ),
@@ -46,7 +41,7 @@ class SocialLinksInput extends StatelessWidget {
         // Twitter
         _buildSocialInput(
           icon: Icons.tag,
-          iconColor: Color(0xFF1DA1F2),
+          iconColor: const Color(0xFF1DA1F2),
           controller: controllers['twitter']!,
           hint: 'twitter.com/username',
         ),
@@ -55,7 +50,7 @@ class SocialLinksInput extends StatelessWidget {
         // Instagram
         _buildSocialInput(
           icon: Icons.camera_alt_outlined,
-          iconColor: Color(0xFFE4405F),
+          iconColor: const Color(0xFFE4405F),
           controller: controllers['instagram']!,
           hint: 'instagram.com/username',
         ),
@@ -82,10 +77,7 @@ class SocialLinksInput extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surfaceDark,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.borderColor,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.borderColor, width: 1),
       ),
       child: Row(
         children: [
@@ -99,11 +91,7 @@ class SocialLinksInput extends StatelessWidget {
                 bottomLeft: Radius.circular(12),
               ),
             ),
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: 20,
-            ),
+            child: Icon(icon, color: iconColor, size: 20),
           ),
           Expanded(
             child: TextField(

@@ -1,6 +1,5 @@
 // features/groups/data/datasources/group_remote_datasource.dart
 
-import 'package:dio/dio.dart';
 import 'package:frontend/config/api_endpoints.dart';
 import 'package:frontend/features/groups/data/model/group_model.dart';
 import '../../../../core/error/exceptions.dart';
@@ -23,7 +22,7 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
 
   GroupRemoteDataSourceImpl({required this.dioClient});
 
-/*  @override
+  /*  @override
   Future<GroupEntity> getGroupDetails(String groupId) async {
     try {
       final response = await dioClient.get(
@@ -108,9 +107,7 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   @override
   Future<void> exitGroup(String groupId) async {
     try {
-      final response = await dioClient.post(
-        ApiEndpoints.exitGroup(groupId),
-      );
+      final response = await dioClient.post(ApiEndpoints.exitGroup(groupId));
 
       if (response.statusCode != 200 && response.statusCode != 204) {
         throw ServerException(message: 'Failed to exit group');
@@ -201,7 +198,7 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
     }
   }
 
-/*  @override
+  /*  @override
   Future<List<Map<String, dynamic>>> getGroupMedia(String groupId) async {
     try {
       final response = await dioClient.get(
@@ -222,7 +219,8 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
   final mockGroupData = {
     "id": "group_001",
     "name": "M-13 BCA IV Sem Statistics 2024-25",
-    "description": "A collaborative group for BCA students studying Advanced Statistics. Here we share notes, doubts, and discussion materials.",
+    "description":
+        "A collaborative group for BCA students studying Advanced Statistics. Here we share notes, doubts, and discussion materials.",
     "avatar": "https://via.placeholder.com/150/0066cc/ffffff?text=Statistics",
     "created_at": "2024-08-15T10:30:00Z",
     "created_by": "user_001",
@@ -235,70 +233,70 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
         "name": "Anmol Kumar",
         "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=AK",
         "is_admin": true,
-        "joined_at": "2024-08-15T10:30:00Z"
+        "joined_at": "2024-08-15T10:30:00Z",
       },
       {
         "id": "user_002",
         "name": "Hemant Singh",
         "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=HS",
         "is_admin": true,
-        "joined_at": "2024-08-15T10:35:00Z"
+        "joined_at": "2024-08-15T10:35:00Z",
       },
       {
         "id": "user_003",
         "name": "Priya Sharma",
         "avatar": "https://via.placeholder.com/150/95E1D3/ffffff?text=PS",
         "is_admin": false,
-        "joined_at": "2024-08-15T11:00:00Z"
+        "joined_at": "2024-08-15T11:00:00Z",
       },
       {
         "id": "user_004",
         "name": "Rahul Patel",
         "avatar": "https://via.placeholder.com/150/F38181/ffffff?text=RP",
         "is_admin": false,
-        "joined_at": "2024-08-15T11:15:00Z"
+        "joined_at": "2024-08-15T11:15:00Z",
       },
       {
         "id": "user_005",
         "name": "Neha Gupta",
         "avatar": "https://via.placeholder.com/150/AA96DA/ffffff?text=NG",
         "is_admin": false,
-        "joined_at": "2024-08-15T11:30:00Z"
+        "joined_at": "2024-08-15T11:30:00Z",
       },
       {
         "id": "user_006",
         "name": "Arjun Verma",
         "avatar": "https://via.placeholder.com/150/FCBAD3/ffffff?text=AV",
         "is_admin": false,
-        "joined_at": "2024-08-16T09:00:00Z"
+        "joined_at": "2024-08-16T09:00:00Z",
       },
       {
         "id": "user_007",
         "name": "Divya Malhotra",
         "avatar": "https://via.placeholder.com/150/A8D8EA/ffffff?text=DM",
         "is_admin": false,
-        "joined_at": "2024-08-16T10:00:00Z"
+        "joined_at": "2024-08-16T10:00:00Z",
       },
       {
         "id": "user_008",
         "name": "Vikram Singh",
         "avatar": "https://via.placeholder.com/150/FF9999/ffffff?text=VS",
         "is_admin": false,
-        "joined_at": "2024-08-16T11:00:00Z"
+        "joined_at": "2024-08-16T11:00:00Z",
       },
     ],
     "admins": [
       {
         "id": "user_001",
         "name": "Anmol Kumar",
-        "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=AK"
+        "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=AK",
       },
       {
         "id": "user_002",
         "name": "Hemant Singh",
-        "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=HS"
-      }
-    ]
+        "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=HS",
+      },
+    ],
   };
 
   final mockGroupData2 = {
@@ -317,57 +315,58 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
         "name": "ANUJ Kumar",
         "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=AN",
         "is_admin": true,
-        "joined_at": "2024-07-10T14:20:00Z"
+        "joined_at": "2024-07-10T14:20:00Z",
       },
       {
         "id": "user_009",
         "name": "Archana Singh",
         "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=AR",
         "is_admin": false,
-        "joined_at": "2024-07-10T14:25:00Z"
+        "joined_at": "2024-07-10T14:25:00Z",
       },
       {
         "id": "user_010",
         "name": "Butki Sharma",
         "avatar": "https://via.placeholder.com/150/95E1D3/ffffff?text=BS",
         "is_admin": false,
-        "joined_at": "2024-07-10T14:30:00Z"
+        "joined_at": "2024-07-10T14:30:00Z",
       },
       {
         "id": "user_011",
         "name": "Hemant Verma",
         "avatar": "https://via.placeholder.com/150/F38181/ffffff?text=HV",
         "is_admin": false,
-        "joined_at": "2024-07-10T14:35:00Z"
+        "joined_at": "2024-07-10T14:35:00Z",
       },
       {
         "id": "user_012",
         "name": "Kaddu Singh",
         "avatar": "https://via.placeholder.com/150/AA96DA/ffffff?text=KS",
         "is_admin": false,
-        "joined_at": "2024-07-10T15:00:00Z"
+        "joined_at": "2024-07-10T15:00:00Z",
       },
       {
         "id": "user_013",
         "name": "Khusboo Malhotra",
         "avatar": "https://via.placeholder.com/150/FCBAD3/ffffff?text=KM",
         "is_admin": false,
-        "joined_at": "2024-07-11T09:00:00Z"
+        "joined_at": "2024-07-11T09:00:00Z",
       },
     ],
     "admins": [
       {
         "id": "user_003",
         "name": "ANUJ Kumar",
-        "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=AN"
-      }
-    ]
+        "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=AN",
+      },
+    ],
   };
 
   final mockGroupData3 = {
     "id": "group_003",
     "name": "Web Development Team",
-    "description": "Team for collaborative web development projects and learning",
+    "description":
+        "Team for collaborative web development projects and learning",
     "avatar": "https://via.placeholder.com/150/00BCD4/ffffff?text=WebDev",
     "created_at": "2024-09-01T08:00:00Z",
     "created_by": "user_014",
@@ -380,48 +379,48 @@ class GroupRemoteDataSourceImpl implements GroupRemoteDataSource {
         "name": "Rajesh Kumar",
         "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=RK",
         "is_admin": true,
-        "joined_at": "2024-09-01T08:00:00Z"
+        "joined_at": "2024-09-01T08:00:00Z",
       },
       {
         "id": "user_015",
         "name": "Sneha Patel",
         "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=SP",
         "is_admin": true,
-        "joined_at": "2024-09-01T08:15:00Z"
+        "joined_at": "2024-09-01T08:15:00Z",
       },
       {
         "id": "user_016",
         "name": "Rohan Desai",
         "avatar": "https://via.placeholder.com/150/95E1D3/ffffff?text=RD",
         "is_admin": false,
-        "joined_at": "2024-09-01T09:00:00Z"
+        "joined_at": "2024-09-01T09:00:00Z",
       },
       {
         "id": "user_017",
         "name": "Pooja Trivedi",
         "avatar": "https://via.placeholder.com/150/F38181/ffffff?text=PT",
         "is_admin": false,
-        "joined_at": "2024-09-01T10:00:00Z"
+        "joined_at": "2024-09-01T10:00:00Z",
       },
       {
         "id": "user_018",
         "name": "Anil Kumar",
         "avatar": "https://via.placeholder.com/150/AA96DA/ffffff?text=AK",
         "is_admin": false,
-        "joined_at": "2024-09-02T09:00:00Z"
+        "joined_at": "2024-09-02T09:00:00Z",
       },
     ],
     "admins": [
       {
         "id": "user_014",
         "name": "Rajesh Kumar",
-        "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=RK"
+        "avatar": "https://via.placeholder.com/150/FF6B6B/ffffff?text=RK",
       },
       {
         "id": "user_015",
         "name": "Sneha Patel",
-        "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=SP"
-      }
-    ]
+        "avatar": "https://via.placeholder.com/150/4ECDC4/ffffff?text=SP",
+      },
+    ],
   };
 }

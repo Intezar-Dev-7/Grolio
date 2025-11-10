@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:frontend/core/constants/app_assets.dart';
 import 'package:frontend/features/notifications/domain/entities/notification_entity.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
@@ -49,10 +48,7 @@ class _NotificationsPageState extends State<NotificationsPage>
               decoration: const BoxDecoration(
                 color: AppColors.surfaceDark,
                 border: Border(
-                  bottom: BorderSide(
-                    color: AppColors.borderColor,
-                    width: 1,
-                  ),
+                  bottom: BorderSide(color: AppColors.borderColor, width: 1),
                 ),
               ),
               child: TabBar(
@@ -64,10 +60,7 @@ class _NotificationsPageState extends State<NotificationsPage>
                 labelStyle: AppTypography.bodyMedium.copyWith(
                   fontWeight: FontWeight.w600,
                 ),
-                tabs: const [
-                  Tab(text: 'All'),
-                  Tab(text: 'Unread'),
-                ],
+                tabs: const [Tab(text: 'All'), Tab(text: 'Unread')],
               ),
             ),
 
@@ -97,7 +90,8 @@ class _NotificationsPageState extends State<NotificationsPage>
                           ),
                           const SizedBox(height: 16),
                           Text(
-                            state.errorMessage ?? 'Failed to load notifications',
+                            state.errorMessage ??
+                                'Failed to load notifications',
                             style: AppTypography.bodyMedium.copyWith(
                               color: AppColors.textSecondary,
                             ),
@@ -132,8 +126,8 @@ class _NotificationsPageState extends State<NotificationsPage>
                       // Unread Notifications Tab
                       state.unreadNotifications.isEmpty
                           ? const EmptyNotifications(
-                        message: 'No unread notifications',
-                      )
+                            message: 'No unread notifications',
+                          )
                           : _buildNotificationsList(state.unreadNotifications),
                     ],
                   );
@@ -152,10 +146,7 @@ class _NotificationsPageState extends State<NotificationsPage>
       decoration: const BoxDecoration(
         color: AppColors.surfaceDark,
         border: Border(
-          bottom: BorderSide(
-            color: AppColors.borderColor,
-            width: 1,
-          ),
+          bottom: BorderSide(color: AppColors.borderColor, width: 1),
         ),
       ),
       child: Row(
@@ -165,7 +156,7 @@ class _NotificationsPageState extends State<NotificationsPage>
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               InkWell(
-                onTap: (){
+                onTap: () {
                   Navigator.pop(context);
                 },
                 child: const Icon(Icons.arrow_back_ios_rounded),
@@ -203,39 +194,37 @@ class _NotificationsPageState extends State<NotificationsPage>
               ),
               // More options
               PopupMenuButton<String>(
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: AppColors.iconColor,
-                ),
+                icon: const Icon(Icons.more_vert, color: AppColors.iconColor),
                 color: AppColors.surfaceDark,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                itemBuilder: (context) => [
-                  const PopupMenuItem(
-                    value: 'settings',
-                    child: Row(
-                      children: [
-                        Icon(Icons.settings, color: AppColors.iconColor),
-                        SizedBox(width: 12),
-                        Text('Notification settings'),
-                      ],
-                    ),
-                  ),
-                  const PopupMenuItem(
-                    value: 'clear',
-                    child: Row(
-                      children: [
-                        Icon(Icons.clear_all, color: AppColors.error),
-                        SizedBox(width: 12),
-                        Text(
-                          'Clear all',
-                          style: TextStyle(color: AppColors.error),
+                itemBuilder:
+                    (context) => [
+                      const PopupMenuItem(
+                        value: 'settings',
+                        child: Row(
+                          children: [
+                            Icon(Icons.settings, color: AppColors.iconColor),
+                            SizedBox(width: 12),
+                            Text('Notification settings'),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ],
+                      ),
+                      const PopupMenuItem(
+                        value: 'clear',
+                        child: Row(
+                          children: [
+                            Icon(Icons.clear_all, color: AppColors.error),
+                            SizedBox(width: 12),
+                            Text(
+                              'Clear all',
+                              style: TextStyle(color: AppColors.error),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                 onSelected: (value) {
                   if (value == 'clear') {
                     _showClearAllDialog(context);
@@ -261,10 +250,11 @@ class _NotificationsPageState extends State<NotificationsPage>
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemCount: notifications.length,
-        separatorBuilder: (context, index) => Divider(
-          height: 1,
-          color: AppColors.borderColor.withOpacity(0.5),
-        ),
+        separatorBuilder:
+            (context, index) => Divider(
+              height: 1,
+              color: AppColors.borderColor.withOpacity(0.5),
+            ),
         itemBuilder: (context, index) {
           final notification = notifications[index];
           return NotificationTile(
@@ -295,19 +285,19 @@ class _NotificationsPageState extends State<NotificationsPage>
       case NotificationType.comment:
       case NotificationType.mention:
       case NotificationType.reply:
-      // Navigate to post details
-      // Navigator.push(...);
+        // Navigate to post details
+        // Navigator.push(...);
         break;
       case NotificationType.follow:
-      // Navigate to user profile
-      // Navigator.push(...);
+        // Navigate to user profile
+        // Navigator.push(...);
         break;
       case NotificationType.groupInvite:
-      // Navigate to group details
-      // Navigator.push(...);
+        // Navigate to group details
+        // Navigator.push(...);
         break;
       case NotificationType.achievement:
-      // Show achievement details
+        // Show achievement details
         break;
       default:
         break;
@@ -317,60 +307,61 @@ class _NotificationsPageState extends State<NotificationsPage>
   void _showClearAllDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: AppColors.error.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Icon(
-                Icons.delete_outline,
-                color: AppColors.error,
-                size: 20,
-              ),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-            const SizedBox(width: 12),
-            const Text('Clear All Notifications'),
-          ],
-        ),
-        content: Text(
-          'Are you sure you want to clear all notifications? This action cannot be undone.',
-          style: AppTypography.bodyMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
+            title: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.error,
+                    size: 20,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                const Text('Clear All Notifications'),
+              ],
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<NotificationBloc>().add(
-                const NotificationAllCleared(),
-              );
-            },
-            child: const Text(
-              'Clear All',
-              style: TextStyle(
-                color: AppColors.error,
-                fontWeight: FontWeight.w600,
+            content: Text(
+              'Are you sure you want to clear all notifications? This action cannot be undone.',
+              style: AppTypography.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
               ),
             ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<NotificationBloc>().add(
+                    const NotificationAllCleared(),
+                  );
+                },
+                child: const Text(
+                  'Clear All',
+                  style: TextStyle(
+                    color: AppColors.error,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }

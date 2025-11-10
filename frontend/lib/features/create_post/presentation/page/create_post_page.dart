@@ -1,6 +1,5 @@
 // features/create_post/presentation/pages/create_post_page.dart
 
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -81,41 +80,45 @@ class _CreatePostPageState extends State<CreatePostPage> {
             BlocBuilder<CreatePostBloc, CreatePostState>(
               builder: (context, state) {
                 return TextButton(
-                  onPressed: state.status == CreatePostStatus.submitting
-                      ? null
-                      : () {
-                    context.read<CreatePostBloc>().add(
-                      CreatePostSubmitted(
-                        content: _contentController.text,
-                        tags: state.tags,
-                        githubUrl: _githubController.text.isEmpty
-                            ? null
-                            : _githubController.text,
-                        demoUrl: _demoController.text.isEmpty
-                            ? null
-                            : _demoController.text,
-                      ),
-                    );
-                  },
-                  child: state.status == CreatePostStatus.submitting
-                      ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        AppColors.primaryGreen,
-                      ),
-                    ),
-                  )
-                      : const Text(
-                    'Post',
-                    style: TextStyle(
-                      color: AppColors.primaryGreen,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
+                  onPressed:
+                      state.status == CreatePostStatus.submitting
+                          ? null
+                          : () {
+                            context.read<CreatePostBloc>().add(
+                              CreatePostSubmitted(
+                                content: _contentController.text,
+                                tags: state.tags,
+                                githubUrl:
+                                    _githubController.text.isEmpty
+                                        ? null
+                                        : _githubController.text,
+                                demoUrl:
+                                    _demoController.text.isEmpty
+                                        ? null
+                                        : _demoController.text,
+                              ),
+                            );
+                          },
+                  child:
+                      state.status == CreatePostStatus.submitting
+                          ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppColors.primaryGreen,
+                              ),
+                            ),
+                          )
+                          : const Text(
+                            'Post',
+                            style: TextStyle(
+                              color: AppColors.primaryGreen,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
                 );
               },
             ),
@@ -126,15 +129,14 @@ class _CreatePostPageState extends State<CreatePostPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-
               const SizedBox(height: 24),
 
               // Image Picker Section
               ImagePickerSection(
                 onImagePicked: (image) {
-                  context
-                      .read<CreatePostBloc>()
-                      .add(CreatePostImagePicked(image));
+                  context.read<CreatePostBloc>().add(
+                    CreatePostImagePicked(image),
+                  );
                 },
               ),
 
@@ -146,17 +148,15 @@ class _CreatePostPageState extends State<CreatePostPage> {
                 decoration: BoxDecoration(
                   color: AppColors.surfaceDark,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: AppColors.borderColor,
-                    width: 1,
-                  ),
+                  border: Border.all(color: AppColors.borderColor, width: 1),
                 ),
                 child: TextField(
                   controller: _contentController,
                   maxLines: 8,
                   style: AppTypography.bodyMedium,
                   decoration: InputDecoration(
-                    hintText: 'What\'s on your mind? Share your ideas, code, or projects...',
+                    hintText:
+                        'What\'s on your mind? Share your ideas, code, or projects...',
                     hintStyle: AppTypography.bodyMedium.copyWith(
                       color: AppColors.textTertiary,
                     ),

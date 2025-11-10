@@ -34,9 +34,7 @@ class TechStackSelector extends StatelessWidget {
       children: [
         Text(
           'Tech Stack / Skills',
-          style: AppTypography.bodyMedium.copyWith(
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppTypography.bodyMedium.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 12),
 
@@ -52,47 +50,48 @@ class TechStackSelector extends StatelessWidget {
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: state.techStack.map((tech) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryGreen.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(
-                          color: AppColors.primaryGreen.withOpacity(0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            tech,
-                            style: AppTypography.bodySmall.copyWith(
-                              color: AppColors.primaryGreen,
-                              fontWeight: FontWeight.w500,
+                  children:
+                      state.techStack.map((tech) {
+                        return Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryGreen.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: AppColors.primaryGreen.withOpacity(0.3),
+                              width: 1,
                             ),
                           ),
-                          const SizedBox(width: 6),
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<ProfileSetupBloc>()
-                                  .add(ProfileSetupTechRemoved(tech));
-                            },
-                            child: const Icon(
-                              Icons.close,
-                              size: 16,
-                              color: AppColors.primaryGreen,
-                            ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                tech,
+                                style: AppTypography.bodySmall.copyWith(
+                                  color: AppColors.primaryGreen,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              GestureDetector(
+                                onTap: () {
+                                  context.read<ProfileSetupBloc>().add(
+                                    ProfileSetupTechRemoved(tech),
+                                  );
+                                },
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 16,
+                                  color: AppColors.primaryGreen,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    );
-                  }).toList(),
+                        );
+                      }).toList(),
                 ),
                 const SizedBox(height: 12),
               ],
@@ -104,52 +103,58 @@ class TechStackSelector extends StatelessWidget {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: popularTechs.map((tech) {
-            return BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
-              builder: (context, state) {
-                final isSelected = state.techStack.contains(tech);
-                return GestureDetector(
-                  onTap: () {
-                    if (isSelected) {
-                      context
-                          .read<ProfileSetupBloc>()
-                          .add(ProfileSetupTechRemoved(tech));
-                    } else {
-                      onTechAdded(tech);
-                    }
+          children:
+              popularTechs.map((tech) {
+                return BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
+                  builder: (context, state) {
+                    final isSelected = state.techStack.contains(tech);
+                    return GestureDetector(
+                      onTap: () {
+                        if (isSelected) {
+                          context.read<ProfileSetupBloc>().add(
+                            ProfileSetupTechRemoved(tech),
+                          );
+                        } else {
+                          onTechAdded(tech);
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 8,
+                        ),
+                        decoration: BoxDecoration(
+                          color:
+                              isSelected
+                                  ? AppColors.primaryGreen.withOpacity(0.15)
+                                  : AppColors.surfaceDark,
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color:
+                                isSelected
+                                    ? AppColors.primaryGreen.withOpacity(0.3)
+                                    : AppColors.borderColor,
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          tech,
+                          style: AppTypography.bodySmall.copyWith(
+                            color:
+                                isSelected
+                                    ? AppColors.primaryGreen
+                                    : AppColors.textSecondary,
+                            fontWeight:
+                                isSelected
+                                    ? FontWeight.w500
+                                    : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                    );
                   },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? AppColors.primaryGreen.withOpacity(0.15)
-                          : AppColors.surfaceDark,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color: isSelected
-                            ? AppColors.primaryGreen.withOpacity(0.3)
-                            : AppColors.borderColor,
-                        width: 1,
-                      ),
-                    ),
-                    child: Text(
-                      tech,
-                      style: AppTypography.bodySmall.copyWith(
-                        color: isSelected
-                            ? AppColors.primaryGreen
-                            : AppColors.textSecondary,
-                        fontWeight:
-                        isSelected ? FontWeight.w500 : FontWeight.normal,
-                      ),
-                    ),
-                  ),
                 );
-              },
-            );
-          }).toList(),
+              }).toList(),
         ),
 
         const SizedBox(height: 12),
@@ -170,21 +175,21 @@ class TechStackSelector extends StatelessWidget {
                   fillColor: AppColors.surfaceDark,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: AppColors.borderColor,
                       width: 1,
                     ),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: AppColors.borderColor,
                       width: 1,
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(
+                    borderSide: const BorderSide(
                       color: AppColors.primaryGreen,
                       width: 1,
                     ),

@@ -129,56 +129,6 @@ class ProfileHeader extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Follow/Edit button
-              isOwnProfile
-                  ? Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: AppColors.primaryButtonGradient,
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const Icon(Icons.add, color: Colors.white, size: 20),
-                  )
-                  : Container(
-                    decoration: BoxDecoration(
-                      color:
-                          profile.isFollowing
-                              ? AppColors.surfaceDark
-                              : AppColors.primaryGreen,
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(
-                        color:
-                            profile.isFollowing
-                                ? AppColors.borderColor
-                                : AppColors.primaryGreen,
-                      ),
-                    ),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        onTap: onFollowTap,
-                        borderRadius: BorderRadius.circular(8),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          child: Icon(
-                            profile.isFollowing ? Icons.check : Icons.add,
-                            color:
-                                profile.isFollowing
-                                    ? AppColors.textPrimary
-                                    : Colors.white,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
             ],
           ),
 

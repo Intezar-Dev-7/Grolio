@@ -1,7 +1,6 @@
 // features/chat/data/models/message_model.dart
 
 import 'package:frontend/features/chat/data/models/meeting_info_model.dart';
-import 'package:frontend/features/chat/domain/entities/meeting_info_entity.dart';
 
 import '../../domain/entities/message_entity.dart';
 
@@ -56,9 +55,10 @@ class MessageModel {
       fileName: json['file_name'] as String?,
       fileSize: json['file_size'] as String?,
       fileUrl: json['file_url'] as String?,
-      meetingInfomodel: json['meeting_info'] != null
-          ? MeetingInfoModel.fromJson(json['meeting_info'])
-          : null,
+      meetingInfomodel:
+          json['meeting_info'] != null
+              ? MeetingInfoModel.fromJson(json['meeting_info'])
+              : null,
     );
   }
 

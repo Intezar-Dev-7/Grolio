@@ -14,10 +14,7 @@ import '../widgets/group_actions_section.dart';
 class GroupDetailsPage extends StatefulWidget {
   final String groupId;
 
-  const GroupDetailsPage({
-    super.key,
-    required this.groupId,
-  });
+  const GroupDetailsPage({super.key, required this.groupId});
 
   @override
   State<GroupDetailsPage> createState() => _GroupDetailsPageState();
@@ -59,9 +56,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
           }
 
           if (state.status == GroupDetailsStatus.error || state.group == null) {
-            return const Center(
-              child: Text('Failed to load group details'),
-            );
+            return const Center(child: Text('Failed to load group details'));
           }
 
           final group = state.group!;
@@ -74,12 +69,18 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 elevation: 0,
                 pinned: true,
                 leading: IconButton(
-                  icon: const Icon(Icons.arrow_back, color: AppColors.iconColor),
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: AppColors.iconColor,
+                  ),
                   onPressed: () => Navigator.pop(context),
                 ),
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.more_vert, color: AppColors.iconColor),
+                    icon: const Icon(
+                      Icons.more_vert,
+                      color: AppColors.iconColor,
+                    ),
                     onPressed: () => _showOptionsMenu(context, group),
                   ),
                 ],
@@ -100,17 +101,21 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                         children: [
                           CircleAvatar(
                             radius: 80,
-                            backgroundColor: AppColors.primaryBlue.withOpacity(0.2),
-                            backgroundImage: group.avatar != null
-                                ? CachedNetworkImageProvider(group.avatar!)
-                                : null,
-                            child: group.avatar == null
-                                ? const Icon(
-                              Icons.group,
-                              size: 60,
-                              color: AppColors.primaryBlue,
-                            )
-                                : null,
+                            backgroundColor: AppColors.primaryBlue.withOpacity(
+                              0.2,
+                            ),
+                            backgroundImage:
+                                group.avatar != null
+                                    ? CachedNetworkImageProvider(group.avatar!)
+                                    : null,
+                            child:
+                                group.avatar == null
+                                    ? const Icon(
+                                      Icons.group,
+                                      size: 60,
+                                      color: AppColors.primaryBlue,
+                                    )
+                                    : null,
                           ),
                           // Edit icon (only for admins)
                           if (group.isAdmin)
@@ -170,7 +175,8 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     const SizedBox(height: 24),
 
                     // Group Description (if exists)
-                    if (group.description != null && group.description!.isNotEmpty)
+                    if (group.description != null &&
+                        group.description!.isNotEmpty)
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 24),
                         child: Column(
@@ -216,7 +222,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                         onChanged: (value) {
                           // TODO: Toggle mute
                         },
-                        activeColor: AppColors.primaryGreen,
+                        activeThumbColor: AppColors.primaryGreen,
                       ),
                     ),
 
@@ -225,9 +231,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     // Participants Section
                     _buildSectionHeader(
                       '${group.membersCount} Participants',
-                      onTap: group.isAdmin
-                          ? () => _showAddMemberDialog(context)
-                          : null,
+                      onTap:
+                          group.isAdmin
+                              ? () => _showAddMemberDialog(context)
+                              : null,
                     ),
 
                     // Add participants button (only for members)
@@ -241,15 +248,17 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
                     // Participants List
                     ...group.members.map(
-                          (member) => GroupMemberTile(
+                      (member) => GroupMemberTile(
                         member: member,
                         isCurrentUserAdmin: group.isAdmin,
                         onTap: () {
                           // Navigate to user profile
                         },
-                        onLongPress: group.isAdmin
-                            ? () => _showMemberOptions(context, member, group)
-                            : null,
+                        onLongPress:
+                            group.isAdmin
+                                ? () =>
+                                    _showMemberOptions(context, member, group)
+                                : null,
                       ),
                     ),
 
@@ -397,7 +406,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                 ),
               ],
               ListTile(
-                leading: const Icon(Icons.favorite_outline, color: AppColors.iconColor),
+                leading: const Icon(
+                  Icons.favorite_outline,
+                  color: AppColors.iconColor,
+                ),
                 title: const Text('Add to favourites'),
                 onTap: () {
                   Navigator.pop(context);
@@ -415,69 +427,76 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void _showAddMemberDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Text(
-          'Add Participants',
-          style: AppTypography.titleMedium.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                style: AppTypography.bodyMedium,
-                decoration: InputDecoration(
-                  hintText: 'Search contacts',
-                  prefixIcon: const Icon(Icons.search, color: AppColors.iconColor),
-                  filled: true,
-                  fillColor: AppColors.backgroundDark,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.borderColor),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            title: Text(
+              'Add Participants',
+              style: AppTypography.titleMedium.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: SizedBox(
+              width: double.maxFinite,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextField(
+                    style: AppTypography.bodyMedium,
+                    decoration: InputDecoration(
+                      hintText: 'Search contacts',
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        color: AppColors.iconColor,
+                      ),
+                      filled: true,
+                      fillColor: AppColors.backgroundDark,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                        borderSide: const BorderSide(
+                          color: AppColors.borderColor,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  // TODO: Show list of contacts to add
+                  const Text('Select contacts to add...'),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  // TODO: Add selected members
+                },
+                child: const Text(
+                  'Add',
+                  style: TextStyle(
+                    color: AppColors.primaryGreen,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-              const SizedBox(height: 16),
-              // TODO: Show list of contacts to add
-              const Text('Select contacts to add...'),
             ],
           ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              // TODO: Add selected members
-            },
-            child: const Text(
-              'Add',
-              style: TextStyle(
-                color: AppColors.primaryGreen,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
   void _showMemberOptions(BuildContext context, member, group) {
-    final isCurrentUser = member.id == 'current_user_id'; // TODO: Check with AuthService
+    final isCurrentUser =
+        member.id == 'current_user_id'; // TODO: Check with AuthService
 
     showModalBottomSheet(
       context: context,
@@ -557,7 +576,10 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     },
                   ),
                 ListTile(
-                  leading: const Icon(Icons.person_remove, color: AppColors.error),
+                  leading: const Icon(
+                    Icons.person_remove,
+                    color: AppColors.error,
+                  ),
                   title: const Text('Remove from group'),
                   onTap: () {
                     Navigator.pop(context);
@@ -576,48 +598,49 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
   void _confirmRemoveMember(BuildContext context, member) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Text(
-          'Remove ${member.name}?',
-          style: AppTypography.titleMedium.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: Text(
-          'Are you sure you want to remove this member from the group?',
-          style: AppTypography.bodyMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<GroupDetailsBloc>().add(
-                GroupDetailsMemberRemoved(member.id),
-              );
-            },
-            child: const Text(
-              'Remove',
-              style: TextStyle(
-                color: AppColors.error,
-                fontWeight: FontWeight.w600,
+            title: Text(
+              'Remove ${member.name}?',
+              style: AppTypography.titleMedium.copyWith(
+                fontWeight: FontWeight.bold,
               ),
             ),
+            content: Text(
+              'Are you sure you want to remove this member from the group?',
+              style: AppTypography.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<GroupDetailsBloc>().add(
+                    GroupDetailsMemberRemoved(member.id),
+                  );
+                },
+                child: const Text(
+                  'Remove',
+                  style: TextStyle(
+                    color: AppColors.error,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -627,57 +650,58 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
 
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Text(
-          'Exit Group?',
-          style: AppTypography.titleMedium.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        content: Text(
-          group.isAdmin
-              ? 'You are an admin of this group. If you exit, you will no longer be an admin. Are you sure you want to exit?'
-              : 'Are you sure you want to exit "${group.name}"?',
-          style: AppTypography.bodyMedium.copyWith(
-            color: AppColors.textSecondary,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<GroupDetailsBloc>().add(
-                const GroupDetailsExitRequested(),
-              );
-              Navigator.pop(context); // Go back to chat list
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('You have left "${group.name}"'),
-                  backgroundColor: AppColors.success,
-                ),
-              );
-            },
-            child: const Text(
-              'Exit',
-              style: TextStyle(
-                color: AppColors.error,
-                fontWeight: FontWeight.w600,
+            title: Text(
+              'Exit Group?',
+              style: AppTypography.titleMedium.copyWith(
+                fontWeight: FontWeight.bold,
               ),
             ),
+            content: Text(
+              group.isAdmin
+                  ? 'You are an admin of this group. If you exit, you will no longer be an admin. Are you sure you want to exit?'
+                  : 'Are you sure you want to exit "${group.name}"?',
+              style: AppTypography.bodyMedium.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<GroupDetailsBloc>().add(
+                    const GroupDetailsExitRequested(),
+                  );
+                  Navigator.pop(context); // Go back to chat list
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('You have left "${group.name}"'),
+                      backgroundColor: AppColors.success,
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Exit',
+                  style: TextStyle(
+                    color: AppColors.error,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -685,61 +709,64 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
     // Similar to user report dialog
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        backgroundColor: AppColors.surfaceDark,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: AppColors.error.withOpacity(0.15),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Icon(
-                Icons.report_outlined,
-                color: AppColors.error,
-                size: 20,
-              ),
+      builder:
+          (context) => AlertDialog(
+            backgroundColor: AppColors.surfaceDark,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-            const SizedBox(width: 12),
-            const Text('Report Group'),
-          ],
-        ),
-        content: const Text('Report this group for inappropriate content?'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: AppColors.textSecondary),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<GroupDetailsBloc>().add(
-                const GroupDetailsReportRequested(),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Group reported. Thank you for your feedback.'),
-                  backgroundColor: AppColors.success,
+            title: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.error.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: const Icon(
+                    Icons.report_outlined,
+                    color: AppColors.error,
+                    size: 20,
+                  ),
                 ),
-              );
-            },
-            child: const Text(
-              'Report',
-              style: TextStyle(
-                color: AppColors.error,
-                fontWeight: FontWeight.w600,
-              ),
+                const SizedBox(width: 12),
+                const Text('Report Group'),
+              ],
             ),
+            content: const Text('Report this group for inappropriate content?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: AppColors.textSecondary),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<GroupDetailsBloc>().add(
+                    const GroupDetailsReportRequested(),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text(
+                        'Group reported. Thank you for your feedback.',
+                      ),
+                      backgroundColor: AppColors.success,
+                    ),
+                  );
+                },
+                child: const Text(
+                  'Report',
+                  style: TextStyle(
+                    color: AppColors.error,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }

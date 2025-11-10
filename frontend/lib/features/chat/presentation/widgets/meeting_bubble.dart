@@ -10,11 +10,7 @@ class MeetingBubble extends StatelessWidget {
   final MessageEntity message;
   final bool isMe;
 
-  const MeetingBubble({
-    super.key,
-    required this.message,
-    required this.isMe,
-  });
+  const MeetingBubble({super.key, required this.message, required this.isMe});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +25,7 @@ class MeetingBubble extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment:
-          isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+              isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
           children: [
             // Sender name (for received messages)
             if (!isMe)
@@ -49,10 +45,7 @@ class MeetingBubble extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.surfaceDark,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: AppColors.borderColor,
-                  width: 1,
-                ),
+                border: Border.all(color: AppColors.borderColor, width: 1),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,9 +56,9 @@ class MeetingBubble extends StatelessWidget {
                       horizontal: 12,
                       vertical: 8,
                     ),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: AppColors.backgroundDark,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(11),
                         topRight: Radius.circular(11),
                       ),
@@ -99,17 +92,19 @@ class MeetingBubble extends StatelessWidget {
                             vertical: 4,
                           ),
                           decoration: BoxDecoration(
-                            color: meeting.isAttending
-                                ? AppColors.success.withOpacity(0.15)
-                                : AppColors.error.withOpacity(0.15),
+                            color:
+                                meeting.isAttending
+                                    ? AppColors.success.withOpacity(0.15)
+                                    : AppColors.error.withOpacity(0.15),
                             borderRadius: BorderRadius.circular(6),
                           ),
                           child: Text(
                             meeting.isAttending ? 'Attending' : 'Not Attending',
                             style: AppTypography.bodySmall.copyWith(
-                              color: meeting.isAttending
-                                  ? AppColors.success
-                                  : AppColors.error,
+                              color:
+                                  meeting.isAttending
+                                      ? AppColors.success
+                                      : AppColors.error,
                               fontWeight: FontWeight.w600,
                               fontSize: 10,
                             ),
@@ -221,9 +216,10 @@ class MeetingBubble extends StatelessWidget {
                     Icon(
                       message.isRead ? Icons.done_all : Icons.done,
                       size: 14,
-                      color: message.isRead
-                          ? AppColors.primaryBlue
-                          : AppColors.textTertiary,
+                      color:
+                          message.isRead
+                              ? AppColors.primaryBlue
+                              : AppColors.textTertiary,
                     ),
                   ],
                 ],

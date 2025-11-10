@@ -10,10 +10,7 @@ import '../bloc/profile_setup_bloc.dart';
 class ProfileImagePicker extends StatelessWidget {
   final Function(XFile) onImagePicked;
 
-  const ProfileImagePicker({
-    super.key,
-    required this.onImagePicked,
-  });
+  const ProfileImagePicker({super.key, required this.onImagePicked});
 
   @override
   Widget build(BuildContext context) {
@@ -29,23 +26,21 @@ class ProfileImagePicker extends StatelessWidget {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.surfaceDark,
-                  border: Border.all(
-                    color: AppColors.borderColor,
-                    width: 2,
-                  ),
+                  border: Border.all(color: AppColors.borderColor, width: 2),
                 ),
-                child: state.selectedImage != null
-                    ? ClipOval(
-                  child: Image.file(
-                    File(state.selectedImage!.path),
-                    fit: BoxFit.cover,
-                  ),
-                )
-                    : Icon(
-                  Icons.person_outline,
-                  size: 50,
-                  color: AppColors.iconColor,
-                ),
+                child:
+                    state.selectedImage != null
+                        ? ClipOval(
+                          child: Image.file(
+                            File(state.selectedImage!.path),
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                        : const Icon(
+                          Icons.person_outline,
+                          size: 50,
+                          color: AppColors.iconColor,
+                        ),
               ),
 
               // Upload button
@@ -77,21 +72,22 @@ class ProfileImagePicker extends StatelessWidget {
                         width: 3,
                       ),
                     ),
-                    child: state.status == ProfileSetupStatus.uploadingImage
-                        ? const Padding(
-                      padding: EdgeInsets.all(8),
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          Colors.white,
-                        ),
-                      ),
-                    )
-                        : const Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 24,
-                    ),
+                    child:
+                        state.status == ProfileSetupStatus.uploadingImage
+                            ? const Padding(
+                              padding: EdgeInsets.all(8),
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.white,
+                                ),
+                              ),
+                            )
+                            : const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                              size: 24,
+                            ),
                   ),
                 ),
               ),

@@ -24,14 +24,9 @@ class GroupActionsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 8),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.surfaceDark,
-        border: Border(
-          top: BorderSide(
-            color: AppColors.borderColor,
-            width: 1,
-          ),
-        ),
+        border: Border(top: BorderSide(color: AppColors.borderColor, width: 1)),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -47,11 +42,7 @@ class GroupActionsSection extends StatelessWidget {
             },
           ),
 
-          const Divider(
-            color: AppColors.borderColor,
-            thickness: 1,
-            height: 1,
-          ),
+          const Divider(color: AppColors.borderColor, thickness: 1, height: 1),
 
           // Exit Group
           _buildActionTile(
@@ -88,11 +79,7 @@ class GroupActionsSection extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         child: Row(
           children: [
-            Icon(
-              icon,
-              color: iconColor,
-              size: 24,
-            ),
+            Icon(icon, color: iconColor, size: 24),
             const SizedBox(width: 16),
             Text(
               label,
