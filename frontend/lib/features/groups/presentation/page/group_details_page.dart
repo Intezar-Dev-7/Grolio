@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
-import '../../../../core/services/auth_service.dart';
 import '../bloc/group_details_bloc.dart';
 import '../widgets/group_media_preview.dart';
 import '../widgets/group_member_tile.dart';

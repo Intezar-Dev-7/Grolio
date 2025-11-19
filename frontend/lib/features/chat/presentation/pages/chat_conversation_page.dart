@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/config/dependency_injection.dart' as di;
 import 'package:frontend/core/constants/app_assets.dart';
-import 'package:frontend/core/router/app_router.dart';
 import 'package:frontend/features/groups/data/datasources/group_remote_datasource.dart';
 import 'package:frontend/features/groups/presentation/bloc/group_details_bloc.dart';
 import 'package:frontend/features/groups/presentation/page/group_details_page.dart';
