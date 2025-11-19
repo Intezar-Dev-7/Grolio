@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+/*provider identifies which OAuth provider, providerId is provider's unique id.*/
 const userSchema = new mongoose.Schema({
     provider: {
         type: String,

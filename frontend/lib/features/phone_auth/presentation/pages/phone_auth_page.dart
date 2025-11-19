@@ -3,11 +3,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:frontend/core/router/app_router.dart';
+import 'package:frontend/features/social_auth/presentation/widgets/social_button_group.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_typography.dart';
 import '../bloc/phone_auth_bloc.dart';
 import '../widgets/country_code_selector.dart';
-import '../widgets/social_login_buttons.dart';
 import 'otp_verification_page.dart';
 
 class PhoneAuthPage extends StatefulWidget {

@@ -1,0 +1,12 @@
+import { PrettierConfig } from "prettier";
+
+const PrettierConfig = {
+    "singleQuote": true,
+    "bracketSpacing": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true
+
+}
+
+export default PrettierConfig;
