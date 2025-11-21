@@ -7,8 +7,6 @@
 // Talks to usecases
 // social_auth/presentation/bloc/social_auth_bloc.dart
 import 'dart:async';
-import 'dart:convert';
-import 'dart:ffi';
 import 'package:bloc/bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../domain/repositories/social_auth_repository.dart';
@@ -18,8 +16,6 @@ import '../../domain/usecases/refresh_token.dart';
 import '../../domain/usecases/logout.dart';
 import 'social_auth_event.dart';
 import 'social_auth_state.dart';
-import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
 
 /// BLoC coordinates:
 /// - start OAuth (open URL)
